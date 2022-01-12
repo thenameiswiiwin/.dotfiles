@@ -31,13 +31,7 @@ formulae=(
 )
 
 # Stow
-stow git
-stow zsh
-stow kitty
-stow nvim
-stow aliases
-stow antibody
-stow tmux
+stow aliases antibody git kitty nvim zsh
 
 # Install Packages
 for i in "${formulae[@]}"
