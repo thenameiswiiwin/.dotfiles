@@ -17,6 +17,8 @@ formulae=(
 "zsh"
 "antibody"
 "git"
+"gh"
+"node"
 "neovim"
 "tmux"
 "stow"
