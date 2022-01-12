@@ -53,6 +53,9 @@ alias tad="ta dev"
 # Cheat Sheet
 alias s="~/./tmux-cht.sh"
 
+# Cat -> Bat
+alias cat='bat'
+
 # Lazy
 alias brave='open -a Brave\ Browser'
 alias chome='open -a Google\ Chrome'

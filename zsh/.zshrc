@@ -16,5 +16,15 @@ source ~/.zsh_plugins.sh
 # Source Aliases
 source ~/.aliases
 
+# DIRCOLORS (MacOS)
+export CLICOLOR=1
+export LSCOLORS=FxFhcxdxbxegedabagacad
+
+# FZF
+export FZF_DEFAULT_COMMAND="rg --files --hidden --glob '!.git'"
+export FZF_DEFAULT_OPTS="--height=40% --layout=reverse --border --margin=1 --padding=1"
+
 # To customize prompt, run `p10k configure` or edit ~/.p10k.zsh.
 [[ ! -f ~/.p10k.zsh ]] || source ~/.p10k.zsh
+
+export BAT_THEME="gruvbox-dark"
