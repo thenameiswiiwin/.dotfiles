@@ -30,14 +30,14 @@ formulae=(
 "tree"
 )
 
-# Stow
-stow aliases antibody git kitty nvim zsh
-
 # Install Packages
 for i in "${formulae[@]}"
 do
   brew install $i
 done
+
+# Stow
+stow aliases antibody git kitty nvim zsh
 
 # Add Zsh To Valid Login SHells
 command -v zsh | sudo tee -a /etc/shells
