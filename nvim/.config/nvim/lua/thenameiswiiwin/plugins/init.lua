@@ -9,4 +9,7 @@ Plug "folke/tokyonight.nvim"
 Plug 'nvim-lua/plenary.nvim'
 Plug 'nvim-telescope/telescope.nvim'
 
+-- LSP
+Plug 'neovim/nvim-lspconfig'
+
 Plug.ends()
