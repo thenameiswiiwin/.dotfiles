@@ -1,4 +1,4 @@
-local Plug = require "util.vimplug"
+local Plug = require "thenameiswiiwin.util.vimplug"
 
 Plug.begin("~/.config/nvim/plugged")
 
