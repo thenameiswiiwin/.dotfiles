@@ -1,0 +1,10 @@
+[user]
+	name = Huy Nguyen
+	email = huyn.nguyen95@gmail.com
+[core]
+	excludesfile = ~/.gitignore_global
+    editor = nvim
+[pull]
+	ff = only
+[init]
+	defaultBranch = main

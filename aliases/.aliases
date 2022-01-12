@@ -1,0 +1,74 @@
+# Brew
+alias ball='brew cleanup && brew update && brew upgrade && brew cleanup && brew doctor'
+alias bo='brew outdated'
+alias bi='brew install'
+alias bu='brew uninstall'
+alias bl='brew list'
+alias bs='brew search'
+
+# Antibody
+alias au='antibody update'
+alias ab='antibody bundle < ~/.zsh_plugins.txt > ~/.zsh_plugins.sh'
+
+# Exa 
+alias l='exa'
+alias ll='l -l -h --git --icons'
+alias la='ll -a'
+
+# Tree
+alias tree='la --tree --level=4 -a -I=.git --git-ignore'
+
+# NeoVim 
+alias v='nvim'
+alias vc='~/.config/nvim'
+
+# Zsh
+alias zc='v ~/.zshrc'
+alias zs='source ~/.zshrc'
+alias za='v ~/.aliases'
+
+# Port }}}
+alias kill='netstat -ano | findstr :'
+alias port='sudo lsof -i'
+
+# Help Me }}}
+alias myhelp='v $HOME/.vim/plugged/vim-myhelp/doc/myhelp.txt'
+
+# Git
+alias gc='git commit -m'
+alias gs='git status'
+alias gpsh='git push -u'
+alias gw='git worktree'
+alias ghc='gh repo create'
+alias ghcl='gh repo clone'
+alias ghf='gh repo fork'
+
+# Tmux
+alias ts='~/./tmux-session'
+alias tw='~/./tmux-window'
+alias tc="v ~/.tmux.conf"
+alias tcs="tmux source-file ~/.tmux.conf"
+alias tad="ta dev"
+
+# Cheat Sheet
+alias s="~/./tmux-cht.sh"
+
+# Lazy
+alias brave='open -a Brave\ Browser'
+alias chome='open -a Google\ Chrome'
+alias spotify='open -a Spotify'
+alias post='open -a Postman'
+alias f='open -a Finder '
+alias fh='open -a Finder .'
+
+# Usefull stuff for presentation and seeing dotfiles
+alias hidedesktop="defaults write com.apple.finder CreateDesktop -bool false && killall Finder"
+alias showdesktop="defaults write com.apple.finder CreateDesktop -bool true && killall Finder"
+alias showall='defaults write com.apple.finder AppleShowAllFiles YES && killall Finder'
+alias hideall='defaults write com.apple.finder AppleShowAllFiles NO && killall Finder'	
+
+# Get Rid of .DS_Store
+alias dsclean='find . -type f -name .DS_Store -print0 | xargs -0 rm'
+
+# Flush your dns cache
+alias flush='dscacheutil -flushcache'
