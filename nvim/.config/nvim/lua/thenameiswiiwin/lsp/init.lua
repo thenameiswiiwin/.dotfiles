@@ -1,5 +1,8 @@
+local vim = vim
+local uv = vim.loop
 local lspconfig = require("lspconfig")
 local configs = require "lspconfig.configs"
+local autocmd = require "thenameiswiiwin.autocmds".autocmd
 
 local lsp_status = require("lsp-status")
 lsp_status.register_progress()
@@ -8,6 +11,28 @@ local capabilities = vim.lsp.protocol.make_client_capabilities()
 capabilities.textDocument.completion.completionItem.snippetSupport = true
 capabilities = require("cmp_nvim_lsp").update_capabilities(capabilities)
 capabilities = vim.tbl_extend("keep", capabilities or {}, lsp_status.capabilities)
+
+local M = {}
+
+-- Diagnostic settings
+vim.diagnostic.config {
+  virtual_text = false,
+  signs = true,
+  update_in_insert = true
+}
+
+local function get_node_modules(root_dir)
+  -- util.find_node_modules_ancestor()
+  local root_node = root_dir .. "/node_modules"
+  local stats = uv.fs_stat(root_node)
+  if stats == nil then
+    return nil
+  else
+    return root_node
+  end
+end
+
+local default_node_modules = get_node_modules(vim.fn.getcwd())
 
 local on_attach = function(client, bufnr)
 
@@ -41,7 +66,7 @@ local on_attach = function(client, bufnr)
 end
 
 local servers = { "tsserver", "tailwindcss", "html", "cssls", "bashls", "vimls" }
-for _, lsp in ipairs(servers) do 
+for _, lsp in ipairs(servers) do
     lspconfig[lsp].setup {
         on_attach = on_attach,
         capabilities = capabilities
