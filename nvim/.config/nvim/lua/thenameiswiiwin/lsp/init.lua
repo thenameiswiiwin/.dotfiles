@@ -4,6 +4,11 @@ local configs = require "lspconfig.configs"
 local lsp_status = require("lsp-status")
 lsp_status.register_progress()
 
+local capabilities = vim.lsp.protocol.make_client_capabilities()
+capabilities.textDocument.completion.completionItem.snippetSupport = true
+capabilities = require("cmp_nvim_lsp").update_capabilities(capabilities)
+capabilities = vim.tbl_extend("keep", capabilities or {}, lsp_status.capabilities)
+
 local on_attach = function(client, bufnr)
 
   lsp_status.on_attach(client)
@@ -59,4 +64,61 @@ configs.emmet_ls = {
 lspconfig.emmet_ls.setup {
   on_attach = on_attach,
   capabilities = capabilities
+}
+
+lspconfig.jsonls.setup {
+  cmd = {"vscode-json-language-server", "--stdio"},
+  on_attach = on_attach,
+  capabilities = capabilities,
+  filetypes = {"json", "jsonc"},
+  settings = {
+    json = {
+      -- Schemas https://www.schemastore.org
+      schemas = {
+        {
+          fileMatch = {"package.json"},
+          url = "https://json.schemastore.org/package.json"
+        },
+        {fileMatch={"manifest.json", "manifest.webmanifest"},
+          url="https://json.schemastore.org/web-manifest-combined.json"
+        },
+        {
+          fileMatch = {"tsconfig*.json"},
+          url = "https://json.schemastore.org/tsconfig.json"
+        },
+        {
+          fileMatch = {
+            ".prettierrc",
+            ".prettierrc.json",
+            "prettier.config.json"
+          },
+          url = "https://json.schemastore.org/prettierrc.json"
+        },
+        {
+          fileMatch = {".eslintrc", ".eslintrc.json"},
+          url = "https://json.schemastore.org/eslintrc.json"
+        },
+        {
+          fileMatch = {".babelrc", ".babelrc.json", "babel.config.json"},
+          url = "https://json.schemastore.org/babelrc.json"
+        },
+        {
+          fileMatch = {"lerna.json"},
+          url = "https://json.schemastore.org/lerna.json"
+        },
+        {
+          fileMatch = {"now.json", "vercel.json"},
+          url = "https://json.schemastore.org/now.json"
+        },
+        {
+          fileMatch = {
+            ".stylelintrc",
+            ".stylelintrc.json",
+            "stylelint.config.json"
+          },
+          url = "http://json.schemastore.org/stylelintrc.json"
+        }
+      }
+    }
+  }
 }
