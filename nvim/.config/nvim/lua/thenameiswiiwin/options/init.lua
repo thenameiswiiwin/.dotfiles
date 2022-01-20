@@ -1,5 +1,5 @@
 -- Options
-local Type = {GLOBAL_OPTION = "o"}
+local Type = {GLOBAL_OPTION = "o", WINDOW_OPTION = "wo", BUFFER_OPTION = "bo"}
 local add_options = function(option_type, options)
 	if type(options) ~= "table" then
 		error "options should be a type of 'table'"
@@ -17,7 +17,7 @@ end
 
 Option.g {
 	termguicolors = true,
-	tabstop = 4, 
+	tabstop = 4,
 	softtabstop = 4,
 	shiftwidth = 4,
 	expandtab = true,
@@ -43,12 +43,13 @@ Option.g {
 	updatetime = 250 ,
 	encoding = "UTF-8",
 	mouse = "a",
-    errorbells = true,
-    wildmode = "longest:full,full",
-    list = true,
-    listchars = "tab:▸·,trail:·",
-    clipboard = "unnamedplus",
-    background = "dark",
+	errorbells = true,
+	background = "dark",
+	clipboard = "unnamedplus",
+
+	foldlevel = 20,
+	foldmethod = "expr",
+	foldexpr = "nvim_treesitter#foldexpr()",
 }
 vim.g.clipboard = {
   name = "macOS-clipboard",
@@ -58,9 +59,5 @@ vim.g.clipboard = {
 }
 
 vim.g.mapleader = " "
-
-vim.g.one_allow_italics = true
-vim.g.override_nvim_web_devicons = true
-vim.g.table_mode_corner = "|"
 
 return Option

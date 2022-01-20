@@ -16,63 +16,57 @@ function M.mapBuf(buf, mode, lhs, rhs, opts)
   vim.api.nvim_buf_set_keymap(buf, mode, lhs, rhs, options)
 end
 
-M.map("n", "Q", "<nop>")
-M.map("n", "q", "<nop>") 
-
 M.map("n", "<leader>pv", ":Ex<CR>")
-M.map("n", "<Leader><CR>", ":so ~/.config/nvim/init.lua<CR>")
-M.map("n", "<leader>vwh", ":h <C-R>=expand('<cword>')<CR><CR>")
-M.map("n", "<leader>bs", "/<C-R>=escape(expand('<cWORD>'), '/')<CR><CR>")
-M.map("n", "<leader>u", ":UndotreeShow<R")
-M.map("n", "<Leader>+", ":vertical resize +5<CR>")
-M.map("n", "<Leader>-", ":vertical resize -5<CR>")
-M.map("n", "<Leader>rp", ":resize 100<CR>")
-M.map("n", "<Leader>ee", "oif err != nil {<CR>log.Fatalf('%+v\n', err)<CR>}<CR><esc>kkI<esc>")
-M.map("n", "<Leader>cpu", "a%' PRIu64 '<esc>")
--- M.map("n", "<leader>s", ":%s/\<<C-r><C-w>\>/<C-r><C-w>/gI<Left><Left><Left>")
-M.map("n", "<leader>gt", "<Plug>PlenaryTestFile")
-M.map("n", "<leader>gll", ":let g:_search_term = expand('%')<CR><bar>:Gclog -- %<CR>:call search(g:_search_term)<CR>")
-M.map("n", "<leader>gln", ":cnext<CR>:call search(_search_term)<CR>")
-M.map("n", "<leader>glp", ":cprev<CR>:call search(_search_term)<CR>")
 
-M.map("n", "<leader>x", ":silent !chmod +x %<CR>")
+-- LSP
+M.map("n", "<leader>gd",    "<cmd>lua vim.lsp.buf.definition()<CR>")
+M.map("n", "<leader>gh",    "<cmd>lua vim.lsp.buf.hover()<CR>")
+M.map("n", "<leader>gca",   "<cmd>:Telescope lsp_code_actions<CR>")
+M.map("n", "<leader>gD ",   "<cmd>lua vim.lsp.buf.implementation()<CR>")
+M.map("n", "<leader><c-k>", "<cmd>lua vim.lsp.buf.signature_help()<CR>")
+M.map("n", "<leader>gr",    "<cmd>lua vim.lsp.buf.references()<CR>")
+M.map("n", "<leader>gR",    "<cmd>lua vim.lsp.buf.rename()<CR>")
+M.map("n", "<leader>leader>fo", "<cmd>lua vim.lsp.buf.formatting()<CR>")
 
-M.map("v", "K", ":m '<-2<CR>gv=gv")
-M.map("v", "J", ":m '>+1<CR>gv=gv")
+M.map("n", "<leader>xx", "<cmd>TroubleToggle<cr>")
+M.map("n", "<leader>xw", "<cmd>TroubleToggle lsp_workspace_diagnostics<cr>")
+M.map("n", "<leader>xd", "<cmd>TroubleToggle lsp_document_diagnostics<cr>")
+M.map("n", "<leader>xq", "<cmd>TroubleToggle quickfix<cr>")
+M.map("n", "<leader>xl", "<cmd>TroubleToggle loclist<cr>")
+M.map("n", "gR", "<cmd>TroubleToggle lsp_references<cr>")
 
-M.map("n", "Y", "yg$")
-M.map("n", "n", "nzzzv")
-M.map("n", "N", "Nzzzv")
-M.map("n", "J", "mzJ`z")
+-- Sidebar
+M.map("n", "<leader>sb", "<cmd>SidebarNvimToggl<cr>")
 
-M.map("x", "<leader>p", '"_dP')
+-- Bufferline
+M.map("n", "<leader>gb", ":BufferLinePick<CR>")
 
-M.map("n", "<leader>y", '"+y')
-M.map("v", "<leader>y", '"+y')
-M.map("n", "<leader>Y", 'gg"+yG')
+-- Telescope
+M.map("n", "<leader>ps", ":lua require('telescope.builtin').grep_string( { search = vim.fn.input('Grep for > ') } )<cr>")
+M.map("n", "<leader>ff", ":lua require'telescope.builtin'.find_files{ hidden = true }<cr>")
+M.map("n", "<leader>fb", "<cmd>Telescope buffers<cr>")
+-- M.map("n", <Leader>fs", ":lua require'telescope.builtin'.file_browser{ cwd = vim.fn.expand('%:p:h') }<cr>")
+M.map("n", "<leader>fs", "<cmd>lua require 'telescope'.extensions.file_browser.file_browser( { path = vim.fn.expand('%:p:h') } )<CR>")
+M.map("n", "<leader>fc", ":lua require'telescope.builtin'.git_status{}<cr>")
+M.map("n", "<leader>cb", ":lua require'telescope.builtin'.git_branches{}<cr>")
+M.map("n", "<leader>fr", ":lua require'telescope.builtin'.resume{}<CR>")
+M.map("n", "<leader>fg", "<cmd>lua require('telescope.builtin').live_grep( { file_ignore_patterns = { '**/*.spec.js' } } )<cr>")
+-- M.map("n", "<leader>fgi", "<cmd>lua require('telescope.builtin').live_grep( { file_ignore_patterns = { vim.fn.input("Ignore pattern > ") } } )<cr>")
+M.map("n", "<leader>fgd", ":lua require'telescope.builtin'.live_grep{ search_irs = { 'slices/admin' } }")
 
-M.map("n", "<leader>d", '"_d')
-M.map("v", "<leader>d", '"_d')
+M.map("n", "<leader>cheat", ":Cheatsheet<cr>")
+-- M.map("n", "<leader>fh", "<cmd>Telescope help_tags<cr>d")
 
-M.map("n", "<Leader>ww", "ofunction wait(ms: number): Promise<void> {<CR>return new Promise(res => setTimeout(res, ms));<CR>}<esc>k=i{<CR>")
+-- Harpoon
+M.map("n", "<leader>a", ":lua require('harpoon.mark').add_file()<CR>")
+M.map("n", "<leader>,", ":lua require('harpoon.ui').toggle_quick_menu()<CR>")
+M.map("n", "<leader>1", ":lua require('harpoon.ui').nav_file(1)<CR>")
+M.map("n", "<leader>2", ":lua require('harpoon.ui').nav_file(2)<CR>")
+M.map("n", "<leader>3", ":lua require('harpoon.ui').nav_file(3)<CR>")
+M.map("n", "<leader>4", ":lua require('harpoon.ui').nav_file(4)<CR>")
 
-M.map("i", "<C-c>", "<esc>")
-
-M.map("n", "<C-j>", "<cmd>TmuxNavigateDown<cr>")
-M.map("n", "<C-k>", "<cmd>TmuxNavigateUp<cr>")
-M.map("n", "<C-l>", "<cmd>TmuxNavigateRight<cr>")
-M.map("n", "<C-h>", "<cmd>TmuxNavigateLeft<CR>")
-
-M.map("i", "<C-j>", "<cmd>TmuxNavigateDown<cr>")
-M.map("i", "<C-k>", "<cmd>TmuxNavigateUp<cr>")
-M.map("i", "<C-l>", "<cmd>TmuxNavigateRight<cr>")
-M.map("i", "<C-h>", "<cmd>TmuxNavigateLeft<CR>")
-
-M.map("t", "<C-j>", "<c-\\><c-n>:TmuxNavigateDown<cr>")
-M.map("t", "<C-k>", "<c-\\><c-n>:TmuxNavigateUp<cr>")
-M.map("t", "<C-l>", "<c-\\><c-n>:TmuxNavigateRight<cr>")
-M.map("t", "<C-h>", "<c-\\><c-n>:TmuxNavigateLeft<CR>")
-
-M.map("n", "<Leader>tm", "<cmd>TableModeToggle<cr>")
+-- Vimwiki
+M.map("n", "<leader>vw", "VimwikiIndex<CR>")
+M.map("n", "<leader>tl", "VimwikiToggleListItem<cr>")
 
 return M
