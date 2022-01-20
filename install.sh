@@ -39,7 +39,7 @@ do
 done
 
 # Stow
-stow aliases antibody git kitty nvim zsh
+stow aliases antibody git kitty nvim zsh tmux bin
 
 # Add Zsh To Valid Login SHells
 command -v zsh | sudo tee -a /etc/shells
