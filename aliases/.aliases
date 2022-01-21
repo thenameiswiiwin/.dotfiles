@@ -10,7 +10,7 @@ alias bs='brew search'
 alias au='antibody update'
 alias ab='antibody bundle < ~/.zsh_plugins.txt > ~/.zsh_plugins.sh'
 
-# Exa 
+# Exa
 alias l='exa'
 alias ll='l -l -h --git --icons'
 alias la='ll -a'
@@ -18,7 +18,7 @@ alias la='ll -a'
 # Tree
 alias tree='la --tree --level=4 -a -I=.git --git-ignore'
 
-# NeoVim 
+# NeoVim
 alias v='nvim'
 alias vc='~/.config/nvim'
 
@@ -64,7 +64,7 @@ alias fh='open -a Finder .'
 alias hidedesktop="defaults write com.apple.finder CreateDesktop -bool false && killall Finder"
 alias showdesktop="defaults write com.apple.finder CreateDesktop -bool true && killall Finder"
 alias showall='defaults write com.apple.finder AppleShowAllFiles YES && killall Finder'
-alias hideall='defaults write com.apple.finder AppleShowAllFiles NO && killall Finder'	
+alias hideall='defaults write com.apple.finder AppleShowAllFiles NO && killall Finder'
 
 # Get Rid of .DS_Store
 alias dsclean='find . -type f -name .DS_Store -print0 | xargs -0 rm'

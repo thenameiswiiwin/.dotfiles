@@ -16,6 +16,8 @@ source ~/.zsh_plugins.sh
 # Source Aliases
 source ~/.aliases
 
+source ~/.zshenv
+
 # DIRCOLORS (MacOS)
 export CLICOLOR=1
 export LSCOLORS=FxFhcxdxbxegedabagacad
@@ -38,4 +40,4 @@ export FZF_DEFAULT_OPTS="--height=40% --layout=reverse --border --margin=1 --pad
 
 export BAT_THEME="gruvbox-dark"
 
-alias luamake=/Users/huy/code/lua-language-server/3rd/luamake/luamake
+alias luamake=/Users/huy/code/personal/lua-language-server/3rd/luamake/luamake
