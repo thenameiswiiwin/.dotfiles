@@ -45,9 +45,8 @@ alias ghf='gh repo fork'
 
 # Tmux
 alias ts='~/bin/./tmux-sessionizer'
-alias tc="v ~/.tmux.conf"
-alias tcs="tmux source-file ~/.tmux.conf"
-alias tad="ta dev"
+alias tc="v ~/tmux.conf"
+alias tcs="tmux source ~/tmux.conf"
 
 # Cat -> Bat
 alias cat='bat'
