@@ -48,7 +48,7 @@ local on_attach = function(client, bufnr)
   mapBuf(bufnr, "n", "<Leader>rn", "<cmd>lua vim.lsp.buf.rename()<CR>")
   mapBuf(bufnr, "n", "<Leader>gr", "<cmd>lua vim.lsp.buf.references()<CR>")
   -- mapBuf(bufnr, "n", "<Leader>ca", "<cmd>lua vim.lsp.buf.code_action()<CR>")
-  mapBuf(bufnr, "n", "<Leader>ca", "<cmd> lua require('mh.telescope').code_actions()<cr>")
+  mapBuf(bufnr, "n", "<Leader>ca", "<cmd> lua require('thenameiswiiwin.telescope').code_actions()<cr>")
   mapBuf(bufnr, "v", "<Leader>ca", "<cmd>lua vim.lsp.buf.range_code_action()<CR>")
   mapBuf(bufnr, "n", "<Leader>sd", "<cmd>lua vim.diagnostic.open_float(0, { scope = 'line' })<CR>")
   -- autocmd("CursorHold", "<buffer>", "lua vim.diagnostic.show_position_diagnostics({focusable=false})")
@@ -163,7 +163,6 @@ local ngls_cmd = {
   "--includeAutomaticOptionalChainCompletions",
   -- "--logToConsole",
   -- "--logFile",
-  -- "/Users/mhartington/Github/StarTrack-ng/logs.txt"
 
 }
 
@@ -182,7 +181,7 @@ table.insert(runtime_path, "lua/?.lua")
 table.insert(runtime_path, "lua/?/init.lua")
 
 lspconfig.sumneko_lua.setup {
-  cmd = {lua_lsp_loc .. "/bin/lua-language-server", "-E", lua_lsp_loc .. "/main.lua"},
+  cmd = {lua_lsp_loc .. "/bin/macOS/lua-language-server", "-E", lua_lsp_loc .. "/main.lua"},
   capabilities = capabilities,
   on_attach = on_attach,
   settings = {
