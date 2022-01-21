@@ -44,7 +44,9 @@ alias ghcl='gh repo clone'
 alias ghf='gh repo fork'
 
 # Tmux
+alias cht='~/bin/./tmux-cht.sh'
 alias ts='~/bin/./tmux-sessionizer'
+alias tw='~/bin/./tmux-windowizer'
 alias tc="v ~/tmux.conf"
 alias tcs="tmux source ~/tmux.conf"
 
@@ -66,7 +68,7 @@ alias showall='defaults write com.apple.finder AppleShowAllFiles YES && killall 
 alias hideall='defaults write com.apple.finder AppleShowAllFiles NO && killall Finder'
 
 # Get Rid of .DS_Store
-alias dsclean='find . -type f -name .DS_Store -print0 | xargs -0 rm'
+alias dsclean='find . -type f -name .DS_Store -print1 | xargs -0 rm'
 
 # Flush your dns cache
 alias flush='dscacheutil -flushcache'
