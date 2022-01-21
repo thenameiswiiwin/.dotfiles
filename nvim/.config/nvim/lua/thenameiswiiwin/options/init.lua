@@ -44,7 +44,7 @@ Option.g {
 	encoding = "UTF-8",
 	mouse = "a",
 	errorbells = true,
-	background = "dark",
+	-- background = "dark",
 	clipboard = "unnamedplus",
 
 	foldlevel = 20,

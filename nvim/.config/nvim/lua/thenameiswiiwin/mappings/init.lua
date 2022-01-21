@@ -69,4 +69,9 @@ M.map("n", "<leader>4", ":lua require('harpoon.ui').nav_file(4)<CR>")
 M.map("n", "<leader>vw", "VimwikiIndex<CR>")
 M.map("n", "<leader>tl", "VimwikiToggleListItem<cr>")
 
+-- Nvim Tree
+M.map("n", "<C-n>", ":NvimTreeToggle<CR>")
+M.map("n", "<leader>r", ":NvimTreeRefresh<CR>")
+M.map("n", "<leader>n", ":NvimTreeFindFile<CR>")
+
 return M

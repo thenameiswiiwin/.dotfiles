@@ -44,14 +44,10 @@ alias ghcl='gh repo clone'
 alias ghf='gh repo fork'
 
 # Tmux
-alias ts='~/./tmux-session'
-alias tw='~/./tmux-window'
+alias ts='~/bin/./tmux-sessionizer'
 alias tc="v ~/.tmux.conf"
 alias tcs="tmux source-file ~/.tmux.conf"
 alias tad="ta dev"
-
-# Cheat Sheet
-alias s="~/./tmux-cht.sh"
 
 # Cat -> Bat
 alias cat='bat'

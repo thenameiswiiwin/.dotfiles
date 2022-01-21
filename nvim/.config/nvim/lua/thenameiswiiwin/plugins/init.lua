@@ -5,6 +5,7 @@ Plug.begin("~/.config/nvim/plugged")
 -- Colors
 Plug "morhetz/gruvbox"
 Plug "mhartington/oceanic-next"
+Plug "Mofiqul/dracula.nvim"
 
 -- LSP
 Plug "neovim/nvim-lspconfig"
