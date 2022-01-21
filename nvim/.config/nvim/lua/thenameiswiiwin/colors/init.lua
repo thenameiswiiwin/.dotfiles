@@ -1,35 +1,35 @@
--- customize dracula color palette
-vim.g.dracula_colors = {
-  bg = "#282A36",
-  fg = "#F8F8F2",
-  selection = "#44475A",
-  comment = "#6272A4",
-  red = "#FF5555",
-  orange = "#FFB86C",
-  yellow = "#F1FA8C",
-  green = "#50fa7b",
-  purple = "#BD93F9",
-  cyan = "#8BE9FD",
-  pink = "#FF79C6",
-  bright_red = "#FF6E6E",
-  bright_green = "#69FF94",
-  bright_yellow = "#FFFFA5",
-  bright_blue = "#D6ACFF",
-  bright_magenta = "#FF92DF",
-  bright_cyan = "#A4FFFF",
-  bright_white = "#FFFFFF",
-  menu = "#21222C",
-  visual = "#3E4452",
-  gutter_fg = "#4B5263",
-  nontext = "#3B4048",
+local M = {
+  base00 = "#1b2b34",
+  base01 = "#343d46",
+  base02 = "#4f5b66",
+  base03 = "#65737e",
+  base04 = "#a7adba",
+  base05 = "#c0c5ce",
+  base06 = "#cdd3de",
+  base07 = "#d8dee9",
+  red = "#ec5f67",
+  orange = "#f99157",
+  yellow = "#fac863",
+  green = "#99c794",
+  cyan = "#62b3b2",
+  blue = "#6699cc",
+  purple = "#c594c5",
+  brown = "#ab7967",
+  white = "#ffffff"
 }
--- show the '~' characters after the end of buffers
-vim.g.dracula_show_end_of_buffer = true
--- use transparent background
-vim.g.dracula_transparent_bg = true
--- set custom lualine background color
-vim.g.dracula_lualine_bg_color = "#44475a"
--- set italic comment
-vim.g.dracula_italic_comment = true
 
-vim.cmd("colorscheme dracula")
+vim.cmd("colorscheme OceanicNext")
+
+function M.setItalics()
+  vim.cmd("hi Comment gui=italic")
+  vim.cmd("hi Keyword gui=italic")
+  vim.cmd("hi Keyword gui=italic")
+  vim.cmd("hi Identifier gui=italic")
+  vim.cmd("hi StorageClass gui=italic")
+  vim.cmd("hi jsLineComment gui=italic")
+  vim.cmd("hi xmlAttrib gui=italic")
+  vim.cmd("hi htmlArg gui=italic")
+  vim.cmd("hi pythonSelf gui=italic")
+end
+M.setItalics()
+return M

@@ -20,11 +20,22 @@ source ~/.aliases
 export CLICOLOR=1
 export LSCOLORS=FxFhcxdxbxegedabagacad
 
+export GIT_EDITOR='vim'
+export VISUAL='vim'
+export EDITOR='vim'
+export TMUXP_CONFIGDIR=$HOME/.config/tmuxp
+export DISABLE_AUTO_TITLE='true'
+export PATH=/Users/$USER/bin:$PATH
+export TERM=xterm-256color
+
 # FZF
 export FZF_DEFAULT_COMMAND="rg --files --hidden --glob '!.git'"
 export FZF_DEFAULT_OPTS="--height=40% --layout=reverse --border --margin=1 --padding=1"
+[ -f ~/.fzf.zsh ] && source ~/.fzf.zsh
 
 # To customize prompt, run `p10k configure` or edit ~/.p10k.zsh.
 [[ ! -f ~/.p10k.zsh ]] || source ~/.p10k.zsh
 
 export BAT_THEME="gruvbox-dark"
+
+alias luamake=/Users/huy/code/lua-language-server/3rd/luamake/luamake
