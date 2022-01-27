@@ -20,13 +20,15 @@ M.map("n", "q", "<nop>")
 M.map("n", "Q", "<nop>")
 
 M.map("n", "<Leader>H", '<cmd>TSHighlightCapturesUnderCursor<cr>')
-M.map("n", "<Leader>ff", "<cmd>lua require('thenameiswiiwin.telescope').find_files()<cr>")
+
+M.map("n", "<Leader>ff", "<cmd>lua require('telescope.builtin').find_files()<cr>")
 M.map("n", "<Leader>fh", "<cmd>lua require('thenameiswiiwin.telescope').help_tags()<cr>")
 M.map("n", "<Leader>fc", "<cmd>lua require('thenameiswiiwin.telescope').colors()<cr>")
 M.map("n", "<Leader>fg", "<cmd>Telescope live_grep<cr>")
 M.map("n", "<Leader>fb", "<cmd>Telescope buffers<cr>")
-M.map("n", "<Leader>fs", "<cmd>Telescope spell_suggest<cr>")
+
 M.map("n", "<Leader>f", "<cmd>Format<cr>")
+
 M.map("n", "H", "^")
 M.map("n", "L", "g_")
 M.map("v", "H", "^")
@@ -53,7 +55,6 @@ M.map("v", "<Leader>y", '"+y"')
 M.map("v", "J", ":m '>+1<CR>gv=gv")
 M.map("v", "K", ":m '<-2<CR>gv=gv")
 M.map("n", "<leader>x", ":!chmod +x %<cr>")
-M.map("n", "<leader>o", ":Yanil<cr>")
 
 M.map("n", "<leader>pv", ":Ex<CR>")
 M.map("v", "<", "<gv")

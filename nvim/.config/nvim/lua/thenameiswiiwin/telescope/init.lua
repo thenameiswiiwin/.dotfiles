@@ -37,7 +37,7 @@ telescope.setup {
             post = function()
               vim.cmd("normal! zx")
             end
-         }
+          }
         )
         return true
       end

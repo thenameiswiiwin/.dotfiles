@@ -14,7 +14,6 @@ return require "packer".startup(
     use {"tpope/vim-unimpaired"}
     use {"AndrewRadev/switch.vim"}
     use {"christoomey/vim-tmux-navigator"}
-    use {"ThePrimeagen/harpoon"}
     use {"tpope/vim-surround"}
     use {
       "numToStr/Comment.nvim",
@@ -249,7 +248,7 @@ return require "packer".startup(
     -- Lua
     use {"tbastos/vim-lua"}
 
-    -- -- mhartington
+    -- -- Local
     use {"mhartington/formatter.nvim"}
     use {"mhartington/vim-folds"}
     use {"mhartington/oceanic-next"}
