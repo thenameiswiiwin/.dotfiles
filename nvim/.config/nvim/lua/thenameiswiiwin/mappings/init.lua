@@ -50,11 +50,13 @@ M.map("v", "j", "v:count == 0 ? 'gj' : 'j'", {expr = true})
 M.map('v', "Ô", ":m '>+1<CR>gv=gv")
 M.map('v', "", ":m '<-2<CR>gv=gv")
 
-M.map("v", "<leader><CR>", ":so ~/.config/nvim/init.vim<CR>")
+M.map("v", "<leader><CR>", ":so ~/.config/nvim/init.lua<CR>")
 M.map("v", "<Leader>y", '"+y"')
 M.map("v", "J", ":m '>+1<CR>gv=gv")
 M.map("v", "K", ":m '<-2<CR>gv=gv")
 M.map("n", "<leader>x", ":!chmod +x %<cr>")
+
+M.map("c", "w!!", "w !sudo tee > /dev/null %")
 
 M.map("n", "<leader>pv", ":Ex<CR>")
 M.map("v", "<", "<gv")

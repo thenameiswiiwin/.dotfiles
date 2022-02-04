@@ -20,15 +20,15 @@ alias tree='la --tree --level=4 -a -I=.git --git-ignore'
 
 # NeoVim
 alias v='nvim'
-alias vc='~/.config/nvim'
+alias vc='$HOME/.config/nvim'
 
 # Zsh
-alias zc='v ~/.zshrc'
-alias zs='source ~/.zshrc'
-alias za='v ~/.aliases'
+alias zc='v $HOME/.zshrc'
+alias zs='source $HOME/.zshrc'
+alias za='v $HOME/.aliases'
 
 # Port }}}
-alias kill='netstat -ano | findstr :'
+alias kill='netstat -ano | findstr'
 alias port='sudo lsof -i'
 
 # Help Me }}}
@@ -44,11 +44,12 @@ alias ghcl='gh repo clone'
 alias ghf='gh repo fork'
 
 # Tmux
-alias cht='~/bin/./tmux-cht.sh'
-alias ts='~/bin/./tmux-sessionizer'
-alias tw='~/bin/./tmux-windowizer'
-alias tc="v ~/tmux.conf"
-alias tcs="tmux source ~/tmux.conf"
+alias t='tmux'
+alias cht='$HOME/bin/./tmux-cht.sh'
+alias ts='$HOME/bin/./tmux-sessionizer'
+alias tw='$HOME/bin/./tmux-windowizer'
+alias tc="v $HOME/tmux.conf"
+alias tcs="tmux source $HOME/tmux.conf"
 
 # Cat -> Bat
 alias cat='bat'
