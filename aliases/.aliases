@@ -28,7 +28,8 @@ alias zs='source $HOME/.zshrc'
 alias za='v $HOME/.aliases'
 
 # Port }}}
-alias kill='netstat -ano | findstr'
+# yarn add global add kill-port
+alias kill='kill-port'
 alias port='sudo lsof -i'
 
 # Help Me }}}
