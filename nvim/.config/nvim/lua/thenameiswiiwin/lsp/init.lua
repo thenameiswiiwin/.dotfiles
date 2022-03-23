@@ -6,6 +6,7 @@ local util = require "lspconfig.util"
 local mapBuf = require "thenameiswiiwin.mappings".mapBuf
 local autocmd = require "thenameiswiiwin.autocmds".autocmd
 
+local lsp_installer = require("nvim-lsp-installer")
 local lsp_status = require("lsp-status")
 lsp_status.register_progress()
 
@@ -67,13 +68,17 @@ local on_attach = function(client, bufnr)
   end
 end
 
-local servers = {"pylsp", "bashls", "sourcekit", "tsserver", "html", "cssls", "volar", "vimls"}
+local servers = {"pylsp", "bashls", "sourcekit", "tsserver", "html", "cssls", "volar", "vimls", "intelephense", "phpactor", "vuels"}
 for _, lsp in ipairs(servers) do
   lspconfig[lsp].setup {
     on_attach = on_attach,
     capabilities = capabilities
   }
 end
+lsp_installer.on_server_ready(function(server)
+  local opts = {}
+  server:setup(opts)
+end)
 lspconfig.sourcekit.setup {
   on_attach = on_attach,
   capabilities = capabilities
@@ -94,6 +99,12 @@ lspconfig.emmet_ls.setup {
 }
 
 local lua_lsp_loc = "/Users/huy/code/personal/lua-language-server"
+
+lspconfig.intelephense.setup {
+  cmd = {"intelephense", "--stdio"},
+  iletypes = {"php"},
+  root_dir = util.root_pattern("composer.json", ".git"),
+}
 
 lspconfig.jsonls.setup {
   cmd = {"vscode-json-language-server", "--stdio"},
@@ -174,6 +185,14 @@ lspconfig.angularls.setup {
   on_new_config = function(new_config)
     new_config.cmd = ngls_cmd
   end
+}
+
+lspconfig.vuels.setup{
+  cmd = { "vls" },
+  on_attach = on_attach,
+  capabilities = capabilities,
+  root_dir = util.root_pattern("package.json", "vue.config.js"),
+  filetypes = { "vue" }
 }
 
 local runtime_path = vim.split(package.path, ";")

@@ -10,6 +10,10 @@ fi
 export NVM_DIR=${HOME}/.nvm
 export NVM_COMPLETION=true
 
+# If you come from bash you might have to change your $PATH
+export PATH="$PATH:$HOME/.composer/vendor/bin"
+export PATH="/usr/local/opt/mysql@5.7/bin:$PATH"
+
 # Source Plugins
 source ~/.zsh_plugins.sh
 
