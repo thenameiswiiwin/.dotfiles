@@ -25,8 +25,7 @@ M.autocmd("TermOpen",     "*",   "setl nonumber")
 
 M.autocmd("WinLeave",     "*",   "if exists('w:last_fdm') | let &l:foldmethod=w:last_fdm | unlet w:last_fdm | endif")
 
-
--- vim.api.nvim_command('autocmd WinEnter * v:lua.mh.autocmds.Preview_func()')
+-- vim.api.nvim_command('autocmd WinEnter * v:lua.thenameiswiiwin.autocmds.Preview_func()')
 
 -- autocmd WinEnter * call Preview_func()
 --

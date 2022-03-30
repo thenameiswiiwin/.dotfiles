@@ -55,6 +55,9 @@ alias tcs="tmux source $HOME/tmux.conf"
 # Cat -> Bat
 alias cat='bat'
 
+# Keyboard
+alias qm='cd $HOME/qmk_firmware/keyboards/lily58/keymaps/thenameiswiiwin && v keymap.c'
+
 # Lazy
 alias brave='open -a Brave\ Browser'
 alias chome='open -a Google\ Chrome'
