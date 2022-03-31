@@ -49,8 +49,8 @@ alias t='tmux'
 alias cht='$HOME/bin/./tmux-cht.sh'
 alias ts='$HOME/bin/./tmux-sessionizer'
 alias tw='$HOME/bin/./tmux-windowizer'
-alias tc="v $HOME/tmux.conf"
-alias tcs="tmux source $HOME/tmux.conf"
+alias tc="v $HOME/.tmux.conf"
+alias tcs="tmux source $HOME/.tmux.conf"
 
 # Cat -> Bat
 alias cat='bat'
