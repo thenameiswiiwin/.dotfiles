@@ -71,10 +71,7 @@ Option.g {
   splitbelow = true,
   emoji = false,
   indentexpr = "nvim_treesitter#indent()",
-  showmatch = true,
-  hlsearch = true,
-  incsearch = true,
-  ignorecase = true,
+  showmatch = false
 }
 Option.b {
   swapfile = false,
@@ -84,7 +81,6 @@ Option.b {
 Option.w {
   number = true,
   numberwidth = 1,
-  relativenumber = true,
   signcolumn = "yes",
   spell = false,
   foldlevel = 99,
@@ -105,7 +101,6 @@ vim.cmd('let &t_8f = "\\<Esc>[38;2;%lu;%lu;%lum"')
 vim.cmd('let &t_8b = "\\<Esc>[48;2;%lu;%lu;%lum"')
 
 vim.g.mapleader = " "
-
 vim.g.one_allow_italics = true
 vim.g.oceanic_next_terminal_bold = true
 vim.g.oceanic_next_terminal_italic = true

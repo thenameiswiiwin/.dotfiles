@@ -6,7 +6,6 @@ local util = require "lspconfig.util"
 local mapBuf = require "thenameiswiiwin.mappings".mapBuf
 local autocmd = require "thenameiswiiwin.autocmds".autocmd
 
-local lsp_installer = require("nvim-lsp-installer")
 local lsp_status = require("lsp-status")
 lsp_status.register_progress()
 
@@ -40,7 +39,7 @@ local default_node_modules = get_node_modules(vim.fn.getcwd())
 local on_attach = function(client, bufnr)
 
   lsp_status.on_attach(client)
-  mapBuf(bufnr, "n", "<Leader>gD", "<Cmd>lua vim.lsp.buf.declaration()<CR>")
+  mapBuf(bufnr, "n", "<Leader>gdc", "<Cmd>lua vim.lsp.buf.declaration()<CR>")
   mapBuf(bufnr, "n", "<Leader>gd", "<Cmd>lua vim.lsp.buf.definition()<CR>")
   mapBuf(bufnr, "n", "<Leader>gh", "<Cmd>lua vim.lsp.buf.hover()<CR>")
   mapBuf(bufnr, "n", "<Leader>gi", "<cmd>lua vim.lsp.buf.implementation()<CR>")
@@ -68,164 +67,142 @@ local on_attach = function(client, bufnr)
   end
 end
 
--- local servers = {"pylsp", "bashls", "sourcekit", "tsserver", "html", "cssls", "volar", "vimls", "intelephense", "phpactor", "vuels"}
--- for _, lsp in ipairs(servers) do
---   lspconfig[lsp].setup {
---     on_attach = on_attach,
---     capabilities = capabilities
---   }
--- end
+local servers = {"pylsp", "bashls", "sourcekit", "tsserver", "html", "cssls", "volar", "vimls"}
+for _, lsp in ipairs(servers) do
+  lspconfig[lsp].setup {
+    on_attach = on_attach,
+    capabilities = capabilities
+  }
+end
+lspconfig.sourcekit.setup {
+  on_attach = on_attach,
+  capabilities = capabilities
+}
+configs.emmet_ls = {
+  default_config = {
+    cmd = {"emmet-ls", "--stdio"},
+    filetypes = {"html", "css", "scss"},
+    root_dir = function()
+      return vim.loop.cwd()
+    end,
+    settings = {}
+  }
+}
+lspconfig.emmet_ls.setup {
+  on_attach = on_attach,
+  capabilities = capabilities
+}
 
+local lua_lsp_loc = "/Users/huy/Github/lua-language-server"
 
-lsp_installer.on_server_ready(function(server)
-    local opts = {}
-    server:setup(opts)
-end)
+lspconfig.jsonls.setup {
+  cmd = {"vscode-json-language-server", "--stdio"},
+  on_attach = on_attach,
+  capabilities = capabilities,
+  filetypes = {"json", "jsonc"},
+  settings = {
+    json = {
+      -- Schemas https://www.schemastore.org
+      schemas = {
+        {
+          fileMatch = {"package.json"},
+          url = "https://json.schemastore.org/package.json"
+        },
+        {fileMatch={"manifest.json", "manifest.webmanifest"},
+          url="https://json.schemastore.org/web-manifest-combined.json"
+        },
+        {
+          fileMatch = {"tsconfig*.json"},
+          url = "https://json.schemastore.org/tsconfig.json"
+        },
+        {
+          fileMatch = {
+            ".prettierrc",
+            ".prettierrc.json",
+            "prettier.config.json"
+          },
+          url = "https://json.schemastore.org/prettierrc.json"
+        },
+        {
+          fileMatch = {".eslintrc", ".eslintrc.json"},
+          url = "https://json.schemastore.org/eslintrc.json"
+        },
+        {
+          fileMatch = {".babelrc", ".babelrc.json", "babel.config.json"},
+          url = "https://json.schemastore.org/babelrc.json"
+        },
+        {
+          fileMatch = {"lerna.json"},
+          url = "https://json.schemastore.org/lerna.json"
+        },
+        {
+          fileMatch = {"now.json", "vercel.json"},
+          url = "https://json.schemastore.org/now.json"
+        },
+        {
+          fileMatch = {
+            ".stylelintrc",
+            ".stylelintrc.json",
+            "stylelint.config.json"
+          },
+          url = "http://json.schemastore.org/stylelintrc.json"
+        }
+      }
+    }
+  }
+}
 
--- lspconfig.sourcekit.setup {
---   on_attach = on_attach,
---   capabilities = capabilities
--- }
--- configs.emmet_ls = {
---   default_config = {
---     cmd = {"emmet-ls", "--stdio"},
---     filetypes = {"html", "css", "scss"},
---     root_dir = function()
---       return vim.loop.cwd()
---     end,
---     settings = {}
---   }
--- }
--- lspconfig.emmet_ls.setup {
---   on_attach = on_attach,
---   capabilities = capabilities
--- }
---
--- local lua_lsp_loc = "/Users/huy/code/personal/lua-language-server"
---
--- lspconfig.intelephense.setup {
---   cmd = {"intelephense", "--stdio"},
---   iletypes = {"php"},
---   root_dir = util.root_pattern("composer.json", ".git"),
--- }
---
--- local lua_lsp_loc = "/Users/mhartington/lua-language-server"
---
--- lspconfig.jsonls.setup {
---   cmd = {"vscode-json-language-server", "--stdio"},
---   on_attach = on_attach,
---   capabilities = capabilities,
---   filetypes = {"json", "jsonc"},
---   settings = {
---     json = {
---       -- Schemas https://www.schemastore.org
---       schemas = {
---         {
---           fileMatch = {"package.json"},
---           url = "https://json.schemastore.org/package.json"
---         },
---         {fileMatch={"manifest.json", "manifest.webmanifest"},
---           url="https://json.schemastore.org/web-manifest-combined.json"
---         },
---         {
---           fileMatch = {"tsconfig*.json"},
---           url = "https://json.schemastore.org/tsconfig.json"
---         },
---         {
---           fileMatch = {
---             ".prettierrc",
---             ".prettierrc.json",
---             "prettier.config.json"
---           },
---           url = "https://json.schemastore.org/prettierrc.json"
---         },
---         {
---           fileMatch = {".eslintrc", ".eslintrc.json"},
---           url = "https://json.schemastore.org/eslintrc.json"
---         },
---         {
---           fileMatch = {".babelrc", ".babelrc.json", "babel.config.json"},
---           url = "https://json.schemastore.org/babelrc.json"
---         },
---         {
---           fileMatch = {"lerna.json"},
---           url = "https://json.schemastore.org/lerna.json"
---         },
---         {
---           fileMatch = {"now.json", "vercel.json"},
---           url = "https://json.schemastore.org/now.json"
---         },
---         {
---           fileMatch = {
---             ".stylelintrc",
---             ".stylelintrc.json",
---             "stylelint.config.json"
---           },
---           url = "http://json.schemastore.org/stylelintrc.json"
---         }
---       }
---     }
---   }
--- }
+local ngls_cmd = {
+  "ngserver",
+  "--stdio",
+  "--tsProbeLocations",
+  default_node_modules,
+  "--ngProbeLocations",
+  default_node_modules,
+  "--includeCompletionsWithSnippetText",
+  "--includeAutomaticOptionalChainCompletions",
+  -- "--logToConsole",
+  -- "--logFile",
+  -- "/Users/huy/Github/StarTrack-ng/logs.txt"
 
--- local ngls_cmd = {
---   "ngserver",
---   "--stdio",
---   "--tsProbeLocations",
---   default_node_modules,
---   "--ngProbeLocations",
---   default_node_modules,
---   "--includeCompletionsWithSnippetText",
---   "--includeAutomaticOptionalChainCompletions",
---   -- "--logToConsole",
---   -- "--logFile",
---
--- }
+}
 
--- lspconfig.angularls.setup {
---   cmd = ngls_cmd,
---   on_attach = on_attach,
---   capabilities = capabilities,
---   root_dir = util.root_pattern("angular.json"),
---   on_new_config = function(new_config)
---     new_config.cmd = ngls_cmd
---   end
--- }
---
--- lspconfig.vuels.setup{
---   cmd = { "vls" },
---   on_attach = on_attach,
---   capabilities = capabilities,
---   root_dir = util.root_pattern("package.json", "vue.config.js"),
---   filetypes = { "vue" }
--- }
+lspconfig.angularls.setup {
+  cmd = ngls_cmd,
+  on_attach = on_attach,
+  capabilities = capabilities,
+  root_dir = util.root_pattern("angular.json"),
+  on_new_config = function(new_config)
+    new_config.cmd = ngls_cmd
+  end
+}
 
 local runtime_path = vim.split(package.path, ";")
 table.insert(runtime_path, "lua/?.lua")
 table.insert(runtime_path, "lua/?/init.lua")
 
--- lspconfig.sumneko_lua.setup {
---   cmd = {lua_lsp_loc .. "/bin/macOS/lua-language-server", "-E", lua_lsp_loc .. "/main.lua"},
---   capabilities = capabilities,
---   on_attach = on_attach,
---   settings = {
---     Lua = {
---       runtime = {version = "LuaJIT", path = runtime_path},
---       diagnostics = {globals = {"vim"}},
---       telemetry = {enable = false},
---       workspace = {
---         library = vim.api.nvim_get_runtime_file("", true),
---         maxPreload = 2000,
---         preloadFileSize = 1000
---       }
---       -- workspace = {
---       --   -- Make the server aware of Neovim runtime files
---       --   library = {
---       --     [vim.fn.expand "$VIMRUNTIME/lua"] = true,
---       --     [vim.fn.expand "$VIMRUNTIME/lua/vim/lsp"] = true
---       --   }
---       -- }
---     }
---   }
--- }
+lspconfig.sumneko_lua.setup {
+  cmd = {lua_lsp_loc .. "/bin/lua-language-server", "-E", lua_lsp_loc .. "/main.lua"},
+  capabilities = capabilities,
+  on_attach = on_attach,
+  settings = {
+    Lua = {
+      runtime = {version = "LuaJIT", path = runtime_path},
+      diagnostics = {globals = {"vim"}},
+      telemetry = {enable = false},
+      workspace = {
+        library = vim.api.nvim_get_runtime_file("", true),
+        maxPreload = 2000,
+        preloadFileSize = 1000
+      }
+      -- workspace = {
+      --   -- Make the server aware of Neovim runtime files
+      --   library = {
+      --     [vim.fn.expand "$VIMRUNTIME/lua"] = true,
+      --     [vim.fn.expand "$VIMRUNTIME/lua/vim/lsp"] = true
+      --   }
+      -- }
+    }
+  }
+}
 return M

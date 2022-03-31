@@ -16,19 +16,17 @@ function M.mapBuf(buf, mode, lhs, rhs, opts)
   vim.api.nvim_buf_set_keymap(buf, mode, lhs, rhs, options)
 end
 
-M.map("n", "q", "<nop>")
 M.map("n", "Q", "<nop>")
+M.map("n", "q", "<nop>")
 
 M.map("n", "<Leader>H", '<cmd>TSHighlightCapturesUnderCursor<cr>')
-
-M.map("n", "<Leader>ff", "<cmd>lua require('telescope.builtin').find_files()<cr>")
-M.map("n", "<Leader>fh", "<cmd>lua require('thenameiswiiwin.telescope').help_tags()<cr>")
-M.map("n", "<Leader>fc", "<cmd>lua require('thenameiswiiwin.telescope').colors()<cr>")
-M.map("n", "<Leader>fg", "<cmd>Telescope live_grep<cr>")
-M.map("n", "<Leader>fb", "<cmd>Telescope buffers<cr>")
-
+M.map("n", "<c-p>", "<cmd>lua require('thenameiswiiwin.telescope').find_files()<cr>")
+M.map("n", "<Leader>h", "<cmd>lua require('thenameiswiiwin.telescope').help_tags()<cr>")
+M.map("n", "<Leader>c", "<cmd>lua require('thenameiswiiwin.telescope').colors()<cr>")
+M.map("n", "<Leader>a", "<cmd>Telescope live_grep<cr>")
+M.map("n", "<Leader>b", "<cmd>Telescope buffers<cr>")
+M.map("n", "z=", "<cmd>Telescope spell_suggest<cr>")
 M.map("n", "<Leader>f", "<cmd>Format<cr>")
-
 M.map("n", "H", "^")
 M.map("n", "L", "g_")
 M.map("v", "H", "^")
@@ -39,8 +37,8 @@ M.map("v", "J", "5j")
 M.map("v", "K", "5k")
 M.map("v", "gJ", ":join<cr>")
 M.map("n", ";", ":", {nowait = true, silent = false})
-M.map("n", "<leader>za", "za")
-M.map("n", "<leader>za", "za")
+M.map("n", "<Space>", "za")
+M.map("n", "<Space>", "za")
 M.map("n", "<Leader>,", "<cmd>bnext<cr>")
 M.map("n", "<Leader>.", "<cmd>bprevious<cr>")
 M.map("n", "k", "v:count == 0 ? 'gk' : 'k'", {expr = true})
@@ -50,15 +48,7 @@ M.map("v", "j", "v:count == 0 ? 'gj' : 'j'", {expr = true})
 M.map('v', "Ô", ":m '>+1<CR>gv=gv")
 M.map('v', "", ":m '<-2<CR>gv=gv")
 
-M.map("v", "<leader><CR>", ":so ~/.config/nvim/init.lua<CR>")
-M.map("v", "<Leader>y", '"+y"')
-M.map("v", "J", ":m '>+1<CR>gv=gv")
-M.map("v", "K", ":m '<-2<CR>gv=gv")
-M.map("n", "<leader>x", ":!chmod +x %<cr>")
 
-M.map("c", "w!!", "w !sudo tee > /dev/null %")
-
-M.map("n", "<leader>pv", ":Ex<CR>")
 M.map("v", "<", "<gv")
 M.map("v", ">", ">gv")
 M.map("n", "<Leader>d", '"_d')
@@ -99,14 +89,6 @@ M.map("t", "<C-k>", "<c-\\><c-n>:TmuxNavigateUp<cr>")
 M.map("t", "<C-l>", "<c-\\><c-n>:TmuxNavigateRight<cr>")
 M.map("t", "<C-h>", "<c-\\><c-n>:TmuxNavigateLeft<CR>")
 
--- Harpoon
-M.map("n", "<leader>a", ":lua require('harpoon.mark').add_file()<CR>")
-M.map("n", "<leader>,", ":lua require('harpoon.ui').toggle_quick_menu()<CR>")
-M.map("n", "<leader>1", ":lua require('harpoon.ui').nav_file(1)<CR>")
-M.map("n", "<leader>2", ":lua require('harpoon.ui').nav_file(2)<CR>")
-M.map("n", "<leader>3", ":lua require('harpoon.ui').nav_file(3)<CR>")
-M.map("n", "<leader>4", ":lua require('harpoon.ui').nav_file(4)<CR>")
-
 M.map("n", "<Leader>tm", "<cmd>TableModeToggle<cr>")
 M.map("n", "<Leader>u", "<cmd>PackerUpdate<cr>")
 
@@ -115,7 +97,11 @@ for i = 1, 9 do
   M.map("t", "<leader>" .. i, '<C-\\><C-n>:lua require"bufferline".go_to_buffer(' .. i .. ")<CR>")
 end
 
+
+
 vim.cmd("cnoreabbrev <silent> x lua require('thenameiswiiwin.commands').BufDel()")
+
+
 
 -- vim.cmd("cnoreabbrev x Sayonara")
 -- vim.cmd("cnoreabbrev x! BufDel!")

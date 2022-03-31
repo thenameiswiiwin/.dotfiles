@@ -225,7 +225,6 @@ return require "packer".startup(
     use {"othree/html5.vim"}
     use {"mattn/emmet-vim"}
     use {"posva/vim-vue"}
-    use {"phpactor/phpactor", ft = "php", tag = "*", run = "composer install --no-dev -o"}
     use {"leafOfTree/vim-svelte-plugin"}
     use {"skwp/vim-html-escape"}
     use {"kana/vim-textobj-user"}
@@ -270,10 +269,7 @@ return require "packer".startup(
     use {"simrat39/symbols-outline.nvim"}
     use {"nvim-lua/lsp-status.nvim"}
 
-    use {
-      "neovim/nvim-lspconfig",
-      'williamboman/nvim-lsp-installer',
-    }
+    use {"neovim/nvim-lspconfig"}
     use {"glepnir/lspsaga.nvim"}
     --
     use {"nvim-telescope/telescope.nvim"}
