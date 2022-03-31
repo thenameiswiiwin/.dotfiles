@@ -81,6 +81,7 @@ Option.b {
 Option.w {
   number = true,
   numberwidth = 1,
+  relativenumber = true,
   signcolumn = "yes",
   spell = false,
   foldlevel = 99,

@@ -273,6 +273,8 @@ return require "packer".startup(
 
     use {"neovim/nvim-lspconfig"}
     use {"glepnir/lspsaga.nvim"}
+    use "onsails/lspkind-nvim"
+
     --
     use {"nvim-telescope/telescope.nvim"}
     use {"nvim-telescope/telescope-github.nvim"}
