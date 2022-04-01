@@ -1,8 +1,8 @@
 # Brew
-alias ball='brew cleanup && brew update && brew upgrade && brew cleanup && brew doctor'
+alias bup='brew cleanup && brew update && brew upgrade && brew cleanup && brew doctor'
 alias bo='brew outdated'
 alias bi='brew install'
-alias bu='brew uninstall'
+alias bx='brew uninstall'
 alias bl='brew list'
 alias bs='brew search'
 
@@ -24,8 +24,8 @@ alias vc='$HOME/.config/nvim'
 
 # Zsh
 alias zc='v $HOME/.zshrc'
-alias zs='source $HOME/.zshrc'
 alias za='v $HOME/.aliases'
+alias zs='source $HOME/.zshrc'
 
 # Port }}}
 # yarn add global add kill-port
@@ -46,9 +46,7 @@ alias ghf='gh repo fork'
 
 # Tmux
 alias t='tmux'
-alias cht='$HOME/bin/./tmux-cht.sh'
-alias ts='$HOME/bin/./tmux-sessionizer'
-alias tw='$HOME/bin/./tmux-windowizer'
+alias tf='$HOME/bin/./tmux-sessionizer'
 alias tc="v $HOME/.tmux.conf"
 alias tcs="tmux source $HOME/.tmux.conf"
 

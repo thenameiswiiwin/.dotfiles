@@ -34,6 +34,9 @@ export DISABLE_AUTO_TITLE='true'
 export PATH=/Users/$USER/bin:$PATH
 export TERM=xterm-256color
 
+# Sessionizer
+bindkey -s ^f "tmux-sessionizer\n"
+
 # FZF
 export FZF_DEFAULT_COMMAND="rg --files --hidden --glob '!.git'"
 export FZF_DEFAULT_OPTS="--height=40% --layout=reverse --border --margin=1 --padding=1"
