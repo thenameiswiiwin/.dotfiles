@@ -10,12 +10,11 @@ local lsp_status = require("lsp-status")
 lsp_status.register_progress()
 
 local capabilities = vim.lsp.protocol.make_client_capabilities()
-capabilities.textDocument.completion.completionItem.snippetSupport = true
 capabilities = require("cmp_nvim_lsp").update_capabilities(capabilities)
 capabilities = vim.tbl_extend("keep", capabilities or {}, lsp_status.capabilities)
+capabilities.textDocument.completion.completionItem.snippetSupport = true
 
 local M = {}
-
 -- Diagnostic settings
 vim.diagnostic.config {
   virtual_text = false,
@@ -99,6 +98,9 @@ lspconfig.intelephense.setup {
   cmd = {"intelephense", "--stdio"},
   on_attach = on_attach,
   capabilities = capabilities,
+  flags = {
+    debounce_text_changes = 150,
+  },
 }
 lspconfig.phpactor.setup {
   cmd = {"phpactor", "language-server"},
@@ -113,6 +115,9 @@ lspconfig.phpactor.setup {
 lspconfig.efm.setup{
   on_attach = on_attach,
   capabilities = capabilities,
+    flags = {
+    debounce_text_changes = 150,
+  },
   nit_options = { documentFormatting = true },
   filetypes = { 'php' },
   settings = {
@@ -133,8 +138,6 @@ lspconfig.tailwindcss.setup{
   on_attach = on_attach,
   capabilities = capabilities,
 }
-
-
 
 lspconfig.jsonls.setup {
   cmd = {"vscode-json-language-server", "--stdio"},
@@ -206,16 +209,6 @@ local ngls_cmd = {
   -- "--logFile",
   -- "/Users/huy/Github/StarTrack-ng/logs.txt"
 
-}
-
-lspconfig.angularls.setup {
-  cmd = ngls_cmd,
-  on_attach = on_attach,
-  capabilities = capabilities,
-  root_dir = util.root_pattern("angular.json"),
-  on_new_config = function(new_config)
-    new_config.cmd = ngls_cmd
-  end
 }
 
 local runtime_path = vim.split(package.path, ";")

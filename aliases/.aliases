@@ -46,6 +46,7 @@ alias ghf='gh repo fork'
 
 # Tmux
 alias t='tmux'
+alias ta="t a -t"
 alias tf='$HOME/bin/./tmux-sessionizer'
 alias tc="v $HOME/.tmux.conf"
 alias tcs="tmux source $HOME/.tmux.conf"
