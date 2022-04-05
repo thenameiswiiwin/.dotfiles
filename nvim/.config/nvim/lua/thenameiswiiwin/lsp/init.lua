@@ -67,7 +67,7 @@ local on_attach = function(client, bufnr)
   end
 end
 
-local servers = {"pylsp", "bashls", "sourcekit", "tsserver", "html", "cssls", "volar", "vimls"}
+local servers = {"pylsp", "bashls", "sourcekit", "tsserver", "html", "cssls", "volar", "vimls", "intelephense", "phpactor", "efm", "sqls", "tailwindcss"}
 for _, lsp in ipairs(servers) do
   lspconfig[lsp].setup {
     on_attach = on_attach,
@@ -94,6 +94,47 @@ lspconfig.emmet_ls.setup {
 }
 
 local lua_lsp_loc = "/Users/huy/Github/lua-language-server"
+
+lspconfig.intelephense.setup {
+  cmd = {"intelephense", "--stdio"},
+  on_attach = on_attach,
+  capabilities = capabilities,
+}
+lspconfig.phpactor.setup {
+  cmd = {"phpactor", "language-server"},
+  on_attach = on_attach,
+  filetypes = {"php"},
+  init_options = {
+    ["language_server_phpstan.enabled"] = false,
+    ["language_server_psalm.enabled"] = false,
+  },
+  root_dir = util.root_pattern("composer.json"),
+}
+lspconfig.efm.setup{
+  on_attach = on_attach,
+  capabilities = capabilities,
+  nit_options = { documentFormatting = true },
+  filetypes = { 'php' },
+  settings = {
+    rootMarkers = { '.git/' },
+    languages = {
+      php = {
+        lintCommand = './vendor/bin/phpstan analyze --error-format raw --no-progress'
+      },
+    },
+  },
+}
+lspconfig.sqls.setup{
+  cmd = {"path/to/command", "-config", "path/to/config.yml"};
+  on_attach = on_attach,
+  capabilities = capabilities,
+}
+lspconfig.tailwindcss.setup{
+  on_attach = on_attach,
+  capabilities = capabilities,
+}
+
+
 
 lspconfig.jsonls.setup {
   cmd = {"vscode-json-language-server", "--stdio"},
