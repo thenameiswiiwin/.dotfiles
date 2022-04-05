@@ -32,7 +32,7 @@ cmp.setup {
     ['<C-d>'] = cmp.mapping.scroll_docs(-4),
     ['<C-f>'] = cmp.mapping.scroll_docs(4),
     ['<C-e>'] = cmp.mapping.close(),
-    ['<c-y>'] = cmp.mapping.confirm {
+    ['<C-y>'] = cmp.mapping.confirm{
       behavior = cmp.ConfirmBehavior.Insert,
       select = true,
     },
@@ -42,9 +42,8 @@ cmp.setup {
     { name = 'gh_issues' },
     { name = 'nvim_lua' },
     { name = 'nvim_lsp' },
-    -- { name = 'nvim_lsp_signature_help' },
     { name = 'path' },
-  { name = 'luasnip' },
-    { name = 'buffer', keyword_length = 5 },
+    { name = 'luasnip' },
+    { name = 'buffer', keyword_length = 4 },
   },
 }

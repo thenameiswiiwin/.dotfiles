@@ -223,7 +223,7 @@ return require "packer".startup(
     use {"jxnblk/vim-mdx-js"}
     -- HTML
     use {"othree/html5.vim"}
-    use {"mattn/emmet-vim"}
+    -- use {"mattn/emmet-vim"}
     use {"posva/vim-vue"}
     use {"leafOfTree/vim-svelte-plugin"}
     use {"skwp/vim-html-escape"}
