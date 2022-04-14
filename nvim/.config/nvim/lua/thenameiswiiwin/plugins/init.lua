@@ -223,7 +223,7 @@ return require "packer".startup(
     use {"jxnblk/vim-mdx-js"}
     -- HTML
     use {"othree/html5.vim"}
-    -- use {"mattn/emmet-vim"}
+    use {"mattn/emmet-vim"}
     use {"posva/vim-vue"}
     use {"leafOfTree/vim-svelte-plugin"}
     use {"skwp/vim-html-escape"}
@@ -248,7 +248,6 @@ return require "packer".startup(
     -- Lua
     use {"tbastos/vim-lua"}
 
-    -- -- Local
     use {"mhartington/formatter.nvim"}
     use {"mhartington/vim-folds"}
     use {"mhartington/oceanic-next"}
@@ -275,8 +274,6 @@ return require "packer".startup(
 
     use {"neovim/nvim-lspconfig"}
     use {"glepnir/lspsaga.nvim"}
-    use "onsails/lspkind-nvim"
-
     --
     use {"nvim-telescope/telescope.nvim"}
     use {"nvim-telescope/telescope-github.nvim"}

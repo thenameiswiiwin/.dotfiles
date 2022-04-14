@@ -1,1 +1,1 @@
-/Users/huy/dotfiles/nvim/.config/nvim/lua/thenameiswiiwin/vim
+/Users/huy/.dotfiles/.config/nvim/lua/vim/inspect.lua

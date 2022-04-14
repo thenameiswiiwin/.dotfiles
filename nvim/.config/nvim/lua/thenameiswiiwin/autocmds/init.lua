@@ -10,6 +10,7 @@ M.autocmd("BufWritePre",  "*",   "%s/\\s\\+$//e")
 
 M.autocmd("ColorScheme",  "*",   "lua require('thenameiswiiwin.colors').setItalics()")
 M.autocmd("CompleteDone", "*",   "pclose")
+
 M.autocmd("FileType",     "vue", "syntax sync fromstart")
 
 -- M.autocmd("InsertEnter",  "*",   "let save_cwd = getcwd() | set autochdir")

@@ -101,8 +101,7 @@ local commonFT = {
   "json",
   "yaml",
   "xml",
-  "svg",
-  "php",
+  "svg"
 }
 for _, ft in ipairs(commonFT) do
   formatterConfig[ft] = {prettierConfig}

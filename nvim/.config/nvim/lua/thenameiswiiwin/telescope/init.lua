@@ -69,11 +69,11 @@ function M.colors()
   local opts = generateOpts({})
   builtIn.colorscheme(opts)
 end
--- function M.find_files()
---   local opts = generateOpts({})
---   opts.find_command = {"fd", "--type", "f", "--follow"}
---   builtIn.find_files(opts)
--- end
+function M.find_files()
+  local cmn_opts = generateOpts({})
+  cmn_opts.find_command = {"fd", "--type", "f", "--follow"}
+  builtIn.find_files(cmn_opts)
+end
 function M.help_tags()
   local opts = generateOpts({})
   builtIn.help_tags(opts)

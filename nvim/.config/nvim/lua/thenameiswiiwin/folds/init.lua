@@ -7,4 +7,3 @@ function foldText()
     "" .. vim.fn.getline(fe):gsub("%s+", "")
   return line
 end
---

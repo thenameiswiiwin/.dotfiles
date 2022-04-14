@@ -20,7 +20,7 @@ M.map("n", "Q", "<nop>")
 M.map("n", "q", "<nop>")
 
 M.map("n", "<Leader>H", '<cmd>TSHighlightCapturesUnderCursor<cr>')
--- M.map("n", "<Leader>ff", "<cmd>lua require('thenameiswiiwin.telescope').find_files()<cr>")
+-- M.map("n", "<c-p>", "<cmd>lua require('thenameiswiiwin.telescope').find_files()<cr>")
 M.map("n", "<Leader>ff", "<cmd>Telescope find_files<cr>")
 M.map("n", "<Leader>fh", "<cmd>lua require('thenameiswiiwin.telescope').help_tags()<cr>")
 M.map("n", "<Leader>fc", "<cmd>lua require('thenameiswiiwin.telescope').colors()<cr>")
