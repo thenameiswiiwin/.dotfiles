@@ -138,6 +138,11 @@ lspconfig.tailwindcss.setup{
   on_attach = on_attach,
   capabilities = capabilities,
 }
+-- lspconfig.volar.setup {
+--   on_attach = on_attach,
+--   capabilities = capabilities,
+--   filetypes = {'typescript', 'javascript', 'javascriptreact', 'typescriptreact', 'vue', 'json'},
+-- }
 
 lspconfig.jsonls.setup {
   cmd = {"vscode-json-language-server", "--stdio"},
