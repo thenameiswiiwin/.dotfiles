@@ -13,6 +13,8 @@
       --['<C-Space>'] = cmp.mapping.complete(),
       ['<C-x>'] = cmp.mapping.complete(),
       ['<C-e>'] = cmp.mapping.close(),
+      ['<C-n>'] = cmp.mapping(cmp.mapping.select_next_item(), {'i','c'}),
+      ['<C-p>'] = cmp.mapping(cmp.mapping.select_prev_item(), {'i','c'}),
       --['<CR>'] = cmp.mapping.confirm({ select = false }),
       ['<C-y>'] = cmp.mapping.confirm({
         behavior = cmp.ConfirmBehavior.Insert,

@@ -56,6 +56,7 @@ alias cat='bat'
 
 # Keyboard
 alias qm='cd $HOME/qmk_firmware/keyboards/lily58/keymaps/thenameiswiiwin && v keymap.c'
+alias qc='qmk compile -kb lily58/rev1 -km keymap.c'
 
 # Lazy
 alias brave='open -a Brave\ Browser'
