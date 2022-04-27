@@ -26,6 +26,7 @@ formulae=(
 "fzf"
 "treesitter"
 "ripgrep"
+"fd"
 "bat"
 "direnv"
 "exa"
@@ -39,7 +40,7 @@ do
 done
 
 # Stow
-stow aliases antibody git kitty nvim zsh tmux bin
+stow aliases antibody bin git kitty nvim phpactor tmux zsh
 
 # Add Zsh To Valid Login SHells
 command -v zsh | sudo tee -a /etc/shells
