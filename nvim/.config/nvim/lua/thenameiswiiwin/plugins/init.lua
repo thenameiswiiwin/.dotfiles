@@ -207,9 +207,6 @@ return require "packer".startup(
       "iamcco/markdown-preview.nvim",
       run = "cd app && yarn install"
     }
-    -- Rust
-    use {"rust-lang/rust.vim"}
-    use {"racer-rust/vim-racer"}
     -- Python
     use {"tmhedberg/SimpylFold", ft = "python"}
     -- JS/TS
@@ -253,7 +250,6 @@ return require "packer".startup(
     use {"mhartington/oceanic-next"}
 
     use {"nvim-treesitter/nvim-treesitter"}
-    use {"nvim-treesitter/nvim-treesitter-angular"}
     use {"nvim-treesitter/playground"}
 
     use {
@@ -272,7 +268,10 @@ return require "packer".startup(
     use {"simrat39/symbols-outline.nvim"}
     use {"nvim-lua/lsp-status.nvim"}
 
-    use {"neovim/nvim-lspconfig"}
+    use {
+      "neovim/nvim-lspconfig",
+      "williamboman/nvim-lsp-installer",
+    }
     use {"glepnir/lspsaga.nvim"}
     --
     use {"nvim-telescope/telescope.nvim"}

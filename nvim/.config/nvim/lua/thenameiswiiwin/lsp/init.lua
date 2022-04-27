@@ -1,6 +1,7 @@
 local vim = vim
 local uv = vim.loop
 local lspconfig = require "lspconfig"
+local lsp_installer = require "nvim-lsp-installer"
 local configs = require "lspconfig.configs"
 local util = require "lspconfig.util"
 local mapBuf = require "thenameiswiiwin.mappings".mapBuf
@@ -23,23 +24,10 @@ vim.diagnostic.config {
   update_in_insert = true
 }
 
-local function get_node_modules(root_dir)
-  -- util.find_node_modules_ancestor()
-  local root_node = root_dir .. "/node_modules"
-  local stats = uv.fs_stat(root_node)
-  if stats == nil then
-    return nil
-  else
-    return root_node
-  end
-end
-
-local default_node_modules = get_node_modules(vim.fn.getcwd())
-
 local on_attach = function(client, bufnr)
 
   lsp_status.on_attach(client)
-  mapBuf(bufnr, "n", "<Leader>gdc", "<Cmd>lua vim.lsp.buf.declaration()<CR>")
+  mapBuf(bufnr, "n", "<Leader>gD", "<Cmd>lua vim.lsp.buf.declaration()<CR>")
   mapBuf(bufnr, "n", "<Leader>gd", "<Cmd>lua vim.lsp.buf.definition()<CR>")
   mapBuf(bufnr, "n", "<Leader>gh", "<Cmd>lua vim.lsp.buf.hover()<CR>")
   mapBuf(bufnr, "n", "<Leader>gi", "<cmd>lua vim.lsp.buf.implementation()<CR>")
@@ -67,13 +55,35 @@ local on_attach = function(client, bufnr)
   end
 end
 
-local servers = {"pylsp", "bashls", "sourcekit", "tsserver", "html", "cssls", "volar", "vimls", "intelephense", "phpactor", "efm", "sqls", "tailwindcss"}
-for _, lsp in ipairs(servers) do
-  lspconfig[lsp].setup {
-    on_attach = on_attach,
-    capabilities = capabilities
+-- local servers = {"pylsp", "bashls", "sourcekit", "tsserver", "html", "cssls", "volar", "vimls"}
+-- for _, lsp in ipairs(servers) do
+--   lspconfig[lsp].setup {
+--     on_attach = on_attach,
+--     capabilities = capabilities
+--   }
+-- end
+
+lsp_installer.on_server_ready(function(server)
+    local opts = {}
+    server:setup(opts)
+end)
+lsp_installer.settings({
+  ui = {
+      icons = {
+          server_installed = "✓",
+          server_pending = "➜",
+          server_uninstalled = "✗"
+      },
+     keymaps = {
+        toggle_server_expand = "<CR>",
+        install_server = "i",
+        update_server = "u",
+        update_all_servers = "U",
+        uninstall_server = "X",
+    },
   }
-end
+})
+
 lspconfig.sourcekit.setup {
   on_attach = on_attach,
   capabilities = capabilities
@@ -94,55 +104,6 @@ lspconfig.emmet_ls.setup {
 }
 
 local lua_lsp_loc = "/Users/huy/Github/lua-language-server"
-lspconfig.intelephense.setup {
-  cmd = {"intelephense", "--stdio"},
-  on_attach = on_attach,
-  capabilities = capabilities,
-  flags = {
-    debounce_text_changes = 150,
-  },
-}
-lspconfig.phpactor.setup {
-  cmd = {"phpactor", "language-server"},
-  on_attach = on_attach,
-  filetypes = {"php"},
-  init_options = {
-    ["language_server_phpstan.enabled"] = false,
-    ["language_server_psalm.enabled"] = false,
-  },
-  root_dir = util.root_pattern("composer.json"),
-}
-lspconfig.efm.setup{
-  on_attach = on_attach,
-  capabilities = capabilities,
-    flags = {
-    debounce_text_changes = 150,
-  },
-  nit_options = { documentFormatting = true },
-  filetypes = { 'php' },
-  settings = {
-    rootMarkers = { '.git/' },
-    languages = {
-      php = {
-        lintCommand = './vendor/bin/phpstan analyze --error-format raw --no-progress'
-      },
-    },
-  },
-}
-lspconfig.sqls.setup{
-  cmd = {"path/to/command", "-config", "path/to/config.yml"};
-  on_attach = on_attach,
-  capabilities = capabilities,
-}
-lspconfig.tailwindcss.setup{
-  on_attach = on_attach,
-  capabilities = capabilities,
-}
--- lspconfig.volar.setup {
---   on_attach = on_attach,
---   capabilities = capabilities,
---   filetypes = {'typescript', 'javascript', 'javascriptreact', 'typescriptreact', 'vue', 'json'},
--- }
 
 lspconfig.jsonls.setup {
   cmd = {"vscode-json-language-server", "--stdio"},
@@ -199,31 +160,6 @@ lspconfig.jsonls.setup {
       }
     }
   }
-}
-
-local ngls_cmd = {
-  "ngserver",
-  "--stdio",
-  "--tsProbeLocations",
-  default_node_modules,
-  "--ngProbeLocations",
-  default_node_modules,
-  "--includeCompletionsWithSnippetText",
-  "--includeAutomaticOptionalChainCompletions",
-  -- "--logToConsole",
-  -- "--logFile",
-  -- "/Users/huy/Github/StarTrack-ng/logs.txt"
-
-}
-
-lspconfig.angularls.setup {
-  cmd = ngls_cmd,
-  on_attach = on_attach,
-  capabilities = capabilities,
-  root_dir = util.root_pattern("angular.json"),
-  on_new_config = function(new_config)
-    new_config.cmd = ngls_cmd
-  end
 }
 
 local runtime_path = vim.split(package.path, ";")
