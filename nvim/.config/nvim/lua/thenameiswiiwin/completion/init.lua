@@ -17,17 +17,29 @@ cmp.setup({
   mapping = {
     ['<C-d>'] = cmp.mapping.scroll_docs(-4),
     ['<C-f>'] = cmp.mapping.scroll_docs(4),
-    --['<C-Space>'] = cmp.mapping.complete(),
-    ['<C-x>'] = cmp.mapping.complete(),
     ['<C-e>'] = cmp.mapping.close(),
     ['<C-n>'] = cmp.mapping(cmp.mapping.select_next_item(), {'i','c'}),
-    ['<C-p>'] = cmp.mapping(cmp.mapping.select_prev_item(), {'i','c'}),
-    --['<CR>'] = cmp.mapping.confirm({ select = false }),
-    ['<C-y>'] = cmp.mapping.confirm({
-      behavior = cmp.ConfirmBehavior.Insert,
-      select = true
-    }),
-    -- ["<tab>"] = false,
+    ["<C-y>"] = cmp.mapping(
+      cmp.mapping.confirm {
+        behavior = cmp.ConfirmBehavior.Insert,
+        select = true,
+      },
+      { "i", "c" }
+    ),
+    ["<C-x>"] = cmp.mapping {
+      i = cmp.mapping.complete(),
+      c = function(
+        _ --[[fallback]]
+      )
+        if cmp.visible() then
+          if not cmp.confirm { select = true } then
+            return
+          end
+        else
+          cmp.complete()
+        end
+      end,
+    },
     ["<tab>"] = cmp.config.disable,
   },
   sources = {

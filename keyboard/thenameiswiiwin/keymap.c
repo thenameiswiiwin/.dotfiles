@@ -41,7 +41,7 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
  * |------+------+------+------+------+------|       |    |       |------+------+------+------+------+------|
  * |      |      |      |      |      |      |-------|    |-------|   ,  |   .  |      |      |      |      |
  * `-----------------------------------------/       /     \      \-----------------------------------------'
- *                   |      |      |      | /       /       \      \  |      |BackSP|      |
+ *                   |      |      |      | /Space  /       \Enter \  |RAISE |BackSP|      |
  *                   |      |      |      |/       /         \      \ |      |      |      |
  *                   `----------------------------'           '------''--------------------'
  */
@@ -50,29 +50,29 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
   XXXXXXX, KC_1,    KC_2,    KC_3,    KC_4,    KC_5,                      KC_6,    KC_7,    KC_8,    KC_9,    KC_0,    XXXXXXX,
   XXXXXXX, KC_EXLM, KC_AT,   KC_HASH, KC_DLR,  KC_PERC,                   KC_CIRC, KC_AMPR, KC_ASTR, KC_LPRN, KC_RPRN, XXXXXXX,
   XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, KC_COMM, KC_DOT,  XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX,
-                             XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX,  XXXXXXX, KC_BSPC, XXXXXXX
+                             XXXXXXX, XXXXXXX, XXXXXXX, KC_SPC,  KC_ENT, MO(_RAISE), KC_BSPC, XXXXXXX
 ),
 /* RAISE
  * ,-----------------------------------------.                    ,-----------------------------------------.
  * |      |      |      |      |      |      |                    |      |      |      |      |      |      |
  * |------+------+------+------+------+------|                    |------+------+------+------+------+------|
- * |      |      |      |      |      |      |                    |   (  |   {  |   )  |   }  |      |   +  |
+ * |      |      |      |   !  |      |      |                    |      |   (  |   {  |   )  |   }  |      |
  * |------+------+------+------+------+------|                    |------+------+------+------+------+------|
- * |      |      |      |      |      |      |-------.    ,-------|      | Left | Down |  Up  |Right |   =  |
+ * |      |      |      |   =  |   >  |      |-------.    ,-------| Left | Down |  Up  |Right |      |   +  |
  * |------+------+------+------+------+------|       |    |       |------+------+------+------+------+------|
- * |      |      |      |      |      |      |-------|    |-------|   <  |   >  |   \  |   |  |      |      |
+ * |      |      |      |      |      |      |-------|    |-------|      |   <  |   >  |   \  |   |  |      |
  * `-----------------------------------------/       /     \      \-----------------------------------------'
- *                   |      |      |      | /       /       \      \  |      |BackSP|      |
+ *                   |      |      |LOWER | /Space  /       \Enter \  |      |BackSP|      |
  *                   |      |      |      |/       /         \      \ |      |      |      |
  *                   `----------------------------'           '------''--------------------'
  */
 
 [_RAISE] = LAYOUT(
-  XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX,                     XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX,
-  XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX,                     KC_LPRN, KC_LCBR, KC_RPRN, KC_RCBR, XXXXXXX, KC_PLUS,
-  XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX,                     KC_LEFT, KC_DOWN, KC_UP,   KC_RGHT, XXXXXXX, KC_EQL,
-  XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX,  XXXXXXX, XXXXXXX,  KC_LT,   KC_GT,   KC_BSLS, KC_PIPE, XXXXXXX, XXXXXXX,
-                             XXXXXXX, XXXXXXX, XXXXXXX,  XXXXXXX, XXXXXXX,  XXXXXXX, XXXXXXX, XXXXXXX
+  XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX,                      XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX,
+  XXXXXXX, XXXXXXX, XXXXXXX, KC_EXLM, XXXXXXX, XXXXXXX,                      XXXXXXX, KC_LPRN, KC_LCBR, KC_RPRN, KC_RCBR, XXXXXXX,
+  XXXXXXX, XXXXXXX, XXXXXXX, KC_EQL,  KC_GT,   XXXXXXX,                      KC_LEFT, KC_DOWN, KC_UP,   KC_RGHT, XXXXXXX, KC_PLUS,
+  XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX,    XXXXXXX, XXXXXXX, XXXXXXX, KC_LT,   KC_GT,   KC_BSLS, KC_PIPE, XXXXXXX,
+                             XXXXXXX, XXXXXXX, MO(_LOWER), KC_SPC,  KC_ENT,  XXXXXXX, KC_BSPC, XXXXXXX
 ),
 /* ADJUST
  * ,-----------------------------------------.                    ,-----------------------------------------.
