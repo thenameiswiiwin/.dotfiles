@@ -90,13 +90,17 @@ bufferline.setup {
     tab_selected = {guibg = "#142832"},
     tab_close = {guibg = "#0D1519"},
     buffer_visible = {guibg = "#101920"},
-    buffer_selected = {guibg = "#142832", guifg = colors.white, gui = "NONE"},
+    -- buffer_selected = {guibg = "#142832", guifg = colors.white, gui = "NONE"},
+    buffer_selected = {guibg = "#142832"},
     indicator_selected = {guifg = colors.cyan, guibg = "#142832"},
     separator = {guibg = "#62b3b2"},
     separator_selected = {guifg = colors.cyan, guibg = "#142832"},
     separator_visible = {guibg = colors.cyan},
-    duplicate = {guibg = "#0D1519", guifg = colors.base04, gui = "NONE"},
-    duplicate_selected = {guibg = "#142832", gui = "NONE", guifg = colors.white},
-    duplicate_visible = {guibg = "#101920", gui = "NONE"}
+    -- duplicate = {guibg = "#0D1519", guifg = colors.base04, gui = "NONE"},
+    duplicate = {guibg = "#0D1519"},
+    -- duplicate_selected = {guibg = "#142832", gui = "NONE", guifg = colors.white},
+    duplicate_selected = {guibg = "#142832", guifg = colors.white},
+    -- duplicate_visible = {guibg = "#101920", gui = "NONE"}
+    duplicate_visible = {guibg = "#101920"}
   }
 }
