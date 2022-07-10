@@ -8,3 +8,7 @@
 	ff = only
 [init]
 	defaultBranch = main
+; [credential]
+; 	helper = osxkeychain
+; [credentials]
+; 	helper = osxkeychain

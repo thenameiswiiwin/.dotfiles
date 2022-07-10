@@ -248,6 +248,7 @@ return require "packer".startup(
     -- Lua
     use {"tbastos/vim-lua"}
 
+    -- -- Local
     use {"mhartington/formatter.nvim"}
     use {"mhartington/vim-folds"}
     use {"mhartington/oceanic-next"}
@@ -260,13 +261,9 @@ return require "packer".startup(
       "hrsh7th/nvim-cmp",
       requires = {
         "hrsh7th/cmp-nvim-lsp",
-        "hrsh7th/cmp-buffer",
-        "hrsh7th/cmp-path",
         "L3MON4D3/LuaSnip",
         "saadparwaiz1/cmp_luasnip",
-        "f3fora/cmp-spell",
-        "onsails/lspkind-nvim",
-        "hrsh7th/cmp-nvim-lsp-signature-help"
+        "f3fora/cmp-spell"
       }
     }
     use {"simrat39/symbols-outline.nvim"}
@@ -310,20 +307,5 @@ return require "packer".startup(
     --   end
     -- }
     use {"dstein64/vim-startuptime"}
-
-    use {'tpope/vim-projectionist',
-      config = function()
-      require('thenameiswiiwin.projectionist')
-    end
-    }
-
-    use {'phpactor/phpactor',
-      branch = 'master',
-      ft = 'php',
-      run = 'composer install --no-dev -o',
-      config = function()
-        require('user.plugins.phpactor')
-      end
-    }
   end
 )

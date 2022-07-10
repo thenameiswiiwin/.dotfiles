@@ -39,7 +39,7 @@ local default_node_modules = get_node_modules(vim.fn.getcwd())
 local on_attach = function(client, bufnr)
 
   lsp_status.on_attach(client)
-  mapBuf(bufnr, "n", "<Leader>gD", "<Cmd>lua vim.lsp.buf.declaration()<CR>")
+  mapBuf(bufnr, "n", "<Leader>gdc", "<Cmd>lua vim.lsp.buf.declaration()<CR>")
   mapBuf(bufnr, "n", "<Leader>gd", "<Cmd>lua vim.lsp.buf.definition()<CR>")
   mapBuf(bufnr, "n", "<Leader>gh", "<Cmd>lua vim.lsp.buf.hover()<CR>")
   mapBuf(bufnr, "n", "<Leader>gi", "<cmd>lua vim.lsp.buf.implementation()<CR>")
@@ -67,7 +67,7 @@ local on_attach = function(client, bufnr)
   end
 end
 
-local servers = {"pylsp", "bashls", "sourcekit", "tsserver", "html", "cssls", "volar", "vimls", "tailwindcss", "vuels"}
+local servers = {"pylsp", "bashls", "sourcekit", "tsserver", "html", "cssls", "volar", "vimls"}
 for _, lsp in ipairs(servers) do
   lspconfig[lsp].setup {
     on_attach = on_attach,
@@ -150,72 +150,6 @@ lspconfig.jsonls.setup {
       }
     }
   }
-}
-
-lspconfig.vuels.setup {
-  on_attach = on_attach,
-  capabilities = capabilities,
-  cmd = {"vls"},
-  filetypes = {"vue"},
-  root_dir = util.root_pattern("package.json", "vue.config.js"),
-  init_options = {
-    config = {
-      css = {},
-      emmet = {},
-      html = {
-        suggest = {}
-      },
-      javascript = {
-        format = {}
-      },
-      stylusSupremacy = {},
-      typescript = {
-        format = {}
-      },
-      vetur = {
-        completion = {
-          autoImport = false,
-          tagCasing = "camel",
-          useScaffoldSnippets = false
-        },
-        format = {
-          defaultFormatter = {
-            js = "none",
-            ts = "none"
-          },
-          defaultFormatterOptions = {},
-          scriptInitialIndent = false,
-          styleInitialIndent = false
-        },
-        useWorkspaceDependencies = false,
-        validation = {
-          script = true,
-          style = true,
-          template = true
-        }
-      }
-    }
-  }
-}
-
-lspconfig.volar.setup {
-  on_attach = on_attach,
-  capabilities = capabilities,
-  cmd = {"vue-language-server", "--stdio"},
-  filetypes = {"typescript", "javascript", "javascriptreact", "typescriptreact", "vue", "json"},
-  init_options = {
-    typescript = {
-      serverPath = '/path/to/.npm/lib/node_modules/typescript/lib/tsserverlib.js'
-    }
-  },
-}
-
-lspconfig.tailwindcss.setup {
-  on_attach = on_attach,
-  capabilities = capabilities,
-  cmd = {"tailwindcss-language-server", "--stdio"},
-  filetypes = {"blade", "html", "markdown", "mdx", "php","css", "less", "postcss", "sass", "scss", "stylus", "javascript", "javascriptreact", "typescript", "typescriptreact", "vue"},
-  root_dir = util.root_pattern('tailwind.config.js', 'tailwind.config.ts', 'postcss.config.js', 'postcss.config.ts', 'package.json', 'node_modules', '.git'),
 }
 
 local ngls_cmd = {
