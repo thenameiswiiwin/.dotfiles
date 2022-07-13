@@ -93,7 +93,7 @@ lspconfig.emmet_ls.setup {
   capabilities = capabilities
 }
 
-local lua_lsp_loc = "/Users/huy/Github/lua-language-server"
+local lua_lsp_loc = "/Users/huy/code/personal/lua-language-server"
 
 lspconfig.jsonls.setup {
   cmd = {"vscode-json-language-server", "--stdio"},
@@ -163,7 +163,7 @@ local ngls_cmd = {
   "--includeAutomaticOptionalChainCompletions",
   -- "--logToConsole",
   -- "--logFile",
-  -- "/Users/huy/Github/StarTrack-ng/logs.txt"
+  -- "/Users/mhartington/Github/StarTrack-ng/logs.txt"
 
 }
 

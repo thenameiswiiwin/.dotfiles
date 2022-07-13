@@ -1,1 +1,1 @@
-/Users/huy/.dotfiles/.config/nvim/lua/vim/inspect.lua
+/Users/huy/.dotfiles/config/nvim/lua/vim/inspect.lua

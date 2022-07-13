@@ -2,9 +2,7 @@ local install_path = vim.fn.stdpath "data" .. "/site/pack/packer/start/packer.nv
 if vim.fn.empty(vim.fn.glob(install_path)) > 0 then
   vim.cmd("!git clone https://github.com/wbthomason/packer.nvim " .. install_path)
 end
-
-return require "packer".startup(
-  function(use)
+return require "packer".startup( function(use)
     -- Packer can manage itself as an optional plugin
     use {"nvim-lua/popup.nvim"}
     use {"nvim-lua/plenary.nvim"}

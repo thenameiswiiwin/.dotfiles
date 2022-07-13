@@ -47,7 +47,6 @@ alias ghf='gh repo fork'
 # Tmux
 alias t='tmux'
 alias ta="t a -t"
-alias tf='$HOME/bin/./tmux-sessionizer'
 alias tc="v $HOME/.tmux.conf"
 alias tcs="tmux source $HOME/.tmux.conf"
 
@@ -60,9 +59,8 @@ alias qc='qmk compile -kb lily58/rev1 -km keymap.c'
 
 # Lazy
 alias brave='open -a Brave\ Browser'
-alias chome='open -a Google\ Chrome'
 alias spotify='open -a Spotify'
-alias post='open -a Postman'
+alias postman='open -a Postman'
 alias f='open -a Finder '
 alias fh='open -a Finder .'
 

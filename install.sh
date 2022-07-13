@@ -27,12 +27,23 @@ formulae=(
 "fzf"
 "treesitter"
 "tldr"
+"lulu"
 "ripgrep"
 "fd"
 "bat"
 "direnv"
 "exa"
 "tree"
+"docker"
+)
+
+# Applications
+casks=(
+"brave-browser"
+"spotify"
+"sublime-text"
+"postman"
+"rectangle"
 )
 
 # Install Packages
@@ -40,6 +51,15 @@ for i in "${formulae[@]}"
 do
   brew install $i
 done
+
+# Install Applications
+for i in "${casks[@]}"
+do
+  brew install --cask $i
+done
+
+# Nerd Fonts
+brew tap homebrew/cask-fonts && brew install --cask font-victor-mono-nerd-font
 
 # Stow
 stow aliases antibody bin git kitty nvim osx phpactor tmux zsh
@@ -49,6 +69,9 @@ command -v zsh | sudo tee -a /etc/shells
 
 # Changing To Zsh As Default Shell
 chsh -s $(which zsh) $USER
+
+# For Tmux
+brew install reattach-to-user-namespace
 
 # Bundle Zsh Plugins
 antibody bundle < ~/.zsh_plugins.txt > ~/.zsh_plugins.sh
