@@ -44,6 +44,7 @@ casks=(
 "sublime-text"
 "postman"
 "rectangle"
+"cleanmymac"
 )
 
 # Install Packages
