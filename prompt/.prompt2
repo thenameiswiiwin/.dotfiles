@@ -200,13 +200,13 @@ prompt_async_tasks() {
 
   # Initialize the async worker.
   ((!${prompt_async_init:-0})) && {
-    async_start_worker "mike_prompt" -u -n
-    async_register_callback "mike_prompt" prompt_async_callback
+    async_start_worker "huy_prompt" -u -n
+    async_register_callback "huy_prompt" prompt_async_callback
     typeset -g prompt_async_init=1
   }
 
   # Update the current working directory of the async worker.
-  async_worker_eval "mike_prompt" builtin cd -q $PWD
+  async_worker_eval "huy_prompt" builtin cd -q $PWD
 
   typeset -gA prompt_vcs_info
   typeset -g prompt_git_status
@@ -214,7 +214,7 @@ prompt_async_tasks() {
   local -H MATCH MBEGIN MEND
   if [[ $PWD != ${prompt_vcs_info[pwd]}* ]]; then
     # Stop any running async jobs.
-    async_flush_jobs "mike_prompt"
+    async_flush_jobs "huy_prompt"
 
     # Reset Git preprompt variables, switching working tree.
     unset prompt_git_status
@@ -224,7 +224,7 @@ prompt_async_tasks() {
   fi
   unset MATCH MBEGIN MEND
 
-  async_job "mike_prompt" prompt_async_vcs_info
+  async_job "huy_prompt" prompt_async_vcs_info
 
   # Only perform tasks inside a Git working tree.
   [[ -n $prompt_vcs_info[top] ]] || return
@@ -233,7 +233,7 @@ prompt_async_tasks() {
 }
 
 prompt_async_refresh() {
-  async_job "mike_prompt" prompt_async_git_status
+  async_job "huy_prompt" prompt_async_git_status
 }
 
 prompt_async_callback() {

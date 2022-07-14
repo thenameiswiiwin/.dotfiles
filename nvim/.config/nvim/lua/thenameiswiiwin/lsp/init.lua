@@ -163,7 +163,7 @@ local ngls_cmd = {
   "--includeAutomaticOptionalChainCompletions",
   -- "--logToConsole",
   -- "--logFile",
-  -- "/Users/mhartington/Github/StarTrack-ng/logs.txt"
+  -- "/Users/huy/personnal/StarTrack-ng/logs.txt"
 
 }
 

@@ -2,11 +2,11 @@
 #
 # Install:
 #
-#   tic xterm-256color-italic.terminfo
+# tic -x xterm-256color-italic.terminfo
 #
 # Usage:
 #
-#   export TERM=xterm-256color-italic
+# export TERM=xterm-256color-italic
 #
 xterm-256color-italic|xterm with 256 colors and italic,
   use=xterm-256color,
@@ -15,4 +15,3 @@ xterm-256color-italic|xterm with 256 colors and italic,
   smul=\E[4m,
   Smulx=\E[4\:%p1%dm,
   rmul=\E[24m,
-

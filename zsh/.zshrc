@@ -22,6 +22,8 @@ source ~/.aliases
 
 source ~/.zshenv
 
+# source ~/.prompt2
+
 # DIRCOLORS (MacOS)
 export CLICOLOR=1
 export LSCOLORS=FxFhcxdxbxegedabagacad
@@ -33,6 +35,7 @@ export TMUXP_CONFIGDIR=$HOME/.config/tmuxp
 export DISABLE_AUTO_TITLE='true'
 export PATH=/Users/$USER/bin:$PATH
 export TERM=xterm-256color
+export TERM=xterm-256color-italic
 
 # Sessionizer
 bindkey -s ^f "tmux-sessionizer\n"
