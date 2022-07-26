@@ -261,7 +261,8 @@ return require "packer".startup( function(use)
         "hrsh7th/cmp-nvim-lsp",
         "L3MON4D3/LuaSnip",
         "saadparwaiz1/cmp_luasnip",
-        "f3fora/cmp-spell"
+        "f3fora/cmp-spell",
+        "hrsh7th/cmp-path"
       }
     }
     use {"simrat39/symbols-outline.nvim"}

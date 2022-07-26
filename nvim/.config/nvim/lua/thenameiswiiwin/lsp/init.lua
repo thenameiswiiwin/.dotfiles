@@ -51,6 +51,7 @@ local on_attach = function(client, bufnr)
   mapBuf(bufnr, "n", "<Leader>ca", "<cmd> lua require('thenameiswiiwin.telescope').code_actions()<cr>")
   mapBuf(bufnr, "v", "<Leader>ca", "<cmd>lua vim.lsp.buf.range_code_action()<CR>")
   mapBuf(bufnr, "n", "<Leader>sd", "<cmd>lua vim.diagnostic.open_float(0, { scope = 'line' })<CR>")
+  mapBuf(bufnr, "n", "<Leader>sl", "<cmd>Telescope diagnostics<CR>")
   -- autocmd("CursorHold", "<buffer>", "lua vim.diagnostic.show_position_diagnostics({focusable=false})")
 
   vim.bo.omnifunc = "v:lua.vim.lsp.omnifunc"
