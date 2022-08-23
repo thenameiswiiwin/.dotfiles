@@ -101,7 +101,7 @@ local commonFT = {
   "json",
   "yaml",
   "xml",
-  "svg"
+  "svg",
 }
 for _, ft in ipairs(commonFT) do
   formatterConfig[ft] = {prettierConfig}
@@ -110,6 +110,7 @@ end
 formatter.setup(
   {
     logging = true,
-    filetype = formatterConfig
+    filetype = formatterConfig,
+    log_level = 2,
   }
 )
