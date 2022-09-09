@@ -79,7 +79,7 @@ local on_attach = function(client, bufnr)
   end
 end
 
-local servers = {"pylsp", "bashls", "sourcekit", "tsserver", "html", "cssls", "volar", "vimls", "tailwindcss"}
+local servers = {"pylsp", "bashls", "sourcekit", "tsserver", "html", "volar", "vimls", "tailwindcss"}
 for _, lsp in ipairs(servers) do
   lspconfig[lsp].setup {
     on_attach = on_attach,
@@ -103,6 +103,22 @@ configs.emmet_ls = {
 lspconfig.emmet_ls.setup {
   on_attach = on_attach,
   capabilities = capabilities
+}
+lspconfig.cssls.setup {
+  on_attach = on_attach,
+  capabilities = capabilities,
+  settings = {
+    css = {
+      lint = {
+        unknownAtRules = "ignore"
+      }
+    },
+    scss = {
+      lint = {
+        unknownAtRules = "ignore"
+      }
+    },
+  }
 }
 
 local lua_lsp_loc = "/Users/huy/code/personal/lua-language-server"
