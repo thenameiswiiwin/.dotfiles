@@ -2,7 +2,7 @@ require "thenameiswiiwin.plugins"
 require "thenameiswiiwin.options"
 require "thenameiswiiwin.mappings"
 require "thenameiswiiwin.commands"
--- require "thenameiswiiwin.completion"
+require "thenameiswiiwin.completion"
 require "thenameiswiiwin.colors"
 
 require "thenameiswiiwin.autocmds"
