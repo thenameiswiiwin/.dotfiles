@@ -45,6 +45,3 @@ export FZF_DEFAULT_OPTS="--height=40% --layout=reverse --border --margin=1 --pad
 export BAT_THEME="gruvbox-dark"
 
 alias luamake=/Users/huy/code/personal/lua-language-server/3rd/luamake/luamake
-
-# Created by `pipx` on 2022-09-09 20:21:34
-export PATH="$PATH:/Users/huy/.local/bin"

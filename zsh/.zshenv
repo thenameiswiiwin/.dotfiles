@@ -40,3 +40,4 @@ function strip_diff_leading_symbols(){
         # actually strips the leading symbols
                sed -E "s/^($color_code_regex)[\+\-]/\1 /g"
 }
+eval "$(perl -I$HOME/perl5/lib/perl5 -Mlocal::lib=$HOME/perl5)"
