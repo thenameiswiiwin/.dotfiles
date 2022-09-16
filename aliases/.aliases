@@ -2,8 +2,7 @@
 alias bu='brew cleanup && brew update && brew upgrade && brew cleanup && brew doctor'
 alias bo='brew outdated'
 alias bi='brew install'
-alias bx='brew uninstall'
-alias bl='brew list'
+alias bx='brew uninstall' alias bl='brew list'
 alias bs='brew search'
 
 # Antibody

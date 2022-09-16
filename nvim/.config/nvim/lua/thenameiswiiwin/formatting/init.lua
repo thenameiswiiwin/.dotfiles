@@ -81,7 +81,7 @@ local formatterConfig = {
       return {
         -- remove trailing whitespace
         exe = "sed",
-        args = {"-i", "'s/[ \t]*$//'"},
+        args = {"-i", "''", "'s/[ \t]*$//'"},
         stdin = false
       }
     end
@@ -102,6 +102,7 @@ local commonFT = {
   "yaml",
   "xml",
   "svg",
+  "svelte"
 }
 for _, ft in ipairs(commonFT) do
   formatterConfig[ft] = {prettierConfig}

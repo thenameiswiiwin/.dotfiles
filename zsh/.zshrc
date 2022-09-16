@@ -10,10 +10,6 @@ fi
 export NVM_DIR=${HOME}/.nvm
 export NVM_COMPLETION=true
 
-# If you come from bash you might have to change your $PATH
-export PATH="$PATH:$HOME/.composer/vendor/bin"
-export PATH="/usr/local/opt/mysql@5.7/bin:$PATH"
-
 # Source Plugins
 source ~/.zsh_plugins.sh
 
@@ -33,7 +29,6 @@ export VISUAL='vim'
 export EDITOR='vim'
 export TMUXP_CONFIGDIR=$HOME/.config/tmuxp
 export DISABLE_AUTO_TITLE='true'
-export PATH=/Users/$USER/bin:$PATH
 export TERM=xterm-256color
 
 # Sessionizer
@@ -50,3 +45,6 @@ export FZF_DEFAULT_OPTS="--height=40% --layout=reverse --border --margin=1 --pad
 export BAT_THEME="gruvbox-dark"
 
 alias luamake=/Users/huy/code/personal/lua-language-server/3rd/luamake/luamake
+
+# Created by `pipx` on 2022-09-09 20:21:34
+export PATH="$PATH:/Users/huy/.local/bin"
