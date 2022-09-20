@@ -328,6 +328,7 @@ return require "packer".startup(
     use {"mhartington/oceanic-next"}
 
     use {"nvim-treesitter/nvim-treesitter", run = ":TSUpdate"}
+    use {"nvim-treesitter/nvim-treesitter-context"}
     use {"nvim-treesitter/nvim-treesitter-angular"}
     use {"nvim-treesitter/playground"}
     use {"nyngwang/NeoClear.lua"}
