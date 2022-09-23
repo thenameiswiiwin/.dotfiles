@@ -61,7 +61,6 @@ M.map("v", "K", ":m '<-2<CR>gv=gv")
 M.map("n", "<leader>x", ":!chmod +x %<cr>")
 -- M.map("n", "<silent><C-f>", ":silent !tmux neww tmux-sessionizer<CR>")
 M.map("n", "<leader>pv", ":Ex<CR>")
-
 M.map("x", "<Leader>p", "\"_dP")
 
 -- M.map("v", "<", "<gv")
