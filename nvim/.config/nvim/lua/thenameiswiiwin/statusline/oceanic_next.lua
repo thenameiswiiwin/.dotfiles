@@ -1,36 +1,36 @@
 local colors = require "thenameiswiiwin.colors"
-local M = {}
-M.normal = {
+local H = {}
+H.normal = {
   a = {bg = colors.base01, fg = colors.white},
   b = {bg = colors.base01, fg = colors.white},
   c = {bg = colors.base01, fg = colors.white}
 }
-M.insert = {
+H.insert = {
   a = {bg = colors.base01, fg = colors.green},
   b = {bg = colors.base01, fg = colors.green},
   c = {bg = colors.base01, fg = colors.green}
 }
-M.visual = {
+H.visual = {
   a = {bg = colors.base01, fg = colors.orange},
   b = {bg = colors.base01, fg = colors.orange},
   c = {bg = colors.base01, fg = colors.orange}
 }
-M.replace = {
+H.replace = {
   a = {bg = colors.base01, fg = colors.red},
   b = {bg = colors.base01, fg = colors.red},
   c = {bg = colors.base01, fg = colors.red}
 }
-M.command = {
+H.command = {
   a = {bg = colors.base01, fg = colors.cyan},
   b = {bg = colors.base01, fg = colors.cyan},
   c = {bg = colors.base01, fg = colors.cyan}
 }
 
-M.terminal = M.normal
+H.terminal = H.normal
 
-M.inactive = {
+H.inactive = {
   a = {bg = colors.base01, fg = colors.base03},
   b = {bg = colors.base01, fg = colors.base03},
   c = {bg = colors.base01, fg = colors.base03}
 }
-return M
+return H

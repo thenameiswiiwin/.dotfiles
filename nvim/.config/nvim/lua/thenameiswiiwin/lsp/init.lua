@@ -16,10 +16,10 @@ textDocument = {
   }
 }
 -- capabilities.textDocument.completion.completionItem.snippetSupport = true
-capabilities = require("cmp_nvim_lsp").update_capabilities(capabilities)
+capabilities = require("cmp_nvim_lsp").default_capabilities(capabilities)
 -- capabilities = vim.tbl_extend("keep", capabilities or {}, lsp_status.capabilities)
 
-local M = {}
+local H = {}
 
 -- Diagnostic settings
 vim.diagnostic.config {
@@ -51,7 +51,7 @@ local default_node_modules = get_node_modules(vim.fn.getcwd())
 
 local on_attach = function(client, bufnr)
 
-  mapBuf(bufnr, "n", "<Leader>gdc", "<Cmd>lua vim.lsp.buf.declaration()<CR>")
+  mapBuf(bufnr, "n", "<Leader>gD", "<Cmd>lua vim.lsp.buf.declaration()<CR>")
   mapBuf(bufnr, "n", "<Leader>gd", "<Cmd>lua vim.lsp.buf.definition()<CR>")
   mapBuf(bufnr, "n", "<Leader>gh", "<Cmd>lua vim.lsp.buf.hover()<CR>")
   mapBuf(bufnr, "n", "<Leader>gi", "<cmd>lua vim.lsp.buf.implementation()<CR>")
@@ -120,8 +120,13 @@ lspconfig.cssls.setup {
     },
   }
 }
+lspconfig.tailwindcss.setup {
+  on_attach = on_attach,
+  capabilities = capabilities,
+}
 
-local lua_lsp_loc = "/Users/huy/code/personal/lua-language-server"
+-- local lua_lsp_loc = "/Users/huy/code/personal/lua-language-server"
+local lua_lsp_loc = "/usr/local/Cellar/lua-language-server/3.5.6/libexec"
 
 lspconfig.jsonls.setup {
   cmd = {"vscode-json-language-server", "--stdio"},
@@ -180,38 +185,13 @@ lspconfig.jsonls.setup {
   }
 }
 
-local ngls_cmd = {
-  "ngserver",
-  "--stdio",
-  "--tsProbeLocations",
-  default_node_modules,
-  "--ngProbeLocations",
-  default_node_modules,
-  "--includeCompletionsWithSnippetText",
-  "--includeAutomaticOptionalChainCompletions",
-  -- "--logToConsole",
-  -- "--logFile",
-  -- "/Users/thenameiswiiwin/Github/StarTrack-ng/logs.txt"
-
-}
-
-lspconfig.angularls.setup {
-  cmd = ngls_cmd,
-  on_attach = on_attach,
-  capabilities = capabilities,
-  root_dir = util.root_pattern("angular.json"),
-  on_new_config = function(new_config)
-    new_config.cmd = ngls_cmd
-  end
-}
-
 local runtime_path = vim.split(package.path, ";")
 table.insert(runtime_path, "lua/?.lua")
 table.insert(runtime_path, "lua/?/init.lua")
 
-
 lspconfig.sumneko_lua.setup {
-  cmd = {lua_lsp_loc .. "/bin/lua-language-server", "-E", lua_lsp_loc .. "/main.lua"},
+  -- cmd = {lua_lsp_loc .. "/bin/lua-language-server", "-E", lua_lsp_loc .. "/main.lua"},
+  cmd = {lua_lsp_loc .. "/bin/lua-language-server", "-E", lua_lsp_loc .. "/bin/main.lua"},
   capabilities = capabilities,
   on_attach = on_attach,
   settings = {
@@ -224,14 +204,7 @@ lspconfig.sumneko_lua.setup {
         maxPreload = 2000,
         preloadFileSize = 1000
       }
-      -- workspace = {
-      --   -- Make the server aware of Neovim runtime files
-      --   library = {
-      --     [vim.fn.expand "$VIMRUNTIME/lua"] = true,
-      --     [vim.fn.expand "$VIMRUNTIME/lua/vim/lsp"] = true
-      --   }
-      -- }
     }
   }
 }
-return M
+return H

@@ -13,12 +13,11 @@ export NVM_COMPLETION=true
 # Source Plugins
 source ~/.zsh_plugins.sh
 
-# Source Aliases
+# Source aliases
 source ~/.aliases
 
+# Source zshenv
 source ~/.zshenv
-
-# source ~/.prompt2
 
 # DIRCOLORS (MacOS)
 export CLICOLOR=1
@@ -29,7 +28,7 @@ export VISUAL='vim'
 export EDITOR='vim'
 export TMUXP_CONFIGDIR=$HOME/.config/tmuxp
 export DISABLE_AUTO_TITLE='true'
-export TERM=xterm-256color
+export TERM=xterm-256color-italic
 
 # Sessionizer
 bindkey -s ^f "tmux-sessionizer\n"
@@ -42,6 +41,3 @@ export FZF_DEFAULT_OPTS="--height=40% --layout=reverse --border --margin=1 --pad
 # To customize prompt, run `p10k configure` or edit ~/.p10k.zsh.
 [[ ! -f ~/.p10k.zsh ]] || source ~/.p10k.zsh
 
-export BAT_THEME="gruvbox-dark"
-
-alias luamake=/Users/huy/code/personal/lua-language-server/3rd/luamake/luamake

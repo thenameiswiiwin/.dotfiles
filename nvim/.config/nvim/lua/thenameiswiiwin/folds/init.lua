@@ -1,4 +1,4 @@
-local M = {}
+local H = {}
 function foldText()
   local fs = vim.api.nvim_get_vvar("foldstart")
   local fe = vim.api.nvim_get_vvar("foldend")

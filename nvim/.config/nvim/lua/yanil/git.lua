@@ -26,15 +26,15 @@ do
   end
 end
 
-local M = {
+local H = {
   state = {},
   options = {}
 }
 
-function M.setup(opts)
+function H.setup(opts)
   opts = opts or {}
-  M.options.icons = vim.tbl_deep_extend("keep", opts.icons or {}, default_options.icons)
-  M.options.highlights = vim.tbl_deep_extend("keep", opts.highlights or {}, default_options.highlights)
+  H.options.icons = vim.tbl_deep_extend("keep", opts.icons or {}, default_options.icons)
+  H.options.highlights = vim.tbl_deep_extend("keep", opts.highlights or {}, default_options.highlights)
 
   api.nvim_command("augroup yanil_git")
   api.nvim_command("autocmd!")
@@ -91,7 +91,7 @@ local parsers = {
   end
 }
 
-function M.update(cwd)
+function H.update(cwd)
   cwd = cwd or loop.cwd()
   if not cwd then
     return
@@ -146,9 +146,9 @@ function M.update(cwd)
       -- End for loop
 
       -- Eval State and fire event
-      if not utils.table_equal(M.state, state) then
-        M.prev_state = M.state
-        M.state = state
+      if not utils.table_equal(H.state, state) then
+        H.prev_state = H.state
+        H.state = state
         if vim.fn.exists("#User#YanilGitStatusChanged") then
           api.nvim_command("doautocmd User YanilGitStatusChanged")
         end
@@ -192,18 +192,18 @@ function M.update(cwd)
   )
 end
 
-function M.get_icon_and_hl(path)
-  local status = M.state[path]
+function H.get_icon_and_hl(path)
+  local status = H.state[path]
   if not status then
     return
   end
 
-  return M.options.icons[status], M.options.highlights[status]
+  return H.options.icons[status], H.options.highlights[status]
 end
 
-function M.decorator()
+function H.decorator()
   return function(node)
-    local icon, hl = M.get_icon_and_hl(node.abs_path)
+    local icon, hl = H.get_icon_and_hl(node.abs_path)
     if not icon then
       if node.parent then
         return "  "
@@ -216,13 +216,13 @@ function M.decorator()
   end
 end
 
-function M.diff(node)
-  -- if M.state[node.abs_path] ~= "Modified" then return end
+function H.diff(node)
+  -- if H.state[node.abs_path] ~= "Modified" then return end
 
   return vim.fn.systemlist({"git", "diff", "--patch", "--no-color", "--diff-algorithm=default", node.abs_path})
 end
 
-function M.apply_buf(bufnr)
+function H.apply_buf(bufnr)
   bufnr = bufnr or 0
   local patch = api.nvim_buf_get_lines(bufnr, 0, -1, false)
   if not patch or #patch == 0 or (#patch == 1 and patch[1] == "") then
@@ -244,41 +244,41 @@ function M.apply_buf(bufnr)
   if vim.g.loaded_fugitive then
     api.nvim_command("doautocmd User FugitiveChanged")
   else
-    M.update()
+    H.update()
   end
 end
 
-function M.refresh_tree(tree)
+function H.refresh_tree(tree)
   for node in tree:iter() do
-    if M.prev_state[node.abs_path] ~= M.state[node.abs_path] then
+    if H.prev_state[node.abs_path] ~= H.state[node.abs_path] then
       tree:refresh(node, {non_recursive = true})
     end
   end
 end
 
-function M.jump(tree, linenr, step)
+function H.jump(tree, linenr, step)
   local total_lines = tree:total_lines()
   local start, total = step, step * total_lines
   for i = start, total, step do
     local index = (i + linenr) % total_lines
     local node = tree.root:get_node_by_index(index) -- TODO: optimaze
-    if node.parent and M.get_icon_and_hl(node.abs_path) then
+    if node.parent and H.get_icon_and_hl(node.abs_path) then
       tree:go_to_node(node)
       return
     end
   end
 end
 
-function M.jump_next(tree, _node, _key, linenr)
-  M.jump(tree, linenr, 1)
+function H.jump_next(tree, _node, _key, linenr)
+  H.jump(tree, linenr, 1)
 end
 
-function M.jump_prev(tree, _node, _key, linenr)
-  M.jump(tree, linenr, -1)
+function H.jump_prev(tree, _node, _key, linenr)
+  H.jump(tree, linenr, -1)
 end
 
-function M.debug()
-  print(vim.inspect(M.state))
+function H.debug()
+  print(vim.inspect(H.state))
 end
 
-return M
+return H

@@ -1,10 +1,10 @@
 [core]
-  editor = "nvim"
-  ; pager = "diff-so-fancy | less --tabs=4 -RFX"
-  ; pager = delta --plus-color="#012800" --minus-color="#340001" --theme='oceanic-next'
+	editor = "nvim"
+	; pager = "diff-so-fancy | less --tabs=4 -RFX"
+	; pager = delta --plus-color="#012800" --minus-color="#340001" --theme='oceanic-next'
 
 [interactive]
-    diffFilter = delta --color-only
+	diffFilter = delta --color-only
 
 [color]
 	ui = true
@@ -14,16 +14,20 @@
 	grep = auto
 [filter "media"]
 	clean = git-media-clean %f
-  smudge = git-media-smudge %f
+	smudge = git-media-smudge %f
 
 [user]
 	name = Huy Nguyen
 	email = huyn.nguyen95@gmail.com
+  signingkey = E067C6A49288CCFC
+
+[credential]
+  	helper = 1password
 
 [filter "hawser"]
 	clean = git hawser clean %f
 	smudge = git hawser smudge %f
-  required = true
+	required = true
 
 [filter "lfs"]
 	clean = git-lfs clean -- %f
@@ -32,27 +36,27 @@
 	required = true
 
 [github]
-  user = thenameiswiiwin
+	user = thenameiswiiwin
 
 [color "diff-highlight"]
-  oldNormal = "red bold"
-  oldHighlight = "red bold 52"
-  newNormal = "green bold"
-  newHighlight = "green bold 22"
+	oldNormal = "red bold"
+	oldHighlight = "red bold 52"
+	newNormal = "green bold"
+	newHighlight = "green bold 22"
 
-; [ghi]
-;   token = !security find-internet-password -a mhartington -s github.com -l 'ghi token' -w
+[ghi]
+	token = !security find-internet-password -a mhartington -s github.com -l 'ghi token' -w
 
-; [commit]
-;   gpgsign = true
-;
-; [gpg]
-; 	program = gpg
+[commit]
+	gpgsign = true
+
+[gpg]
+	program = gpg
 
 [format]
 	pretty = %Cred%h%Creset - %Cgreen(%ad)%C(yellow)%d%Creset %s %C(bold blue)<%an>%Creset
 [help]
-  autocorrect = 1
+	autocorrect = 1
 
 [tig]
 	tab-size = 4
@@ -63,7 +67,7 @@
 # [url "git@github.com:"]
 # 	insteadOf = https://github.com/
 [init]
-  defaultBranch = main
+	defaultBranch = main
 
 [pull]
-  rebase = true
+	rebase = true

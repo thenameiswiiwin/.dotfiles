@@ -2,9 +2,9 @@ local fn = vim.fn
 local api = vim.api
 local cmd = vim.cmd
 
-local M = {}
+local H = {}
 
-function M.BufDel()
+function H.BufDel()
   local buflisted = vim.fn.getbufinfo({buflisted = 1})
   -- local cur_winnr, cur_bufnr = fn.winnr(), fn.bufnr()
 
@@ -54,4 +54,4 @@ function M.BufDel()
   -- cmd(is_terminal and "bd! #" or "silent! confirm bd #")
 end
 -- vim.cmd([[command! -bang -nargs=? Bdelete lua require('bufdelete').bufdelete_cmd(<q-args>, <q-bang>)]])
-return M
+return H

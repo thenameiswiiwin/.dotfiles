@@ -1,11 +1,11 @@
 local vim = vim
 local api = vim.api
-local M = {}
-function M.noop()
+local H = {}
+function H.noop()
   return
 end
 
-function M.Augroup(group, fn)
+function H.Augroup(group, fn)
   vim.api.nvim_command("augroup " .. group)
   vim.api.nvim_command("autocmd!")
   fn()
@@ -59,7 +59,7 @@ function border_symbols:draw(width, height)
   return border_lines
 end
 
-function M.floating_window_big(bufnr)
+function H.floating_window_big(bufnr)
   local winnr_bak = vim.fn.winnr()
   local altwinnr_bak = vim.fn.winnr("#")
 
@@ -108,7 +108,7 @@ function M.floating_window_big(bufnr)
 
   return winnr
 end
-function M.floating_window_small(bufnr, opts)
+function H.floating_window_small(bufnr, opts)
   opts = opts or {}
   local winnr_bak = vim.fn.winnr()
   local altwinnr_bak = vim.fn.winnr("#")
@@ -158,7 +158,7 @@ function M.floating_window_small(bufnr, opts)
 
   return winnr
 end
-function M.get_num_entries(iter)
+function H.get_num_entries(iter)
   local i = 0
   for _ in iter do
     i = i + 1
@@ -166,7 +166,7 @@ function M.get_num_entries(iter)
   return i
 end
 
-function M.iter(list_or_iter)
+function H.iter(list_or_iter)
   if type(list_or_iter) == "function" then
     return list_or_iter
   end
@@ -179,11 +179,11 @@ function M.iter(list_or_iter)
     end
   )
 end
-function M.reduce(list, memo, func)
-  for i in M.iter(list) do
+function H.reduce(list, memo, func)
+  for i in H.iter(list) do
     memo = func(memo, i)
   end
   return memo
 end
 
-return M
+return H

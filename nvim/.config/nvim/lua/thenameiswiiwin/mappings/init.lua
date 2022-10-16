@@ -63,31 +63,9 @@ M.map("n", "<leader>x", ":!chmod +x %<cr>")
 M.map("n", "<leader>pv", ":Ex<CR>")
 M.map("x", "<Leader>p", "\"_dP")
 
--- M.map("v", "<", "<gv")
--- M.map("v", ">", ">gv")
 M.map("n", "<Leader>d", '"_d')
 M.map("v", "<Leader>d", '"_d')
 M.map("n", "<Esc>", "<cmd>noh<cr>")
-
--- terminal M.mappings
--- M.map("t", "<Esc>", "<c-\\><c-n><esc><cr>")
--- M.map("t", "<Leader>,", "<c-\\><c-n>:bnext<cr>")
--- M.map("t", "<Leader>.", "<c-\\><c-n>:bprevious<cr>")
-
--- M.map("n", "<C-j>", "<cmd>lua require'nvim-tmux-navigation'.NvimTmuxNavigateDown()<cr>")
--- M.map("n", "<C-k>", "<cmd>lua require'nvim-tmux-navigation'.NvimTmuxNavigateUp()<cr>")
--- M.map("n", "<C-l>", "<cmd>lua require'nvim-tmux-navigation'.NvimTmuxNavigateRight()<cr>")
--- M.map("n", "<C-h>", "<cmd>lua require'nvim-tmux-navigation'.NvimTmuxNavigateLeft()<CR>")
---
--- M.map("i", "<C-j>", "<cmd>lua require'nvim-tmux-navigation'.NvimTmuxNavigateDown()<cr>")
--- M.map("i", "<C-k>", "<cmd>lua require'nvim-tmux-navigation'.NvimTmuxNavigateUp()<cr>")
--- M.map("i", "<C-l>", "<cmd>lua require'nvim-tmux-navigation'.NvimTmuxNavigateRight()<cr>")
--- M.map("i", "<C-h>", "<cmd>lua require'nvim-tmux-navigation'.NvimTmuxNavigateLeft()<CR>")
---
--- M.map("t", "<C-j>", "<c-\\><c-n><cmd>lua require'nvim-tmux-navigation'.NvimTmuxNavigateDown()<cr>")
--- M.map("t", "<C-k>", "<c-\\><c-n><cmd>lua require'nvim-tmux-navigation'.NvimTmuxNavigateUp()<cr>")
--- M.map("t", "<C-l>", "<c-\\><c-n><cmd>lua require'nvim-tmux-navigation'.NvimTmuxNavigateRight()<cr>")
--- M.map("t", "<C-h>", "<c-\\><c-n><cmd>lua require'nvim-tmux-navigation'.NvimTmuxNavigateLeft()<CR>")
 
 M.map("n", "<C-j>", "<cmd>TmuxNavigateDown<cr>")
 M.map("n", "<C-k>", "<cmd>TmuxNavigateUp<cr>")
@@ -114,10 +92,6 @@ end
 
 vim.cmd("cnoreabbrev <silent> x lua require('thenameiswiiwin.commands').BufDel()")
 
--- vim.cmd("cnoreabbrev x Sayonara")
--- vim.cmd("cnoreabbrev x! BufDel!")
---
---
 -- Show package versions
 M.map("n", "<leader>ns", ":lua require('package-info').show()<CR>" )
 

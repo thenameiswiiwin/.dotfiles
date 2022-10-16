@@ -5,7 +5,7 @@ local themes = require('telescope.themes')
 local builtIn = require("telescope.builtin")
 local actions = require("telescope.actions")
 local action_set = require("telescope.actions.set")
-local M = {}
+local H = {}
 
 telescope.load_extension("gh")
 telescope.load_extension("packer")
@@ -71,21 +71,21 @@ local function generateOpts(opts)
   return themes.get_dropdown(vim.tbl_extend("force", opts, common_opts))
   -- return themes.get_ivy({previewer = false, layout_config = { height = 10, }, borderchars = {}})
 end
-function M.colors()
+function H.colors()
   local opts = generateOpts({})
   builtIn.colorscheme(opts)
 end
-function M.find_files()
+function H.find_files()
   local cmn_opts = generateOpts({})
   -- cmn_opts.find_command = {"fd", "--type", "f", "-L"}
   builtIn.find_files(cmn_opts)
 end
-function M.help_tags()
+function H.help_tags()
   local opts = generateOpts({})
   builtIn.help_tags(opts)
 end
-function M.code_actions()
+function H.code_actions()
   local opts = generateOpts({})
   builtIn.lsp_code_actions(opts)
 end
-return M
+return H

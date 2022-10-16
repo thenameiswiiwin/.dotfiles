@@ -1,9 +1,6 @@
 # Brew
 alias bu='brew cleanup && brew update && brew upgrade && brew cleanup && brew doctor'
 alias bo='brew outdated'
-alias bi='brew install'
-alias bx='brew uninstall' alias bl='brew list'
-alias bs='brew search'
 
 # Antibody
 alias au='antibody update'
@@ -12,32 +9,22 @@ alias ab='antibody bundle < ~/.zsh_plugins.txt > ~/.zsh_plugins.sh'
 # Exa
 alias l='exa'
 alias ll='l -l -h --git --icons'
-alias la='ll -a'
-
-# Tree
-alias tree='la --tree --level=4 -a -I=.git --git-ignore'
-
-# NeoVim
-alias v='nvim'
-alias vc='$HOME/.config/nvim'
+alias la='ll -a -h --git --icons'
 
 # Zsh
 alias zc='v $HOME/.zshrc'
 alias za='v $HOME/.aliases'
 alias zs='source $HOME/.zshrc'
 
-# Port }}}
-# yarn add global add kill-port
+# Port
+# yarn global add kill-port
 alias kill='kill-port'
 alias port='sudo lsof -i'
-
-# Help Me }}}
-alias myhelp='v $HOME/.vim/plugged/vim-myhelp/doc/myhelp.txt'
 
 # Git
 alias gc='git commit -m'
 alias gs='git status'
-alias gpsh='git push -u'
+alias gp='git push -u'
 alias gw='git worktree'
 alias ghc='gh repo create'
 alias ghcl='gh repo clone'
@@ -49,19 +36,11 @@ alias ta="t a -t"
 alias tc="v $HOME/.tmux.conf"
 alias tcs="tmux source $HOME/.tmux.conf"
 
+# NeoVim
+alias v='nvim'
+
 # Cat -> Bat
 alias cat='bat'
-
-# Keyboard
-alias qm='cd $HOME/qmk_firmware/keyboards/lily58/keymaps/thenameiswiiwin && v keymap.c'
-alias qc='qmk compile -kb lily58/rev1 -km keymap.c'
-
-# Lazy
-alias brave='open -a Brave\ Browser'
-alias spotify='open -a Spotify'
-alias postman='open -a Postman'
-alias f='open -a Finder '
-alias fh='open -a Finder .'
 
 # Usefull stuff for presentation and seeing dotfiles
 alias hidedesktop="defaults write com.apple.finder CreateDesktop -bool false && killall Finder"
@@ -74,3 +53,7 @@ alias dsclean="find . -type f -name .DS_Store -print0 | xargs -0 rm"
 
 # Flush your dns cache
 alias flush='dscacheutil -flushcache'
+
+# Luamake
+alias luamake=/Users/huy/code/personal/lua-language-server/3rd/luamake/luamake
+

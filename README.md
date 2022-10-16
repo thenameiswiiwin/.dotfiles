@@ -1,6 +1,6 @@
 # Thenameiswiiwin's Dotfile
 
-Neovim, Kitty, Oh-My-Zsh, Stow, Tmux, Antibody, ...
+Neovim, Kitty, Oh-My-Zsh, Stow, Tmux, Antibody.
 
 ## Install
 
@@ -24,5 +24,5 @@ brew bundle
 
 ```
 cd ~/.dotfiles
-stow aliases antibody bash bin git kitty nvim prompt tmux vim zsh
+stow aliases antibody bash bin kitty nvim tmux vim zsh
 ```

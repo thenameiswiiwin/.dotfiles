@@ -1,4 +1,4 @@
-local M = {
+local H = {
   base00 = "#1b2b34",
   base01 = "#343d46",
   base02 = "#4f5b66",
@@ -20,7 +20,7 @@ local M = {
 
 vim.cmd("colorscheme OceanicNext")
 
-function M.setItalics()
+function H.setItalics()
   vim.cmd("hi Comment gui=italic")
   vim.cmd("hi Keyword gui=italic")
   vim.cmd("hi Keyword gui=italic")
@@ -31,5 +31,5 @@ function M.setItalics()
   vim.cmd("hi htmlArg gui=italic")
   vim.cmd("hi pythonSelf gui=italic")
 end
-M.setItalics()
-return M
+H.setItalics()
+return H

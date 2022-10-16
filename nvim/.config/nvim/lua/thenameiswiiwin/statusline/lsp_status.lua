@@ -53,7 +53,7 @@ local function get_lsp_progress()
   return table.concat(msgs, " ")
 end
 
-local M = {
+local H = {
   progress = get_lsp_progress
 }
-return M
+return H

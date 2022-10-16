@@ -164,6 +164,7 @@ return require "packer".startup(
     use {"Pocco81/true-zen.nvim"}
 
     -- Colors
+    use {"mhartington/oceanic-next"}
     use {"morhetz/gruvbox"}
     use {
       "catppuccin/nvim",
@@ -276,9 +277,6 @@ return require "packer".startup(
       "iamcco/markdown-preview.nvim",
       run = "cd app && yarn install"
     }
-    -- Rust
-    use {"rust-lang/rust.vim"}
-    use {"racer-rust/vim-racer"}
     -- Python
     use {"tmhedberg/SimpylFold", ft = "python"}
     -- JS/TS
@@ -308,28 +306,14 @@ return require "packer".startup(
         require "colorizer".setup()
       end
     }
-    -- Swift
-    use {"keith/swift.vim"}
-    use {"gfontenot/vim-xcode"}
-    use {
-      "tami5/xbase",
-      run = "make install"
-    }
-    -- Reason
-    -- use{ "reasonml-editor/vim-reason-plus" }
-    -- Go
-    -- use{ "fatih/vim-go" }
     -- Lua
     use {"tbastos/vim-lua"}
 
-    -- -- Local
     use {"mhartington/formatter.nvim"}
     use {"mhartington/vim-folds"}
-    use {"mhartington/oceanic-next"}
 
     use {"nvim-treesitter/nvim-treesitter", run = ":TSUpdate"}
     use {"nvim-treesitter/nvim-treesitter-context"}
-    use {"nvim-treesitter/nvim-treesitter-angular"}
     use {"nvim-treesitter/playground"}
     use {"nyngwang/NeoClear.lua"}
     use {
@@ -344,7 +328,6 @@ return require "packer".startup(
         "f3fora/cmp-spell"
       }
     }
-    -- use {"simrat39/symbols-outline.nvim"}
     use {"nvim-lua/lsp-status.nvim"}
 
     use {"neovim/nvim-lspconfig"}
@@ -358,33 +341,8 @@ return require "packer".startup(
     use {"nvim-telescope/telescope-fzy-native.nvim"}
 
     use {"kyazdani42/nvim-web-devicons"}
-    -- use {"yamatsum/nvim-nonicons"}
     use {"mjlbach/neovim-ui"}
     use {"MunifTanjim/nui.nvim"}
-    -- use {
-    --   "vuki656/package-info.nvim",
-    --   requires = "MunifTanjim/nui.nvim",
-    --   config = function()
-    --     require("package-info").setup(
-    --       {
-    --         colors = {
-    --           up_to_date = "#3C4048", -- Text color for up to date package virtual text
-    --           outdated = "#d19a66" -- Text color for outdated package virtual text
-    --         },
-    --         icons = {
-    --           enable = true, -- Whether to display icons
-    --           style = {
-    --             up_to_date = "|  ", -- Icon for up to date packages
-    --             outdated = "|  " -- Icon for outdated packages
-    --           }
-    --         },
-    --         autostart = true,
-    --         hide_up_to_date = true,
-    --         hide_unstable_versions = false
-    --       }
-    --     )
-    --   end
-    -- }
     use {"dstein64/vim-startuptime"}
   end
 )

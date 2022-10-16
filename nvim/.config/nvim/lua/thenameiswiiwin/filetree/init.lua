@@ -18,7 +18,7 @@ local event = require("nui.utils.autocmd").event
 
 local open_mode = loop.constants.O_CREAT + loop.constants.O_WRONLY + loop.constants.O_TRUNC
 
-local M = {}
+local H = {}
 
 local function depth_indent(node)
   local text = string.rep("  ", node.depth)
@@ -671,4 +671,4 @@ canvas.setup {
 
 map("n", "-", "<Cmd>YanilToggle<cr>", {noremap = true, silent = true, nowait = true})
 
-return M
+return H
