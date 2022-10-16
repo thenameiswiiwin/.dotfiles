@@ -17,11 +17,9 @@
 	smudge = git-media-smudge %f
 
 [user]
-	; name = Huy Nguyen
-	; email = huyn.nguyen95@gmail.com
-	signingkey = ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIGoSsgz7hDn4DX/mpj9pjEYxByy3h1whtbrqIfEtQpB3
 	name = Huy Nguyen
 	email = huyn.nguyen95@gmail.com
+	signingkey = ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIGoSsgz7hDn4DX/mpj9pjEYxByy3h1whtbrqIfEtQpB3
 
 ; [credential]
 ;   helper = 1password
@@ -47,7 +45,7 @@
 	newHighlight = "green bold 22"
 
 [ghi]
-	token = !security find-internet-password -a mhartington -s github.com -l 'ghi token' -w
+	token = !security find-internet-password -a thenameiswiiwin -s github.com -l 'ghi token' -w
 
 [commit]
 	gpgsign = true
