@@ -19,10 +19,10 @@
 [user]
 	name = Huy Nguyen
 	email = huyn.nguyen95@gmail.com
-  signingkey = E067C6A49288CCFC
+	signingkey = ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIGoSsgz7hDn4DX/mpj9pjEYxByy3h1whtbrqIfEtQpB3
 
 [credential]
-  	helper = 1password
+  helper = 1password
 
 [filter "hawser"]
 	clean = git hawser clean %f
@@ -52,6 +52,7 @@
 
 [gpg]
 	program = gpg
+	format = ssh
 
 [format]
 	pretty = %Cred%h%Creset - %Cgreen(%ad)%C(yellow)%d%Creset %s %C(bold blue)<%an>%Creset
@@ -71,3 +72,5 @@
 
 [pull]
 	rebase = true
+[gpg "ssh"]
+	program = /Applications/1Password.app/Contents/MacOS/op-ssh-sign
