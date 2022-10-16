@@ -20,6 +20,8 @@
 	; name = Huy Nguyen
 	; email = huyn.nguyen95@gmail.com
 	signingkey = ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIGoSsgz7hDn4DX/mpj9pjEYxByy3h1whtbrqIfEtQpB3
+	name = Huy Nguyen
+	email = huyn.nguyen95@gmail.com
 
 ; [credential]
 ;   helper = 1password
