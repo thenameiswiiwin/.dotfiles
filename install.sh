@@ -17,6 +17,7 @@ formulae=(
 "zsh"
 "antibody"
 "git"
+"gh"
 "nvm"
 "node"
 "neovim"
@@ -39,6 +40,8 @@ casks=(
 "brave-browser"
 "kitty"
 "rectangle"
+"postman"
+"figma"
 )
 
 # Install Packages
@@ -57,7 +60,7 @@ done
 brew tap homebrew/cask-fonts && brew install --cask font-victor-mono-nerd-font
 
 # Stow
-stow aliases antibody bin kitty nvim tmux zsh fonts
+stow aliases antibody bin fonts git kitty nvim tmux vim zsh
 
 # Add Zsh to Valid Login Shells
 command -v zsh | sudo tee -a /etc/shells
@@ -75,7 +78,7 @@ antibody bundle < ~/.zsh_plugins.txt > ~/.zsh_plugins.sh
 nvim --headless +PlugInstall +qall
 
 # LSP
-yarn add global bash-language-server typescript typescript-language-server vscode-langservers-extracted @volar/vue-language-server vim-language-server @tailwindcss/language-server emmet-ls
+yarn global add bash-language-server typescript typescript-language-server vscode-langservers-extracted @volar/vue-language-server vim-language-server @tailwindcss/language-server emmet-ls kill-port
 
 ## sumneko lua-language-server
 brew install lua-language-server

@@ -2,7 +2,6 @@ local vim = vim
 local uv = vim.loop
 local lspconfig = require "lspconfig"
 local configs = require "lspconfig.configs"
-local util = require "lspconfig.util"
 local mapBuf = require "thenameiswiiwin.mappings".mapBuf
 -- local autocmd = require "thenameiswiiwin.autocmds".autocmd
 
@@ -36,22 +35,9 @@ float = {
     },
 }
 
-local function get_node_modules(root_dir)
-  -- util.find_node_modules_ancestor()
-  local root_node = root_dir .. "/node_modules"
-  local stats = uv.fs_stat(root_node)
-  if stats == nil then
-    return nil
-  else
-    return root_node
-  end
-end
-
-local default_node_modules = get_node_modules(vim.fn.getcwd())
-
 local on_attach = function(client, bufnr)
 
-  mapBuf(bufnr, "n", "<Leader>gD", "<Cmd>lua vim.lsp.buf.declaration()<CR>")
+  mapBuf(bufnr, "n", "<Leader>gdc", "<Cmd>lua vim.lsp.buf.declaration()<CR>")
   mapBuf(bufnr, "n", "<Leader>gd", "<Cmd>lua vim.lsp.buf.definition()<CR>")
   mapBuf(bufnr, "n", "<Leader>gh", "<Cmd>lua vim.lsp.buf.hover()<CR>")
   mapBuf(bufnr, "n", "<Leader>gi", "<cmd>lua vim.lsp.buf.implementation()<CR>")

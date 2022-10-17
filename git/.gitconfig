@@ -19,7 +19,7 @@
 [user]
 	name = Huy Nguyen
 	email = huyn.nguyen95@gmail.com
-	signingkey = E067C6A49288CCFC
+	signingkey = ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIGoSsgz7hDn4DX/mpj9pjEYxByy3h1whtbrqIfEtQpB3
 
 [credential]
   helper = osxkeychain
@@ -51,7 +51,7 @@
 	gpgsign = true
 
 [gpg]
-	program = gpg
+	; program = gpg
 	format = ssh
 
 [format]
