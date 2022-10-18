@@ -14,25 +14,16 @@
 
 "}}}"
 
-
-
 " Fold, gets it's own section  ----------------------------------------------{{{
-
-
 " }}}
-
-
 
 " Nvim terminal -------------------------------------------------------------{{{
 " }}}
-
-
 
 " Completion ----------------------------------------------------------------{{{
 "}}}
 
 " Emmet customization -------------------------------------------------------{{{
-
 " Remapping <C-y>, just doesn't cut it.
   function! s:expand_html_tab()
 " try to determine if we're within quotes or tags.
@@ -62,9 +53,7 @@
   autocmd FileType html,css,scss,typescriptreact,vue,javascript,markdown.mdx EmmetInstall
 "}}}
 
-
 " vim-airline ---------------------------------------------------------------{{{
-
   let g:webdevicons_enable_airline_statusline = 1
   if !exists('g:airline_symbols')
     le g:airline_symbols = {
@@ -72,5 +61,4 @@
       \ 'modified': ' ●'
       \}
   endif
-
 "}}}

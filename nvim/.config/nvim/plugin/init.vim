@@ -21,7 +21,6 @@ return "\<tab>"
 
 endfunction
 
-
 autocmd FileType html,css,scss,typescriptreact,vue,javascript,markdown imap <silent><buffer><expr><tab> <sid>expand_html_tab()
 let g:user_emmet_mode='a'
 let g:user_emmet_complete_tag = 0
