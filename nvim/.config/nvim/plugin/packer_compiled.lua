@@ -138,7 +138,7 @@ _G.packer_plugins = {
     url = "https://github.com/Raimondi/delimitMate"
   },
   ["dressing.nvim"] = {
-    config = { "\27LJ\2\n\v\0\1\1\0\0\0\1L\0\2\0\v\0\1\1\0\0\0\1L\0\2\0è\4\1\0\6\0\24\0\0316\0\0\0'\2\1\0B\0\2\0029\0\2\0005\2\n\0005\3\3\0005\4\4\0=\4\5\0035\4\6\0=\4\a\0033\4\b\0=\4\t\3=\3\v\0025\3\f\0005\4\r\0=\4\14\0035\4\15\0005\5\16\0=\5\5\0045\5\17\0=\5\a\0045\5\18\0=\5\19\0043\5\20\0=\5\t\4=\4\21\0034\4\0\0=\4\22\3=\3\23\2B\0\2\1K\0\1\0\vselect\25format_item_override\fbuiltin\0\15min_height\1\3\0\0\3\5\4š³æÌ\t™³¦þ\3\1\3\0\0\3(\4š³æÌ\t™³¦þ\3\1\3\0\0\3Œ\1\4š³æÌ\t™³¦ÿ\3\1\0\6\17winhighlight\20Normal:MyNormal\rwinblend\3\0\15max_height\4Í™³æ\fÌ™³ÿ\3\rrelative\vcursor\vborder\frounded\vanchor\aNW\fbackend\1\0\0\1\0\2\fenabled\2\16trim_prompt\2\ninput\1\0\0\roverride\0\14min_width\1\3\0\0\3\20\4š³æÌ\t™³¦þ\3\14max_width\1\3\0\0\3Œ\1\4Í™³æ\fÌ™³ÿ\3\1\0\n\19default_prompt\vInput:\fenabled\2\17prefer_width\3(\rwinblend\3\n\rrelative\vcursor\17winhighlight\5\vborder\frounded\vanchor\aSW\16insert_only\2\17prompt_align\tleft\nsetup\rdressing\frequire\0" },
+    config = { "\27LJ\2\n\v\0\1\1\0\0\0\1L\0\2\0\v\0\1\1\0\0\0\1L\0\2\0è\4\1\0\6\0\24\0\0316\0\0\0'\2\1\0B\0\2\0029\0\2\0005\2\n\0005\3\3\0005\4\4\0=\4\5\0035\4\6\0=\4\a\0033\4\b\0=\4\t\3=\3\v\0025\3\f\0005\4\r\0=\4\14\0035\4\15\0005\5\16\0=\5\5\0045\5\17\0=\5\a\0045\5\18\0=\5\19\0043\5\20\0=\5\t\4=\4\21\0034\4\0\0=\4\22\3=\3\23\2B\0\2\1K\0\1\0\vselect\25format_item_override\fbuiltin\0\15min_height\1\3\0\0\3\5\4š³æÌ\t™³¦þ\3\1\3\0\0\3(\4š³æÌ\t™³¦þ\3\1\3\0\0\3Œ\1\4š³æÌ\t™³¦ÿ\3\1\0\6\rwinblend\3\0\rrelative\vcursor\17winhighlight\20Normal:MyNormal\vborder\frounded\15max_height\4Í™³æ\fÌ™³ÿ\3\vanchor\aNW\fbackend\1\0\0\1\0\2\16trim_prompt\2\fenabled\2\ninput\1\0\0\roverride\0\14min_width\1\3\0\0\3\20\4š³æÌ\t™³¦þ\3\14max_width\1\3\0\0\3Œ\1\4Í™³æ\fÌ™³ÿ\3\1\0\n\rwinblend\3\n\17prefer_width\3(\rrelative\vcursor\17winhighlight\5\vborder\frounded\vanchor\aSW\16insert_only\2\17prompt_align\tleft\19default_prompt\vInput:\fenabled\2\nsetup\rdressing\frequire\0" },
     loaded = true,
     path = "/Users/huy/.local/share/nvim/site/pack/packer/start/dressing.nvim",
     url = "https://github.com/stevearc/dressing.nvim"
@@ -251,7 +251,7 @@ _G.packer_plugins = {
     url = "https://github.com/MunifTanjim/nui.nvim"
   },
   nvim = {
-    config = { "\27LJ\2\nÜ\5\0\0\b\0\18\0\0236\0\0\0'\2\1\0B\0\2\0029\1\2\0004\3\3\0005\4\3\0005\5\4\0=\5\5\0045\5\6\0005\6\a\0005\a\b\0=\a\t\0065\a\n\0=\a\v\6=\6\f\0055\6\r\0=\6\14\0055\6\15\0=\6\16\5=\5\17\4>\4\1\3B\1\2\1K\0\1\0\17integrations\21indent_blankline\1\0\2\26colored_indent_levels\1\fenabled\1\rnvimtree\1\0\2\14show_root\2\fenabled\2\15native_lsp\15underlines\1\0\4\nhints\14underline\verrors\14underline\16information\14underline\rwarnings\14underline\17virtual_text\1\0\4\nhints\vitalic\verrors\vitalic\16information\vitalic\rwarnings\vitalic\1\0\1\fenabled\2\1\0\17\rgitsigns\1\bhop\1\15ts_rainbow\1\15lightspeed\1\rmarkdown\1\15bufferline\1\vbarbar\1\tfern\1\14vim_sneak\1\vneogit\1\14which_key\1\14telescope\1\15treesitter\2\14gitgutter\1\rlsp_saga\1\16lsp_trouble\1\14dashboard\1\vstyles\1\0\5\rkeywords\vitalic\14functions\vitalic\rcomments\vitalic\14variables\tNONE\fstrings\tNONE\1\0\3\16colorscheme\21dark_catppuccino\16term_colors\1\17transparency\1\nsetup\15catppuccin\frequire\0" },
+    config = { "\27LJ\2\nÜ\5\0\0\b\0\18\0\0236\0\0\0'\2\1\0B\0\2\0029\1\2\0004\3\3\0005\4\3\0005\5\4\0=\5\5\0045\5\6\0005\6\a\0005\a\b\0=\a\t\0065\a\n\0=\a\v\6=\6\f\0055\6\r\0=\6\14\0055\6\15\0=\6\16\5=\5\17\4>\4\1\3B\1\2\1K\0\1\0\17integrations\21indent_blankline\1\0\2\fenabled\1\26colored_indent_levels\1\rnvimtree\1\0\2\fenabled\2\14show_root\2\15native_lsp\15underlines\1\0\4\nhints\14underline\verrors\14underline\16information\14underline\rwarnings\14underline\17virtual_text\1\0\4\nhints\vitalic\verrors\vitalic\16information\vitalic\rwarnings\vitalic\1\0\1\fenabled\2\1\0\17\15bufferline\1\14which_key\1\16lsp_trouble\1\14telescope\1\rgitsigns\1\14gitgutter\1\rlsp_saga\1\15treesitter\2\14dashboard\1\bhop\1\15ts_rainbow\1\15lightspeed\1\rmarkdown\1\vbarbar\1\tfern\1\14vim_sneak\1\vneogit\1\vstyles\1\0\5\rkeywords\vitalic\14functions\vitalic\rcomments\vitalic\14variables\tNONE\fstrings\tNONE\1\0\3\16colorscheme\21dark_catppuccino\16term_colors\1\17transparency\1\nsetup\15catppuccin\frequire\0" },
     loaded = true,
     path = "/Users/huy/.local/share/nvim/site/pack/packer/start/nvim",
     url = "https://github.com/catppuccin/nvim"
@@ -567,6 +567,14 @@ _G.packer_plugins = {
 }
 
 time([[Defining packer_plugins]], false)
+-- Config for: indent-blankline.nvim
+time([[Config for indent-blankline.nvim]], true)
+try_loadstring("\27LJ\2\nù\2\0\0\2\0\v\0\0256\0\0\0009\0\1\0005\1\3\0=\1\2\0006\0\0\0009\0\1\0005\1\5\0=\1\4\0006\0\0\0009\0\1\0'\1\a\0=\1\6\0006\0\0\0009\0\1\0+\1\1\0=\1\b\0006\0\0\0009\0\1\0+\1\1\0=\1\t\0006\0\0\0009\0\1\0+\1\1\0=\1\n\0K\0\1\0004indent_blankline_show_trailing_blankline_indent*indent_blankline_show_current_context$indent_blankline_use_treesitter\aÂ¦\26indent_blankline_char\1\6\0\0\thelp\rstartify\14dashboard\vpacker\nYanil&indent_blankline_filetype_exclude\1\2\0\0\rterminal%indent_blankline_buftype_exclude\6g\bvim\0", "config", "indent-blankline.nvim")
+time([[Config for indent-blankline.nvim]], false)
+-- Config for: nvim
+time([[Config for nvim]], true)
+try_loadstring("\27LJ\2\nÜ\5\0\0\b\0\18\0\0236\0\0\0'\2\1\0B\0\2\0029\1\2\0004\3\3\0005\4\3\0005\5\4\0=\5\5\0045\5\6\0005\6\a\0005\a\b\0=\a\t\0065\a\n\0=\a\v\6=\6\f\0055\6\r\0=\6\14\0055\6\15\0=\6\16\5=\5\17\4>\4\1\3B\1\2\1K\0\1\0\17integrations\21indent_blankline\1\0\2\fenabled\1\26colored_indent_levels\1\rnvimtree\1\0\2\fenabled\2\14show_root\2\15native_lsp\15underlines\1\0\4\nhints\14underline\verrors\14underline\16information\14underline\rwarnings\14underline\17virtual_text\1\0\4\nhints\vitalic\verrors\vitalic\16information\vitalic\rwarnings\vitalic\1\0\1\fenabled\2\1\0\17\15bufferline\1\14which_key\1\16lsp_trouble\1\14telescope\1\rgitsigns\1\14gitgutter\1\rlsp_saga\1\15treesitter\2\14dashboard\1\bhop\1\15ts_rainbow\1\15lightspeed\1\rmarkdown\1\vbarbar\1\tfern\1\14vim_sneak\1\vneogit\1\vstyles\1\0\5\rkeywords\vitalic\14functions\vitalic\rcomments\vitalic\14variables\tNONE\fstrings\tNONE\1\0\3\16colorscheme\21dark_catppuccino\16term_colors\1\17transparency\1\nsetup\15catppuccin\frequire\0", "config", "nvim")
+time([[Config for nvim]], false)
 -- Config for: trouble.nvim
 time([[Config for trouble.nvim]], true)
 try_loadstring("\27LJ\2\n9\0\0\3\0\3\0\a6\0\0\0'\2\1\0B\0\2\0029\0\2\0004\2\0\0B\0\2\1K\0\1\0\nsetup\ftrouble\frequire\0", "config", "trouble.nvim")
@@ -579,6 +587,10 @@ time([[Config for stabilize.nvim]], false)
 time([[Config for gitsigns.nvim]], true)
 try_loadstring("\27LJ\2\nÅ\2\0\0\5\0\16\0\0196\0\0\0'\2\1\0B\0\2\0029\0\2\0005\2\3\0005\3\5\0005\4\4\0=\4\6\0035\4\a\0=\4\b\0035\4\t\0=\4\n\0035\4\v\0=\4\f\0035\4\r\0=\4\14\3=\3\15\2B\0\2\1K\0\1\0\nsigns\17changedelete\1\0\2\ttext\6~\ahl\26GitGutterChangeDelete\14topdelete\1\0\2\ttext\bâ€¾\ahl\20GitGutterDelete\vdelete\1\0\2\ttext\6_\ahl\20GitGutterDelete\vchange\1\0\2\ttext\bâ”‚\ahl\20GitGutterChange\badd\1\0\0\1\0\2\ttext\bâ”‚\ahl\17GitGutterAdd\1\0\1\15debug_mode\1\nsetup\rgitsigns\frequire\0", "config", "gitsigns.nvim")
 time([[Config for gitsigns.nvim]], false)
+-- Config for: Comment.nvim
+time([[Config for Comment.nvim]], true)
+try_loadstring("\27LJ\2\nß\3\0\1\a\0\22\00066\1\0\0009\1\1\0019\1\2\1\a\1\3\0X\0010€6\1\4\0'\3\5\0B\1\2\0029\2\6\0009\3\6\0019\3\a\3\5\2\3\0X\2\2€'\2\b\0X\3\1€'\2\t\0+\3\0\0009\4\6\0009\5\6\0019\5\n\5\5\4\5\0X\4\a€6\4\4\0'\6\v\0B\4\2\0029\4\f\4B\4\1\2\18\3\4\0X\4\16€9\4\r\0009\5\r\0019\5\14\5\4\4\5\0X\4\5€9\4\r\0009\5\r\0019\5\15\5\5\4\5\0X\4\6€6\4\4\0'\6\v\0B\4\2\0029\4\16\4B\4\1\2\18\3\4\0006\4\4\0'\6\17\0B\4\2\0029\4\18\0045\6\19\0=\2\20\6=\3\21\6D\4\2\0K\0\1\0\rlocation\bkey\1\0\0\28calculate_commentstring&ts_context_commentstring.internal\30get_visual_start_location\6V\6v\fcmotion\24get_cursor_location#ts_context_commentstring.utils\nblock\16__multiline\14__default\tline\nctype\18Comment.utils\frequire\20typescriptreact\rfiletype\abo\bvimN\1\0\4\0\6\0\t6\0\0\0'\2\1\0B\0\2\0029\0\2\0005\2\4\0003\3\3\0=\3\5\2B\0\2\1K\0\1\0\rpre_hook\1\0\0\0\nsetup\fComment\frequire\0", "config", "Comment.nvim")
+time([[Config for Comment.nvim]], false)
 -- Config for: octo.nvim
 time([[Config for octo.nvim]], true)
 try_loadstring("\27LJ\2\n2\0\0\3\0\3\0\0066\0\0\0'\2\1\0B\0\2\0029\0\2\0B\0\1\1K\0\1\0\nsetup\tocto\frequire\0", "config", "octo.nvim")
@@ -589,26 +601,14 @@ try_loadstring("\27LJ\2\n7\0\0\3\0\3\0\0066\0\0\0'\2\1\0B\0\2\0029\0\2\0B\0\1\1K
 time([[Config for nvim-colorizer.lua]], false)
 -- Config for: dressing.nvim
 time([[Config for dressing.nvim]], true)
-try_loadstring("\27LJ\2\n\v\0\1\1\0\0\0\1L\0\2\0\v\0\1\1\0\0\0\1L\0\2\0è\4\1\0\6\0\24\0\0316\0\0\0'\2\1\0B\0\2\0029\0\2\0005\2\n\0005\3\3\0005\4\4\0=\4\5\0035\4\6\0=\4\a\0033\4\b\0=\4\t\3=\3\v\0025\3\f\0005\4\r\0=\4\14\0035\4\15\0005\5\16\0=\5\5\0045\5\17\0=\5\a\0045\5\18\0=\5\19\0043\5\20\0=\5\t\4=\4\21\0034\4\0\0=\4\22\3=\3\23\2B\0\2\1K\0\1\0\vselect\25format_item_override\fbuiltin\0\15min_height\1\3\0\0\3\5\4š³æÌ\t™³¦þ\3\1\3\0\0\3(\4š³æÌ\t™³¦þ\3\1\3\0\0\3Œ\1\4š³æÌ\t™³¦ÿ\3\1\0\6\17winhighlight\20Normal:MyNormal\rwinblend\3\0\15max_height\4Í™³æ\fÌ™³ÿ\3\rrelative\vcursor\vborder\frounded\vanchor\aNW\fbackend\1\0\0\1\0\2\fenabled\2\16trim_prompt\2\ninput\1\0\0\roverride\0\14min_width\1\3\0\0\3\20\4š³æÌ\t™³¦þ\3\14max_width\1\3\0\0\3Œ\1\4Í™³æ\fÌ™³ÿ\3\1\0\n\19default_prompt\vInput:\fenabled\2\17prefer_width\3(\rwinblend\3\n\rrelative\vcursor\17winhighlight\5\vborder\frounded\vanchor\aSW\16insert_only\2\17prompt_align\tleft\nsetup\rdressing\frequire\0", "config", "dressing.nvim")
+try_loadstring("\27LJ\2\n\v\0\1\1\0\0\0\1L\0\2\0\v\0\1\1\0\0\0\1L\0\2\0è\4\1\0\6\0\24\0\0316\0\0\0'\2\1\0B\0\2\0029\0\2\0005\2\n\0005\3\3\0005\4\4\0=\4\5\0035\4\6\0=\4\a\0033\4\b\0=\4\t\3=\3\v\0025\3\f\0005\4\r\0=\4\14\0035\4\15\0005\5\16\0=\5\5\0045\5\17\0=\5\a\0045\5\18\0=\5\19\0043\5\20\0=\5\t\4=\4\21\0034\4\0\0=\4\22\3=\3\23\2B\0\2\1K\0\1\0\vselect\25format_item_override\fbuiltin\0\15min_height\1\3\0\0\3\5\4š³æÌ\t™³¦þ\3\1\3\0\0\3(\4š³æÌ\t™³¦þ\3\1\3\0\0\3Œ\1\4š³æÌ\t™³¦ÿ\3\1\0\6\rwinblend\3\0\rrelative\vcursor\17winhighlight\20Normal:MyNormal\vborder\frounded\15max_height\4Í™³æ\fÌ™³ÿ\3\vanchor\aNW\fbackend\1\0\0\1\0\2\16trim_prompt\2\fenabled\2\ninput\1\0\0\roverride\0\14min_width\1\3\0\0\3\20\4š³æÌ\t™³¦þ\3\14max_width\1\3\0\0\3Œ\1\4Í™³æ\fÌ™³ÿ\3\1\0\n\rwinblend\3\n\17prefer_width\3(\rrelative\vcursor\17winhighlight\5\vborder\frounded\vanchor\aSW\16insert_only\2\17prompt_align\tleft\19default_prompt\vInput:\fenabled\2\nsetup\rdressing\frequire\0", "config", "dressing.nvim")
 time([[Config for dressing.nvim]], false)
--- Config for: nvim
-time([[Config for nvim]], true)
-try_loadstring("\27LJ\2\nÜ\5\0\0\b\0\18\0\0236\0\0\0'\2\1\0B\0\2\0029\1\2\0004\3\3\0005\4\3\0005\5\4\0=\5\5\0045\5\6\0005\6\a\0005\a\b\0=\a\t\0065\a\n\0=\a\v\6=\6\f\0055\6\r\0=\6\14\0055\6\15\0=\6\16\5=\5\17\4>\4\1\3B\1\2\1K\0\1\0\17integrations\21indent_blankline\1\0\2\26colored_indent_levels\1\fenabled\1\rnvimtree\1\0\2\14show_root\2\fenabled\2\15native_lsp\15underlines\1\0\4\nhints\14underline\verrors\14underline\16information\14underline\rwarnings\14underline\17virtual_text\1\0\4\nhints\vitalic\verrors\vitalic\16information\vitalic\rwarnings\vitalic\1\0\1\fenabled\2\1\0\17\rgitsigns\1\bhop\1\15ts_rainbow\1\15lightspeed\1\rmarkdown\1\15bufferline\1\vbarbar\1\tfern\1\14vim_sneak\1\vneogit\1\14which_key\1\14telescope\1\15treesitter\2\14gitgutter\1\rlsp_saga\1\16lsp_trouble\1\14dashboard\1\vstyles\1\0\5\rkeywords\vitalic\14functions\vitalic\rcomments\vitalic\14variables\tNONE\fstrings\tNONE\1\0\3\16colorscheme\21dark_catppuccino\16term_colors\1\17transparency\1\nsetup\15catppuccin\frequire\0", "config", "nvim")
-time([[Config for nvim]], false)
--- Config for: indent-blankline.nvim
-time([[Config for indent-blankline.nvim]], true)
-try_loadstring("\27LJ\2\nù\2\0\0\2\0\v\0\0256\0\0\0009\0\1\0005\1\3\0=\1\2\0006\0\0\0009\0\1\0005\1\5\0=\1\4\0006\0\0\0009\0\1\0'\1\a\0=\1\6\0006\0\0\0009\0\1\0+\1\1\0=\1\b\0006\0\0\0009\0\1\0+\1\1\0=\1\t\0006\0\0\0009\0\1\0+\1\1\0=\1\n\0K\0\1\0004indent_blankline_show_trailing_blankline_indent*indent_blankline_show_current_context$indent_blankline_use_treesitter\aÂ¦\26indent_blankline_char\1\6\0\0\thelp\rstartify\14dashboard\vpacker\nYanil&indent_blankline_filetype_exclude\1\2\0\0\rterminal%indent_blankline_buftype_exclude\6g\bvim\0", "config", "indent-blankline.nvim")
-time([[Config for indent-blankline.nvim]], false)
--- Config for: Comment.nvim
-time([[Config for Comment.nvim]], true)
-try_loadstring("\27LJ\2\nß\3\0\1\a\0\22\00066\1\0\0009\1\1\0019\1\2\1\a\1\3\0X\0010€6\1\4\0'\3\5\0B\1\2\0029\2\6\0009\3\6\0019\3\a\3\5\2\3\0X\2\2€'\2\b\0X\3\1€'\2\t\0+\3\0\0009\4\6\0009\5\6\0019\5\n\5\5\4\5\0X\4\a€6\4\4\0'\6\v\0B\4\2\0029\4\f\4B\4\1\2\18\3\4\0X\4\16€9\4\r\0009\5\r\0019\5\14\5\4\4\5\0X\4\5€9\4\r\0009\5\r\0019\5\15\5\5\4\5\0X\4\6€6\4\4\0'\6\v\0B\4\2\0029\4\16\4B\4\1\2\18\3\4\0006\4\4\0'\6\17\0B\4\2\0029\4\18\0045\6\19\0=\2\20\6=\3\21\6D\4\2\0K\0\1\0\rlocation\bkey\1\0\0\28calculate_commentstring&ts_context_commentstring.internal\30get_visual_start_location\6V\6v\fcmotion\24get_cursor_location#ts_context_commentstring.utils\nblock\16__multiline\14__default\tline\nctype\18Comment.utils\frequire\20typescriptreact\rfiletype\abo\bvimN\1\0\4\0\6\0\t6\0\0\0'\2\1\0B\0\2\0029\0\2\0005\2\4\0003\3\3\0=\3\5\2B\0\2\1K\0\1\0\rpre_hook\1\0\0\0\nsetup\fComment\frequire\0", "config", "Comment.nvim")
-time([[Config for Comment.nvim]], false)
 vim.cmd [[augroup packer_load_aucmds]]
 vim.cmd [[au!]]
   -- Filetype lazy-loads
 time([[Defining lazy-load filetype autocommands]], true)
 vim.cmd [[au FileType python ++once lua require("packer.load")({'SimpylFold'}, { ft = "python" }, _G.packer_plugins)]]
-vim.cmd [[au FileType markdown ++once lua require("packer.load")({'vim-markdown-folding', 'vim-markdown'}, { ft = "markdown" }, _G.packer_plugins)]]
+vim.cmd [[au FileType markdown ++once lua require("packer.load")({'vim-markdown', 'vim-markdown-folding'}, { ft = "markdown" }, _G.packer_plugins)]]
 time([[Defining lazy-load filetype autocommands]], false)
 vim.cmd("augroup END")
 vim.cmd [[augroup filetypedetect]]
