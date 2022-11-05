@@ -33,6 +33,7 @@ formulae=(
 "bat"
 "exa"
 "lua-language-server"
+"httpie"
 )
 
 # Applications
