@@ -65,7 +65,7 @@ local on_attach = function(client, bufnr)
   end
 end
 
-local servers = {"pylsp", "bashls", "sourcekit", "tsserver", "html", "volar", "vimls", "tailwindcss"}
+local servers = {"pylsp", "bashls", "sourcekit", "tsserver", "html", "volar", "vimls", "tailwindcss", "prismals"}
 for _, lsp in ipairs(servers) do
   lspconfig[lsp].setup {
     on_attach = on_attach,
@@ -107,6 +107,10 @@ lspconfig.cssls.setup {
   }
 }
 lspconfig.tailwindcss.setup {
+  on_attach = on_attach,
+  capabilities = capabilities,
+}
+lspconfig.prismals.setup {
   on_attach = on_attach,
   capabilities = capabilities,
 }
