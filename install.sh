@@ -39,6 +39,7 @@ formulae=(
 # Applications
 casks=(
 "brave-browser"
+"google-chrome"
 "kitty"
 "rectangle"
 "postman"
