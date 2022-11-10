@@ -99,6 +99,7 @@ local commonFT = {
   "markdown",
   "markdown.mdx",
   "json",
+  "prisma",
   "yaml",
   "xml",
   "svg",
