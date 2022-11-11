@@ -126,5 +126,6 @@ local ft_str =
   ","
 )
 vim.cmd("autocmd Filetype " .. ft_str .. " setlocal foldmethod=expr foldexpr=nvim_treesitter#foldexpr()")
+vim.g.copilot_node_command = "~/.nvm/versions/node/v16.15.0/bin/node"
 
 return Option
