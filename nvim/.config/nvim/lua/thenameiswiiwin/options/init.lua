@@ -72,7 +72,8 @@ Option.g {
   splitbelow = true,
   emoji = false,
   indentexpr = "nvim_treesitter#indent()",
-  showmatch = false
+  showmatch = false,
+  copilot_no_tab_map = true
 }
 Option.b {
   swapfile = false,
@@ -113,6 +114,7 @@ vim.g.markdown_syntax_conceal = false
 vim.g.mkdp_auto_start = false
 vim.g.vim_json_syntax_conceal = false
 vim.g.override_nvim_web_devicons = true
+vim.g.copilot_node_command = "~/.nvm/versions/node/v16.15.0/bin/node"
 -- vim.g.tmux_navigator_no_mappings = true
 local configs = parsers.get_parser_configs()
 local ft_str =
@@ -126,6 +128,5 @@ local ft_str =
   ","
 )
 vim.cmd("autocmd Filetype " .. ft_str .. " setlocal foldmethod=expr foldexpr=nvim_treesitter#foldexpr()")
-vim.g.copilot_node_command = "~/.nvm/versions/node/v16.15.0/bin/node"
 
 return Option

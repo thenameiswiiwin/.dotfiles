@@ -54,4 +54,8 @@ function H.BufDel()
   -- cmd(is_terminal and "bd! #" or "silent! confirm bd #")
 end
 -- vim.cmd([[command! -bang -nargs=? Bdelete lua require('bufdelete').bufdelete_cmd(<q-args>, <q-bang>)]])
+
+
+vim.cmd[[imap <silent><script><expr> <C-b> copilot#Accept("\<CR>")]]
+vim.cmd[[highlight CopilotSuggestion guifg=#555555 ctermfg=8]]
 return H

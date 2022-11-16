@@ -54,6 +54,10 @@ M.map("n", "j", "v:count == 0 ? 'gj' : 'j'", {expr = true})
 M.map("v", "k", "v:count == 0 ? 'gk' : 'k'", {expr = true})
 M.map("v", "j", "v:count == 0 ? 'gj' : 'j'", {expr = true})
 
+--
+
+M.map("i", "<C-b>", ":copilot#Accept('\\<CR>')<CR>", {silent = true})
+
 -- M.map("v", "<leader><CR>", ":so ~/.config/nvim/init.lua<CR>")
 M.map("v", "<Leader>y", '"+y"')
 M.map("v", "J", ":m '>+1<CR>gv=gv")
