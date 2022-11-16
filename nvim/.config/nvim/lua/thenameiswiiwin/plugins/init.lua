@@ -344,5 +344,7 @@ return require "packer".startup(
     use {"mjlbach/neovim-ui"}
     use {"MunifTanjim/nui.nvim"}
     use {"dstein64/vim-startuptime"}
+
+    use {"manzeloth/live-server"}
   end
 )
