@@ -8,6 +8,7 @@ export _Z_DATA="$HOME/z-data"
 export ITERM_24BIT=1
 export DISABLE_AUTO_TITLE="true"
 
+export PATH="/usr/local/opt/curl/bin:$PATH"
 export PATH=/usr/local/bin:$PATH
 export PATH=${PATH}:~/bin
 export BREW_PATH=$(brew --prefix)

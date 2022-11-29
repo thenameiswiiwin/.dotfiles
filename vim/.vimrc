@@ -48,6 +48,8 @@ let &t_Ce = "\e[4:0m"
 " block select not limited by shortest line
   set virtualedit=
   set wildmenu
+  "fzf
+  set rtp+=/usr/local/opt/fzf
   set laststatus=2
   "set colorcolumn=100
   set wrap linebreak nolist
@@ -97,6 +99,9 @@ let &t_Ce = "\e[4:0m"
   inoremap <silent> <End>  <C-o>g<End>
 " copy current files path to clipboard
   nmap cp :let @+ = expand("%") <cr>
+
+  " To install useful keybbidnings and fuzzy completion:
+  " /usr/local/opt/fzf/install
 
 " ,f to format code, requires formatters: read the docs
   noremap <leader>f :Autoformat<CR>
