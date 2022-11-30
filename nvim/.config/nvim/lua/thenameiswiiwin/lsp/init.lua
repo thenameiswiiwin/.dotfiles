@@ -180,7 +180,6 @@ table.insert(runtime_path, "lua/?.lua")
 table.insert(runtime_path, "lua/?/init.lua")
 
 lspconfig.sumneko_lua.setup {
-  -- cmd = {lua_lsp_loc .. "/bin/lua-language-server", "-E", lua_lsp_loc .. "/main.lua"},
   cmd = {lua_lsp_loc .. "/bin/lua-language-server", "-E", lua_lsp_loc .. "/bin/main.lua"},
   capabilities = capabilities,
   on_attach = on_attach,
