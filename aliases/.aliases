@@ -30,6 +30,10 @@ alias ghc='gh repo create'
 alias ghcl='gh repo clone'
 alias ghf='gh repo fork'
 
+# Gh Pages
+alias gad="git add dist -f"
+alias gsp="git subtree push --prefix dist origin gh-pages"
+
 # Tmux
 alias t='tmux'
 alias ta="t a -t"
@@ -56,4 +60,3 @@ alias flush='dscacheutil -flushcache'
 
 # Luamake
 alias luamake=/Users/huy/code/personal/lua-language-server/3rd/luamake/luamake
-
