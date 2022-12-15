@@ -54,8 +54,10 @@ M.map("n", "j", "v:count == 0 ? 'gj' : 'j'", {expr = true})
 M.map("v", "k", "v:count == 0 ? 'gk' : 'k'", {expr = true})
 M.map("v", "j", "v:count == 0 ? 'gj' : 'j'", {expr = true})
 
---
+-- no highlight after search
+M.map("n", "<Leader>nh", ":noh<CR>")
 
+-- Copilot
 M.map("i", "<C-b>", ":copilot#Accept('\\<CR>')<CR>", {silent = true})
 
 -- M.map("v", "<leader><CR>", ":so ~/.config/nvim/init.lua<CR>")
