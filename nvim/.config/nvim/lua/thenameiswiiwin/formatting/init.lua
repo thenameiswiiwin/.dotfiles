@@ -76,6 +76,15 @@ local formatterConfig = {
       }
     end
   },
+  prisma = {
+    function()
+      return {
+        exe = "npx",
+        args = {"prisma", "format", "--stdin-filepath", vim.fn.fnameescape(vim.api.nvim_buf_get_name(0))},
+        stdin = true
+      }
+    end
+  },
   ["*"] = {
     function()
       return {
