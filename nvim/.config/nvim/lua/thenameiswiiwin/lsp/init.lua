@@ -116,7 +116,7 @@ lspconfig.prismals.setup {
 }
 
 -- local lua_lsp_loc = "/Users/huy/code/personal/lua-language-server"
-local lua_lsp_loc = "/usr/local/Cellar/lua-language-server/3.6.5/libexec"
+local lua_lsp_loc = "/usr/local/Cellar/lua-language-server/3.6.6/libexec"
 
 lspconfig.jsonls.setup {
   cmd = {"vscode-json-language-server", "--stdio"},

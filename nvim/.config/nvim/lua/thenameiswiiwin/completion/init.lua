@@ -18,15 +18,17 @@ cmp.setup({
   }),
   sources = {
     { name = "nvim_lua" },
-    { name = "nvim_lsp" },
+    { name = "nvim_lsp", keyword_length = 3 },
     { name = "luasnip" },
   },
   formatting = {
     format = lspkind.cmp_format {
       with_text = true,
       menu = {
+        buffer = "[buf]",
         nvim_lsp = "[LSP]",
         nvim_lua = "[api]",
+        -- path = "[path]",
         luasnip = "[snip]",
         gh_issues = "[issues]",
       },
