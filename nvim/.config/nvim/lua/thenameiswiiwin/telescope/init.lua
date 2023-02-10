@@ -8,7 +8,7 @@ local action_set = require("telescope.actions.set")
 local H = {}
 
 telescope.load_extension("gh")
-telescope.load_extension("packer")
+-- telescope.load_extension("packer")
 telescope.load_extension("fzy_native")
 telescope.load_extension("octo")
 

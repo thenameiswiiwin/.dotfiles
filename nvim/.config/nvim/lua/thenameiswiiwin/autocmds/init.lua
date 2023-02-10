@@ -6,7 +6,7 @@ end
 
 H.autocmd("BufEnter",     "*",   "if &buftype == 'terminal' | :startinsert | endif")
 H.autocmd("BufReadPost",  "*",   [[if line("'\"") > 0 && line ("'\"") <= line("$") | exe "normal! g'\"" | endif]])
-H.autocmd("BufWritePre",  "*",   "%s/\\s\\+$//e")
+-- H.autocmd("BufWritePre",  "*",   "%s/\\s\\+$//e")
 
 H.autocmd("ColorScheme",  "*",   "lua require('thenameiswiiwin.colors').setItalics()")
 H.autocmd("CompleteDone", "*",   "pclose")

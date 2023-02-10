@@ -15,10 +15,24 @@ export BREW_PATH=$(brew --prefix)
 export PATH=${PATH}:~/bin/nvim/bin
 
 export PATH="/usr/local/sbin:$PATH"
+export PATH="/usr/local/opt/python@2/bin:$PATH"
 
 # If you come from bash you might have to change your $PATH
 export PATH="$PATH:$HOME/.composer/vendor/bin"
 export PATH="/usr/local/opt/mysql@5.7/bin:$PATH"
+
+# Python...amiright
+export PATH="/usr/local/opt/python@3.7/bin:$PATH"
+
+# Java setup
+# export JAVA_8_HOME=$(/usr/libexec/java_home -v1.8)
+export JAVA_11_HOME=$(/usr/libexec/java_home -v11)
+# export JAVA_HOME=$JAVA_8_HOME
+export JAVA_HOME=$JAVA_11_HOME
+export GRADLE_HOME=$BREW_PATH
+# export ANDROID_NDK_HOME="/usr/local/share/android-ndk"
+# export ANDROID_HOME=/usr/local/share/android-sdk
+# export PATH=$PATH:$ANDROID_HOME/platform-tools/:$ANDROID_HOME/emulator
 
 export PATH="$HOME/code/personal/lua-language-server/bin/macOS:$PATH"
 

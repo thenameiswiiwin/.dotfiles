@@ -8,11 +8,11 @@ local decorators = require("yanil/decorators")
 local devicons = require("nvim-web-devicons")
 local canvas = require("yanil/canvas")
 local Section = require("yanil/section")
--- local nodelib = require("yanil/node")
+local nodelib = require("yanil/node")
 local map = require("thenameiswiiwin.mappings").map
 local mapBuf = require("thenameiswiiwin.mappings").mapBuf
-local dotutil = require("thenameiswiiwin/util")
 
+local dotutil = require("thenameiswiiwin/util")
 -- local Menu = require("nui.menu")
 -- local event = require("nui.utils.autocmd").event
 

@@ -54,6 +54,8 @@ Option.g {
   formatoptions = "jtcroql",
   inccommand = "nosplit",
   shortmess = "atIcF",
+  loaded_netrw = 0,
+  loaded_netrwPlugin = 0,
   isfname = table.concat(
     vim.tbl_filter(
       function(entry)
@@ -72,8 +74,7 @@ Option.g {
   splitbelow = true,
   emoji = false,
   indentexpr = "nvim_treesitter#indent()",
-  showmatch = false,
-  copilot_no_tab_map = true
+  showmatch = false
 }
 Option.b {
   swapfile = false,
@@ -83,7 +84,6 @@ Option.b {
 Option.w {
   number = true,
   numberwidth = 1,
-  relativenumber = true,
   signcolumn = "yes",
   spell = false,
   foldlevel = 99,
@@ -103,7 +103,6 @@ vim.g.clipboard = {
 vim.cmd('let &t_8f = "\\<Esc>[38;2;%lu;%lu;%lum"')
 vim.cmd('let &t_8b = "\\<Esc>[48;2;%lu;%lu;%lum"')
 
-vim.g.mapleader = " "
 vim.g.one_allow_italics = true
 vim.g.oceanic_next_terminal_bold = true
 vim.g.oceanic_next_terminal_italic = true
@@ -114,7 +113,6 @@ vim.g.markdown_syntax_conceal = false
 vim.g.mkdp_auto_start = false
 vim.g.vim_json_syntax_conceal = false
 vim.g.override_nvim_web_devicons = true
-vim.g.copilot_node_command = "~/.nvm/versions/node/v16.15.0/bin/node"
 -- vim.g.tmux_navigator_no_mappings = true
 local configs = parsers.get_parser_configs()
 local ft_str =
@@ -128,5 +126,5 @@ local ft_str =
   ","
 )
 vim.cmd("autocmd Filetype " .. ft_str .. " setlocal foldmethod=expr foldexpr=nvim_treesitter#foldexpr()")
-
+--vim.opt.completeopt = {"menu","menuone","insert","select"}
 return Option

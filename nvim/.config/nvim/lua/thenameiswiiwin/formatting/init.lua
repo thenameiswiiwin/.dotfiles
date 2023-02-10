@@ -17,13 +17,13 @@ local formatterConfig = {
     --      stdin = true,
     --    }
     --  end,
-    function()
-      return {
-        exe = "luafmt",
-        args = {"--indent-count", 2, "--stdin"},
-        stdin = true
-      }
-    end
+    -- function()
+    --   return {
+    --     exe = "luafmt",
+    --     args = {"--indent-count", 2, "--stdin"},
+    --     stdin = true
+    --   }
+    -- end
   },
   vue = {
     function()
@@ -76,24 +76,20 @@ local formatterConfig = {
       }
     end
   },
-  prisma = {
+  dart = {
     function()
       return {
-        exe = "npx",
-        args = {"prisma", "format", "--stdin-filepath", vim.fn.fnameescape(vim.api.nvim_buf_get_name(0))},
+        exe = "dart",
+        args = {
+          'format'
+        },
         stdin = true
       }
     end
   },
-  ["*"] = {
-    function()
-      return {
-        -- remove trailing whitespace
-        exe = "sed",
-        args = {"-i", "''", "'s/[ \t]*$//'"},
-        stdin = false
-      }
-    end
+  ['*'] = {
+      -- require("formatter.filetypes.any").lsp_format,
+    -- require('formatter.filetypes.any').remove_trailing_whitespace
   }
 }
 local commonFT = {
@@ -108,7 +104,6 @@ local commonFT = {
   "markdown",
   "markdown.mdx",
   "json",
-  "prisma",
   "yaml",
   "xml",
   "svg",

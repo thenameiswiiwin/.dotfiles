@@ -15,8 +15,8 @@ textDocument = {
   }
 }
 -- capabilities.textDocument.completion.completionItem.snippetSupport = true
-capabilities = require("cmp_nvim_lsp").default_capabilities(capabilities)
--- capabilities = vim.tbl_extend("keep", capabilities or {}, lsp_status.capabilities)
+-- capabilities = require("cmp_nvim_lsp").default_capabilities(capabilities)
+capabilities = vim.tbl_extend("keep", capabilities or {}, require("cmp_nvim_lsp").default_capabilities())
 
 local H = {}
 
@@ -35,6 +35,20 @@ float = {
     },
 }
 
+local function get_node_modules(root_dir)
+  -- return util.find_node_modules_ancestor(root_dir) .. '/node_modules' or ''
+  -- util.find_node_modules_ancestor()
+  local root_node = root_dir .. "/node_modules"
+  local stats = uv.fs_stat(root_node)
+  if stats == nil then
+    return ''
+  else
+    return root_node
+  end
+end
+
+local default_node_modules = get_node_modules(vim.fn.getcwd())
+
 local on_attach = function(client, bufnr)
 
   mapBuf(bufnr, "n", "<Leader>gdc", "<Cmd>lua vim.lsp.buf.declaration()<CR>")
@@ -51,7 +65,7 @@ local on_attach = function(client, bufnr)
   mapBuf(bufnr, "n", "<Leader>sd", "<cmd>lua vim.diagnostic.open_float(0, { scope = 'line' })<CR>")
   -- autocmd("CursorHold", "<buffer>", "lua vim.diagnostic.show_position_diagnostics({focusable=false})")
 
-  vim.bo.omnifunc = "v:lua.vim.lsp.omnifunc"
+  -- vim.bo.omnifunc = "v:lua.vim.lsp.omnifunc"
 
   vim.fn.sign_define("DiagnosticSignError", {text = "•", texthl = "DiagnosticSignError"})
   vim.fn.sign_define("DiagnosticSignWarn", {text = "•", texthl = "DiagnosticSignWarn"})
@@ -65,7 +79,7 @@ local on_attach = function(client, bufnr)
   end
 end
 
-local servers = {"pylsp", "bashls", "sourcekit", "tsserver", "html", "volar", "vimls", "tailwindcss", "prismals"}
+local servers = {"pylsp", "bashls", "sourcekit", "tsserver", "html", "vimls", "tailwindcss", "prismals", "svelte"}
 for _, lsp in ipairs(servers) do
   lspconfig[lsp].setup {
     on_attach = on_attach,
@@ -116,8 +130,13 @@ lspconfig.prismals.setup {
 }
 
 -- local lua_lsp_loc = "/Users/huy/code/personal/lua-language-server"
-local lua_lsp_loc = "/usr/local/Cellar/lua-language-server/3.6.8/libexec"
+local lua_lsp_loc = "/usr/local/Cellar/lua-language-server/3.6.10/libexec"
 
+
+lspconfig.dartls.setup{
+  on_attach = on_attach,
+  capabilities = capabilities,
+}
 lspconfig.jsonls.setup {
   cmd = {"vscode-json-language-server", "--stdio"},
   on_attach = on_attach,
@@ -171,6 +190,15 @@ lspconfig.jsonls.setup {
           url = "http://json.schemastore.org/stylelintrc.json"
         }
       }
+    }
+  }
+}
+lspconfig.volar.setup {
+  on_attach = on_attach,
+  capabilities = capabilities,
+ init_options = {
+    typescript = {
+      tsdk = default_node_modules .. '/typescript/lib',
     }
   }
 }
