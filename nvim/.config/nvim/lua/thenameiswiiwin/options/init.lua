@@ -113,6 +113,7 @@ vim.g.markdown_syntax_conceal = false
 vim.g.mkdp_auto_start = false
 vim.g.vim_json_syntax_conceal = false
 vim.g.override_nvim_web_devicons = true
+vim.g.copilot_node_command = "~/.nvm/versions/node/v16.15.0/bin/node"
 -- vim.g.tmux_navigator_no_mappings = true
 local configs = parsers.get_parser_configs()
 local ft_str =
