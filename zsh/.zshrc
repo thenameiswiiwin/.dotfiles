@@ -28,7 +28,7 @@ export VISUAL='vim'
 export EDITOR='vim'
 export TMUXP_CONFIGDIR=$HOME/.config/tmuxp
 export DISABLE_AUTO_TITLE='true'
-export TERM=xterm-256color-italic
+# export TERM=xterm-256color-italic
 
 # Sessionizer
 bindkey -s ^f "tmux-sessionizer\n"
