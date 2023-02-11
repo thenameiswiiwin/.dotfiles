@@ -29,6 +29,7 @@ Option.g {
   mouse = "a",
   clipboard = "unnamedplus",
   hidden = true,
+  relativenumber = true,
   showmode = false,
   timeoutlen = 3e3,
   tabstop = 2,

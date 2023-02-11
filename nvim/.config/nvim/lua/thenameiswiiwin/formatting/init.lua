@@ -88,7 +88,7 @@ local formatterConfig = {
     end
   },
   ['*'] = {
-      -- require("formatter.filetypes.any").lsp_format,
+    -- require("formatter.filetypes.any").lsp_format,
     -- require('formatter.filetypes.any').remove_trailing_whitespace
   }
 }

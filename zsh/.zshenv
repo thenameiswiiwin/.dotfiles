@@ -30,9 +30,6 @@ export JAVA_11_HOME=$(/usr/libexec/java_home -v11)
 # export JAVA_HOME=$JAVA_8_HOME
 export JAVA_HOME=$JAVA_11_HOME
 export GRADLE_HOME=$BREW_PATH
-# export ANDROID_NDK_HOME="/usr/local/share/android-ndk"
-# export ANDROID_HOME=/usr/local/share/android-sdk
-# export PATH=$PATH:$ANDROID_HOME/platform-tools/:$ANDROID_HOME/emulator
 
 export PATH="$HOME/code/personal/lua-language-server/bin/macOS:$PATH"
 
