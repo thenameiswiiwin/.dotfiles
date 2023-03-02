@@ -130,7 +130,7 @@ lspconfig.prismals.setup {
 }
 
 -- local lua_lsp_loc = "/Users/huy/code/personal/lua-language-server"
-local lua_lsp_loc = "/usr/local/Cellar/lua-language-server/3.6.10/libexec"
+local lua_lsp_loc = "/usr/local/Cellar/lua-language-server/3.6.12/libexec"
 
 
 lspconfig.dartls.setup{
@@ -207,7 +207,7 @@ local runtime_path = vim.split(package.path, ";")
 table.insert(runtime_path, "lua/?.lua")
 table.insert(runtime_path, "lua/?/init.lua")
 
-lspconfig.sumneko_lua.setup {
+lspconfig.lua_ls.setup {
   cmd = {lua_lsp_loc .. "/bin/lua-language-server", "-E", lua_lsp_loc .. "/bin/main.lua"},
   capabilities = capabilities,
   on_attach = on_attach,
