@@ -114,6 +114,7 @@
         "/Users/huy/.local/share/nvim/site/pack/packer/start/vim-jsx-pretty/after",
         "/Users/huy/.local/share/nvim/site/pack/packer/start/vim-mdx-js/after",
         "/Users/huy/.local/share/nvim/site/pack/packer/start/vim-yaml-folds/after",
-        "${3rd}/luassert/library"
+        "${3rd}/luassert/library",
+        "${3rd}/luv/library"
     ]
 }

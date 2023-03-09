@@ -130,7 +130,7 @@ lspconfig.prismals.setup {
 }
 
 -- local lua_lsp_loc = "/Users/huy/code/personal/lua-language-server"
-local lua_lsp_loc = "/usr/local/Cellar/lua-language-server/3.6.12/libexec"
+local lua_lsp_loc = "/usr/local/Cellar/lua-language-server/3.6.17/libexec"
 
 
 lspconfig.dartls.setup{
