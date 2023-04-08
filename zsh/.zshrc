@@ -30,6 +30,9 @@ export TMUXP_CONFIGDIR=$HOME/.config/tmuxp
 export DISABLE_AUTO_TITLE='true'
 # export TERM=xterm-256color-italic
 
+# "Fix" for "too many files open" error
+# ulimit -- -n 10240
+
 # Sessionizer
 bindkey -s ^f "tmux-sessionizer\n"
 
