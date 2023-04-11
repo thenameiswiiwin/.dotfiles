@@ -1,42 +1,61 @@
-local ok, lspkind = pcall(require, "lspkind")
-if not ok then
-  return
+-- import nvim-cmp plugin safely
+local cmp_status, cmp = pcall(require, "cmp")
+if not cmp_status then
+	return
+end
+
+-- import luasnip plugin safely
+local luasnip_status, luasnip = pcall(require, "luasnip")
+if not luasnip_status then
+	return
+end
+
+-- import lspkind plugin safely
+local lspkind_status, lspkind = pcall(require, "lspkind")
+if not lspkind_status then
+	return
 end
 
 lspkind.init()
 
-local cmp = require'cmp'
-
 cmp.setup({
-  snippet = {
-    expand = function(args)
-      require('luasnip').lsp_expand(args.body)
-    end,
-  },
-  mapping = cmp.mapping.preset.insert({
-    ['<C-y>'] = cmp.mapping.confirm({ select = true }),
-  }),
-  sources = {
-    { name = "nvim_lua" },
-    { name = "nvim_lsp", keyword_length = 3 },
-    { name = "luasnip" },
-  },
-  formatting = {
-    format = lspkind.cmp_format {
-      with_text = true,
-      menu = {
-        buffer = "[buf]",
-        nvim_lsp = "[LSP]",
-        nvim_lua = "[api]",
-        -- path = "[path]",
-        luasnip = "[snip]",
-        gh_issues = "[issues]",
-      },
-    },
-  },
-  experimental = {
-    native_menu = false,
-    ghost_text = false,
-  }
+	snippet = {
+		expand = function(args)
+			luasnip.lsp_expand(args.body)
+		end,
+	},
+	mapping = cmp.mapping.preset.insert({
+		["<C-k>"] = cmp.mapping.select_prev_item(), -- previous suggestion
+		["<C-j>"] = cmp.mapping.select_next_item(), -- next suggestion
+		-- ["<C-b>"] = cmp.mapping.scroll_docs(-4),
+		-- ["<C-f>"] = cmp.mapping.scroll_docs(4),
+		["<C-y>"] = cmp.mapping.complete(), -- show completion suggestions
+		["<C-e>"] = cmp.mapping.abort(), -- close completion window
+		["<CR>"] = cmp.mapping.confirm({ select = false }),
+	}),
+	sources = {
+		{ name = "nvim_lsp" },
+		{ name = "luasnip" },
+		{ name = "buffer" },
+		{ name = "path" },
+	},
+	formatting = {
+		format = lspkind.cmp_format({
+			-- maxwidth = 50,
+			-- ellipsis_char = "...",
+			with_text = true,
+			menu = {
+				buffer = "[buf]",
+				nvim_lsp = "[LSP]",
+				luasnip = "[snip]",
+				path = "[path]",
+				nvim_lua = "[api]",
+				gh_issues = "[issues]",
+			},
+		}),
+	},
+	experimental = {
+		native_menu = false,
+		ghost_text = false,
+	},
 })
-
