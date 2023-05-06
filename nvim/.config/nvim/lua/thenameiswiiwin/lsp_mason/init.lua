@@ -115,11 +115,17 @@ mason_lspconfig.setup({
 		"tailwindcss",
 		"lua_ls",
 		"emmet_ls",
+		"volar",
 	},
 	-- auto-install configured servers (with lspconfig)
 	automatic_installation = true, -- not the same as ensure_installed
 })
 
+-- volar
+lspconfig["volar"].setup({
+	capabilities = capabilities,
+	on_attach = on_attach,
+})
 -- configure html server
 lspconfig["html"].setup({
 	capabilities = capabilities,
@@ -136,6 +142,7 @@ typescript.setup({
 lspconfig["cssls"].setup({
 	capabilities = capabilities,
 	on_attach = on_attach,
+	filetypes = { "typescript", "javascript", "javascriptreact", "typescriptreact", "vue", "json" },
 })
 -- configure tailwindcss server
 lspconfig["tailwindcss"].setup({
@@ -146,7 +153,7 @@ lspconfig["tailwindcss"].setup({
 lspconfig["emmet_ls"].setup({
 	capabilities = capabilities,
 	on_attach = on_attach,
-	filetypes = { "html", "typescriptreact", "javascriptreact", "css", "sass", "scss", "less", "svelte" },
+	filetypes = { "html", "typescriptreact", "javascriptreact", "css", "sass", "scss", "less", "svelte", "vue" },
 })
 
 mason_null_ls.setup({
