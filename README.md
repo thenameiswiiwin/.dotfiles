@@ -1,11 +1,17 @@
-# Thenameiswiiwin's Dotfile
+# dotfiles
 
-Neovim, Kitty, Oh-My-Zsh, Stow, Tmux, Antibody.
+========
 
-## Install
+## Install Brew
 
 ```
-curl https://cdn.rawgit.com/thenameiswiiwin/dotfiles/main/install.sh | sh
+/bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/HEAD/install.sh)"
+```
+
+## Clone this Repo
+
+```
+git clone git@github.com:thenameiswiiwin/dotfiles-2.git ~/.dotfiles
 ```
 
 ## List Files
@@ -20,9 +26,8 @@ tree -a -I '.git|.DS_Store'
 brew bundle
 ```
 
-## Symlink Dotfiles
+### Symlink dotfiles
 
 ```
-cd ~/.dotfiles
-stow aliases antibody bash bin kitty nvim tmux vim zsh
+stow bin kitty lazygit nvim tmux zsh bat lf rectangle taskell keyboard git aliases
 ```
