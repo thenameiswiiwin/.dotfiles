@@ -1,62 +1,65 @@
-# Brew
+# ~/.dotfiles/aliases/.aliases
+
+# Homebrew
 alias bu='brew cleanup && brew update && brew upgrade && brew cleanup && brew doctor'
 alias bo='brew outdated'
-# Eza
-alias l='exa'
-alias ll='l -l -h --git --icons'
-alias la='ll -a -h --git --icons'
+
+# Docker
+alias dockerps="docker ps --format 'table {{.ID}}\t{{.Image}}\t{{.Status}}\t{{.Names}}'"
+
+# Neovim
+alias v='nvim'
+alias df="nvim ~/.dotfiles"
+
+# Directory navigation
+alias l='eza'
+alias la='l -l -a -h --git --icons'
+alias ls='l --icons --long --header --group-directories-first'
+alias lt="eza --tree --level=2 --long --icons --git"
 
 # Zsh
-alias zc='v $HOME/.zshrc'
-alias za='v $HOME/.aliases'
-alias zs='source $HOME/.zshrc'
+alias zc='nvim ~/.zshrc'
+alias za='nvim ~/.aliases'
+alias zs='source ~/.zshrc'
 
-# Port
+# Network Utilities
 alias port='sudo lsof -i'
 alias ps='ps aux | grep'
+alias kill_port=findandkill
 
 # Git
-alias gaa='git add -A'
+alias ga='git add .'
+alias gaa='git add -p'
+alias gb='git branch'
+alias gba='git branch -a'
 alias gc='git commit -m'
+alias gca='git commit -a -m'
+alias gdiff='git diff'
 alias gs='git status'
-alias gp='git push -u'
+alias gpsh='git push -u origin $(git rev-parse --abbrev-ref HEAD)'
+alias gpu='git pull origin'
 alias gw='git worktree'
 alias ghc='gh repo create'
 alias ghcl='gh repo clone'
 alias ghf='gh repo fork'
+alias glog="git log --graph --topo-order --pretty='%w(100,0,6)%C(yellow)%h%C(bold)%C(black)%d %C(cyan)%ar %C(green)%an%n%C(bold)%C(white)%s %N' --abbrev-commit"
+alias cb='git branch --sort=-committerdate | fzf --header "Checkout Branch" --preview "git diff {1} --color=always" --pointer="" | xargs git checkout'
+alias gr='git remote'
 
-
-# Gh Pages
-alias gad="git add dist -f"
-alias gsp="git subtree push --prefix dist origin gh-pages"
+# Smarter dir nav
+alias z='zoxide'
 
 # Tmux
 alias t='tmux'
-alias ta="t a -t"
-alias tc="v $HOME/.tmux.conf"
-alias tcs="tmux source $HOME/.tmux.conf"
+alias ta='t attach -t'
+alias tc='nvim ~/.tmux.conf'
+alias tcs='tmux source ~/.tmux.conf'
 
-# NeoVim
-alias v='nvim'
-
-# Cat -> Bat
+# Replace cat with bat
 alias cat='bat'
 
-alias cb='git branch --sort=-committerdate | fzf --header "Checkout Recent Branch" --preview "git diff {1} --color=always" --pointer="" | xargs git checkout'
-alias yarntest="yarn ui:build && lerna run test && yarn jest && yarn coverage:collect"
-alias weather="curl -4 wttr.in/chattanooga"
-# npm i -g node-notifier-cli
-alias python=/usr/local/bin/python3.9
+# Clean up mac-specific .DS_Store
+alias dsclean='sudo find / -name ".DS_Store" -exec rm -v {} \;'
 
-
-# Usefull stuff for presentation and seeing dotfiles
-alias hidedesktop="defaults write com.apple.finder CreateDesktop -bool false && killall Finder"
-alias showdesktop="defaults write com.apple.finder CreateDesktop -bool true && killall Finder"
-alias showall='defaults write com.apple.finder AppleShowAllFiles YES && killall Finder'
-alias hideall='defaults write com.apple.finder AppleShowAllFiles NO && killall Finder'
-
-# Get rid of .DS_Store files recursively
-alias dsclean="sudo find / -name ".DS_Store" -depth -exec rm {} \;"
-
-# Flush your dns cache
-alias flush='dscacheutil -flushcache'
+# Flush DNS
+alias flush='sudo dscacheutil -flushcache && sudo killall -HUP mDNSResponder && echo "DNS cache flushed"'

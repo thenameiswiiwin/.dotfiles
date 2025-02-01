@@ -1,13 +1,33 @@
-export PATH=/Users/$USER/bin:$PATH 
-export PATH=$HOME/go/bin:$PATH 
-export PATH=$HOME/.cargo/env:$PATH 
-export PATH=/Users/$USER/.local/share/bob/nvim-bin:$PATH
-export PATH="/opt/homebrew/bin:/opt/homebrew/sbin:$PATH"
+# Basic PATH
+export PATH="$HOME/bin:/usr/local/bin:/usr/local/sbin:$HOME/.local/bin:$PATH"
+export PATH="/opt/homebrew/bin:/opt/homebrew/opt/mysql@5.7/bin:$PATH"
+export PATH="$HOME/go/bin:$HOME/flutter/bin:$HOME/.bun/bin:$HOME/Library/pnpm:$PATH"
 
-export GIT_EDITOR='nvim'
-export VISUAL='nvim'
-export EDITOR='nvim'
+# XDG
+export XDG_CONFIG_HOME="$HOME/.config"
 
-export TERM="xterm-256color"
+# Editors
+export EDITOR="/opt/homebrew/bin/nvim"
+export VISUAL="$EDITOR"
+export GIT_EDITOR="$EDITOR"
 
-. "$HOME/.cargo/env"
+# Bun
+export BUN_INSTALL="$HOME/.bun"
+export PATH="$BUN_INSTALL/bin:$PATH"
+
+# Oh-my-zsh
+export ZSH="$HOME/.oh-my-zsh"
+
+# Starship
+export STARSHIP_CONFIG="$HOME/.config/starship/starship.toml"
+eval "$(starship init zsh)"
+
+# Atuin
+eval "$(atuin init zsh)"
+#
+# Zoxide
+eval "$(zoxide init zsh)"
+
+# # fnm (Node version manager)
+eval "$(fnm env)"
+
