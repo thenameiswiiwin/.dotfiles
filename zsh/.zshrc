@@ -1,95 +1,51 @@
-# Created by Zap installer
-[ -f "${XDG_DATA_HOME:-$HOME/.local/share}/zap/zap.zsh" ] && source "${XDG_DATA_HOME:-$HOME/.local/share}/zap/zap.zsh"
+# Source ~/.zshenv
+[ -f "$HOME/.zshenv" ] && source "$HOME/.zshenv"
 
-plug "zsh-users/zsh-autosuggestions"
-plug "zap-zsh/supercharge"
-plug "zap-zsh/zap-prompt"
-plug "zsh-users/zsh-syntax-highlighting"
-plug "zap-zsh/exa"
-plug "zap-zsh/vim"
-plug "wintermi/zsh-fnm"
+# Oh My Zsh
+ZSH_THEME=""  # or "robbyrussell"
+source "$ZSH/oh-my-zsh.sh"
 
-alias dockerps="docker ps --format 'table {{.ID}}\t{{.Image}}\t{{.Status}}\t{{.Names}}'"
+# Plugins & Completions
+[ -f "$HOME/.fzf.zsh" ] && source "$HOME/.fzf.zsh"
+[ -f "$HOME/.aliases" ] && source "$HOME/.aliases"
 
-function runr() { 
-  jq -r '.scripts | keys[]' package.json |
-    fzf \
-      --header="Select a script to run…" \
-      --prompt="󰎙 Script  " \
-      --preview "jq -r '.scripts | { {1} } | .[]' package.json" \
-      --preview-window="down,1,border-horizontal" \
-      --height="50%" \
-      --layout="reverse" | \
-    xargs -o npm run
-}
+# Bun completions
+if [ -f "$HOME/.bun/_bun" ]; then
+  source "$HOME/.bun/_bun"
+fi
 
-source ~/.aliases
+# Rust (Cargo) environment
+if [ -f "$HOME/.cargo/env" ]; then
+  source "$HOME/.cargo/env"
+fi
 
-# https://gist.github.com/reegnz/b9e40993d410b75c2d866441add2cb55
-function jqf() {
-  echo "" | \
-    fzf \
-      --disabled \
-      --print-query
-      --preview "jq -C {q} $1" \
-      --prompt="Query  " \
-      --header="Interactive jq playground" \
-      --preview-window="down:90"
-}
-function tzf() {
-  tz -list | fzf -m | awk '{print $4}' | tr "\n" ";" | xargs -I {} sh -c "TZ_LIST='{}' tz"
-}
-function ghpr() {
-  GH_FORCE_TTY=100% gh pr list | fzf --query "$1" --ansi --preview 'GH_FORCE_TTY=100% gh pr view {1}' --preview-window down --header-lines 3 | awk '{print $1}' | xargs gh pr checkout -f  
-}
-function ghgist() {
-  GH_FORCE_TTY=100% gh gist list --limit 20 | fzf --ansi --preview 'GH_FORCE_TTY=100% gh gist view {1}' --preview-window down | awk '{print $1}' | xargs gh gist edit
-}
+# zsh-syntax-highlighting & zsh-autosuggestions
+if [ -f "$(brew --prefix)/share/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh" ]; then
+  source "$(brew --prefix)/share/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh"
+fi
+if [ -f "$(brew --prefix)/share/zsh-autosuggestions/zsh-autosuggestions.zsh" ]; then
+  source "$(brew --prefix)/share/zsh-autosuggestions/zsh-autosuggestions.zsh"
+fi
 
-# git clone --depth 1 https://github.com/AstroNvim/AstroNvim ~/.config/AstroNvim
-# git clone git@github.com:nvim-lua/kickstart.nvim.git ~/.config/kickstart
-# git clone https://github.com/NvChad/NvChad ~/.config/NvChad --depth 1
-# git clone https://github.com/LazyVim/starter ~/.config/LazyVim
-alias nvim-astro="NVIM_APPNAME=AstroNvim nvim"
-alias nvim-kick="NVIM_APPNAME=kickstart nvim"
-alias nvim-chad="NVIM_APPNAME=NvChad nvim"
-alias nvim-lazy="NVIM_APPNAME=LazyVim nvim"
-function nvims() {
-  items=("default" "kickstart" "LazyVim" "NvChad" "AstroNvim")
-  config=$(printf "%s\n" "${items[@]}" | fzf --prompt=" Neovim Config  " --height=~50% --layout=reverse --border --exit-0)
-  if [[ -z $config ]]; then
-    echo "Nothing selected"
-    return 0
-  elif [[ $config == "default" ]]; then
-    config=""
+# Killport
+findandkill() {
+  local pids
+  pids="$(lsof -ti:3000)"
+  if [ -n "$pids" ]; then
+    kill "$pids"
   fi
-  NVIM_APPNAME=$config nvim $@
 }
-bindkey -s "^b" "nvims\n"
 
-local dev_commands=(
-	'tz' 'task' 'watson' 'archey' 'ncdu'
-	'fkill' 'lazydocker' 'ntl' 'ranger'
-	'speed-test' 'serve' 'vtop' 'htop' 'btop'
-	'lazygit' 'gitui' 'tig' 'tldr'
-  'calcurse' 'cmatrix' 'cowsay' 'exa' 'fd' 'dooit' 'taskell' 'gh' 'gitui' 'hyperfine' 'lolcat'
-  'mc' 'navi' 'neofetch' 'newsboat' 'nnn' 'tree' 'vhs' 'vifm' 'zellij' 'tmux' 'zoxide'
-)
-alias dev='printf "%s\n" "${dev_commands[@]}" | fzf --height 20% --header Commands | bash'
-
+# Tmux sessionizer
 bindkey -s "^f" "tmux-sessionizer\n"
-# bindkey -s ^f "zellij-switch\n"
 
+# macOS Keyboard Tweaks
+if [[ "$OSTYPE" == "darwin"* ]]; then
+  defaults write NSGlobalDomain KeyRepeat -int 1
+  defaults write NSGlobalDomain InitialKeyRepeat -int 15
+  defaults write NSGlobalDomain ApplePressAndHoldEnabled -bool false
+fi
 
-[ -f ~/.fzf.zsh ] && source ~/.fzf.zsh
-[ -r ~/private/.zshrc ] && source ~/private/.zshrc
-
-# Load and initialise completion system
-autoload -Uz compinit
-compinit
-
-# eval "$(/opt/homebrew/bin/brew shellenv)"
-eval "$(/usr/local/bin/brew shellenv)"
-eval "$(fnm env --use-on-cd --log-level=quiet)"
-eval "$(zoxide init zsh)"
-# eval "$(github-copilot-cli alias -- "$0")"
+# 7. Terraform Autocomplete
+autoload -U +X bashcompinit && bashcompinit
+complete -o nospace -C /opt/homebrew/bin/terraform terraform
