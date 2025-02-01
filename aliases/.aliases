@@ -1,12 +1,7 @@
 # Brew
 alias bu='brew cleanup && brew update && brew upgrade && brew cleanup && brew doctor'
 alias bo='brew outdated'
-
-# Antibody
-alias au='antibody update'
-alias ab='antibody bundle < ~/.zsh_plugins.txt > ~/.zsh_plugins.sh'
-
-# Exa
+# Eza
 alias l='exa'
 alias ll='l -l -h --git --icons'
 alias la='ll -a -h --git --icons'
@@ -17,11 +12,11 @@ alias za='v $HOME/.aliases'
 alias zs='source $HOME/.zshrc'
 
 # Port
-# yarn global add kill-port
-alias kill='kill-port'
 alias port='sudo lsof -i'
+alias ps='ps aux | grep'
 
 # Git
+alias gaa='git add -A'
 alias gc='git commit -m'
 alias gs='git status'
 alias gp='git push -u'
@@ -29,6 +24,7 @@ alias gw='git worktree'
 alias ghc='gh repo create'
 alias ghcl='gh repo clone'
 alias ghf='gh repo fork'
+
 
 # Gh Pages
 alias gad="git add dist -f"
@@ -46,6 +42,13 @@ alias v='nvim'
 # Cat -> Bat
 alias cat='bat'
 
+alias cb='git branch --sort=-committerdate | fzf --header "Checkout Recent Branch" --preview "git diff {1} --color=always" --pointer="" | xargs git checkout'
+alias yarntest="yarn ui:build && lerna run test && yarn jest && yarn coverage:collect"
+alias weather="curl -4 wttr.in/chattanooga"
+# npm i -g node-notifier-cli
+alias python=/usr/local/bin/python3.9
+
+
 # Usefull stuff for presentation and seeing dotfiles
 alias hidedesktop="defaults write com.apple.finder CreateDesktop -bool false && killall Finder"
 alias showdesktop="defaults write com.apple.finder CreateDesktop -bool true && killall Finder"
@@ -53,10 +56,7 @@ alias showall='defaults write com.apple.finder AppleShowAllFiles YES && killall 
 alias hideall='defaults write com.apple.finder AppleShowAllFiles NO && killall Finder'
 
 # Get rid of .DS_Store files recursively
-alias dsclean="find . -type f -name .DS_Store -print0 | xargs -0 rm"
+alias dsclean="sudo find / -name ".DS_Store" -depth -exec rm {} \;"
 
 # Flush your dns cache
 alias flush='dscacheutil -flushcache'
-
-# Luamake
-alias luamake=/Users/huy/code/personal/lua-language-server/3rd/luamake/luamake
