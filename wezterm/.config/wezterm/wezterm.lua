@@ -2,7 +2,7 @@ local wezterm = require 'wezterm'
 
 return {
   color_scheme = 'Catppuccin Mocha',
-  font = wezterm.font 'VictorMono Nerd Font',
+  font = wezterm.font 'DankMono Nerd Font Mono',
   font_size = 16.0,
   adjust_window_size_when_changing_font_size = false,
   window_background_opacity = 1.0,
