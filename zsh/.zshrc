@@ -49,3 +49,6 @@ fi
 # 7. Terraform Autocomplete
 autoload -U +X bashcompinit && bashcompinit
 complete -o nospace -C /opt/homebrew/bin/terraform terraform
+
+# bun completions
+[ -s "/Users/thenameiswiiwin/.bun/_bun" ] && source "/Users/thenameiswiiwin/.bun/_bun"

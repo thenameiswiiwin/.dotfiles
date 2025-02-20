@@ -7,8 +7,14 @@ return {
   {
     'hrsh7th/nvim-cmp',
     opts = function(_, opts)
+      local cmp = require("cmp")
       opts.completion.autocomplete = false
       opts.mapping['<CR>'] = nil
+      opts.sources = cmp.config.sources {
+        { name = 'nvim_lsp' },
+        { name = 'buffer' },
+        { name = 'path' },
+      },
       opts.window = {
         completion = {
           border = {

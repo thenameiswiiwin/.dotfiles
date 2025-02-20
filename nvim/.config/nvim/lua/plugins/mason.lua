@@ -3,6 +3,8 @@ return {
     'williamboman/mason.nvim',
     opts = {
       ensure_installed = {
+        'volar',
+        'tsserver',
         'pylsp',
         'bashls',
         'html',

@@ -1,4 +1,4 @@
 return {
   -- Disable auto opening (){}[]
-  { 'echasnovski/mini.pairs', enabled = false },
+  -- { 'echasnovski/mini.pairs', enabled = false },
 }

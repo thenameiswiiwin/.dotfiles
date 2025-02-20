@@ -1,6 +1,8 @@
+local vim = vim
+local util = require 'lspconfig/util'
+
 -- Disable "No information available" notification on hover
 -- plus define border for hover window
-local vim = vim
 vim.lsp.handlers['textDocument/hover'] = function(_, result, ctx, config)
   config = config
     or {
@@ -88,6 +90,8 @@ return {
             },
           },
         },
+        html = {},
+        cssls = {},
         sourcekit = {
           capabilities = {
             workspace = {
@@ -99,7 +103,7 @@ return {
         },
         emmet_ls = {
           cmd = { 'emmet-ls', '--stdio' },
-          filetypes = { 'html', 'css', 'scss' },
+          filetypes = { 'html', 'css', 'scss', 'vue', 'javascriptreact', 'typescriptreact' },
           root_dir = function()
             return vim.loop.cwd()
           end,
@@ -156,6 +160,7 @@ return {
           root_dir = util.root_pattern('angular.json', 'project.json'),
         },
         volar = {
+          filetypes = { 'vue', 'typescript', 'javascript' },
           init_options = {
             typescript = {
               tsdk = default_node_modules .. '/typescript/lib',
