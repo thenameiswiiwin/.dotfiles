@@ -2,9 +2,11 @@
 
 if [[ "$(uname)" == "Darwin" ]]; then
     brew install php
+    /bin/bash -c "$(curl -fsSL https://php.new/install/mac/8.4)"
 else
-    /bin/bash -c "$(curl -fsSL https://php.new/install/linux)"
+    /bin/bash -c "$(curl -fsSL https://php.new/install/linux/8.4)"
 fi
 
+composer global require laravel/installer
 mv ~/.profile ~/.php_profile
 
