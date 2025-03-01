@@ -1,0 +1,12 @@
+#!/usr/bin/env bash
+
+if [[ "$(uname)" == "Darwin" ]]; then
+	brew install git ripgrep coreaudioctl xclip jq tldr shutter python3
+	brew install fzf && $(brew --prefix)/opt/fzf/install
+else
+	sudo apt -y update
+	sudo apt -y install git ripgrep pavucontrol xclip jq tldr shutter python3-pip
+
+	git clone git@github.com:junegunn/fzf.git "$FZF_DIR"
+	"$FZF_DIR/install" --all
+fi

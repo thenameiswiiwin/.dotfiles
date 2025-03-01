@@ -1,0 +1,6 @@
+[submodule "env/.config/nvim"]
+	path = env/.config/nvim
+	url = git@github.com:thenameiswiiwin/init.lua.git
+[submodule "tmux-sessionizer"]
+	path = tmux-sessionizer
+	url = git@github.com:thenameiswiiwin/tmux-sessionizer.git

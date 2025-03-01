@@ -1,0 +1,14 @@
+#!/usr/bin/env bash
+
+if [[ "$(uname)" == "Darwin" ]]; then
+	brew install node
+else
+	sudo apt update && sudo apt install -y nodejs npm
+fi
+
+npm config set prefix ~/.local/npm
+npm i -g n
+n lts
+
+curl -fsSL https://deno.land/install.sh | sh
+curl -fsSL https://bun.sh/install | bash

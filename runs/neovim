@@ -1,0 +1,14 @@
+#!/usr/bin/env bash
+
+if [[ "$(uname)" == "Darwin" ]]; then
+	brew install neovim
+else
+	git clone git@github.com:neovim/neovim.git ~/personal/neovim
+	cd ~/personal/neovim
+	git fetch
+	git checkout v0.9.2
+
+	sudo apt install cmake gettext lua5.1 liblua5.1-0-dev
+	make CMAKE_BUILD_TYPE=RelWithDebInfo
+	sudo make install
+fi
