@@ -3,7 +3,7 @@
 # Install Git if missing
 if ! command -v git &>/dev/null; then
     if [[ "$(uname)" == "Darwin" ]]; then
-        brew install git
+        sudo port install git
     else
         sudo apt -y update && sudo apt -y install git
     fi
@@ -14,7 +14,7 @@ PERSONAL_DIR="$HOME/personal"
 mkdir -p "$PERSONAL_DIR"
 
 # Clone repo if it doesn't already exist
-DEV_DIR="$PERSONAL_DIR/dev"
+DEV_DIR="$HOME/dev"
 if [ ! -d "$DEV_DIR" ]; then
     git clone https://github.com/thenameiswiiwin/.dotfiles "$DEV_DIR"
 else
@@ -24,4 +24,5 @@ fi
 # Run the setup script
 pushd "$DEV_DIR" || exit 1
 ./run
+./dev-env
 popd

@@ -1,8 +1,8 @@
 export XDG_CONFIG_HOME=$HOME/.config
 VIM="nvim"
 
-PERSONAL=$XDG_CONFIG_HOME/personal
-DEV_ENV=$HOME/personal/dev
+export PERSONAL=$XDG_CONFIG_HOME/personal
+export DEV_ENV=$HOME/dev
 for i in `find -L $PERSONAL`; do
     source $i
 done
@@ -70,3 +70,4 @@ alias bu='brew cleanup && brew update && brew upgrade && brew cleanup && brew do
 alias bo='brew outdated'
 
 source ~/.php_profile
+eval "$(/usr/local/bin/brew shellenv)"

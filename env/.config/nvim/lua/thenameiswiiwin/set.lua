@@ -30,6 +30,7 @@ vim.opt.updatetime = 50
 
 vim.opt.colorcolumn = "80"
 
+vim.opt.clipboard = "unnamedplus"
 vim.g.clipboard = {
     name = "macOS-clipboard",
     copy = { ["+"] = "pbcopy", ["*"] = "pbcopy" },
