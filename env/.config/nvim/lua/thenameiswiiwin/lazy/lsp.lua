@@ -34,6 +34,15 @@ return {
                 "lua_ls",
                 "rust_analyzer",
                 "gopls",
+                "html",
+                "cssls",
+                "bashls",
+                "ts_ls",
+                "tailwindcss",
+                "volar",
+                "jsonls",
+                "intelephense",
+                "phpactor",
             },
             handlers = {
                 function(server_name) -- default handler (optional)
