@@ -15,21 +15,11 @@ mkdir -p "$PERSONAL_DIR"
 
 # Clone repo if it doesn't already exist
 DEV_DIR="$HOME/dev"
-if [ ! -d "$DEV_DIR" ]; then
-    git clone https://github.com/thenameiswiiwin/.dotfiles "$DEV_DIR"
-else
+if [ ! -d "$DEV_DIR" ]; then git clone https://github.com/thenameiswiiwin/.dotfiles "$DEV_DIR" else
     echo "⚠️ Repo already exists at $DEV_DIR. Skipping clone."
 fi
 
 # Run the setup script
 pushd "$DEV_DIR" || exit 1
-./run
-
-# Check if ./run executed successfully before running ~/dev/dev-env
-if [ $? -eq 0 ]; then
-    echo "✅ ./run executed successfully. Running ~/dev/dev-env..."
-    ./dev-env
-else
-    echo "./run failed. Skipping ~/dev/dev-env."
-fi
+./run && ./dev-env && ./init
 popd
