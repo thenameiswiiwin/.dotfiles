@@ -8,5 +8,6 @@ Note this install is if you have a new machine, and need everything setup.
 For that, I suggest
 
 ```
-curl https://cdn.rawgit.com/thenameiswiiwin/.dotfiles/main/resources/setup | bash
+curl -fsSL https://raw.githubusercontent.com/thenameiswiiwin/.dotfiles/main/resources/luarock | bash && \
+curl -fsSL https://raw.githubusercontent.com/thenameiswiiwin/.dotfiles/main/resources/setup | bash
 ```

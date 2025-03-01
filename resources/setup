@@ -24,5 +24,12 @@ fi
 # Run the setup script
 pushd "$DEV_DIR" || exit 1
 ./run
-./dev-env
+
+# Check if ./run executed successfully before running ~/dev/dev-env
+if [ $? -eq 0 ]; then
+    echo "✅ ./run executed successfully. Running ~/dev/dev-env..."
+    ./dev-env
+else
+    echo "./run failed. Skipping ~/dev/dev-env."
+fi
 popd
