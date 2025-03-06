@@ -1,4 +1,4 @@
-# Dotfiles Repo
+# My Dev Environment Repo
 
 Terminal-based development, productivity, and workflow efficiency.
 
