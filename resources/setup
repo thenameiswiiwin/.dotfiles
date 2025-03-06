@@ -3,7 +3,9 @@
 # Install Git if missing
 if ! command -v git &>/dev/null; then
     if [[ "$(uname)" == "Darwin" ]]; then
-        sudo port install git
+        /bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/HEAD/install.sh)"
+        eval "$(/opt/homebrew/bin/brew shellenv)"
+        brew install git
     else
         sudo apt -y update && sudo apt -y install git
     fi
