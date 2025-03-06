@@ -7,11 +7,11 @@ Terminal-based development, productivity, and workflow efficiency.
 - [Install](#install)
 - [Tools](#Tools)
 - [Scripts](#scripts)
-    - [Dev-Env Script](#dev-env-script)
+    - [Dev-Env Script](#dev-env)
       - [Usage](#usage-for-dev-env-script)
-    - [Run Script](#dev-env-script)
+    - [Run Script](#run)
       - [Usage](#usage-for-run-script)
-    - [Init Script](#dev-env-script)
+    - [Init Script](#init)
       - [Usage](#usage-for-init-script)
     - [Tmux-Sessionizer Script](#tmux-sessionizer)
       - [Usage](#usage-for-tmux-sessionizer)
@@ -55,7 +55,7 @@ chmod +x setup
 
 ## Scripts
 
-### dev-env script
+### Dev-Env
 
 This script automates the setup of a development environment by copying configuration files and scripts to their appropriate locations.
 
@@ -87,7 +87,9 @@ Run in dry-run mode to preview changes:
 ./dev-env --dry
 ```
 
-### run script
+---
+
+### Run
 
 This script automates the execution of setup scripts located in the `runs` directory, applying optional filtering and a **dry-run mode** for testing changes before applying them.
 
@@ -124,7 +126,9 @@ Run in dry-run mode to preview changes:
 ./run --dry
 ```
 
-### init script
+---
+
+### Init
 
 This script initializes and updates Git submodules, ensuring that dependencies are correctly checked out on their respective branches.
 
@@ -142,7 +146,9 @@ This script initializes and updates Git submodules, ensuring that dependencies a
 ./init
 ```
 
-### tmux-sessionizer
+---
+
+### Tmux-Sessionizer
 
 This script automates the creation, switching, and hydration of **tmux** sessions based on directories. It allows users to quickly jump between development environments using **fzf** for selection.
 
