@@ -1,10 +1,11 @@
 # Dotfiles Repo
 
-Neovim, Ghostty, Tmux.
+Terminal-based development, productivity, and workflow efficiency.
 
 ## Table of contents
 
 - [Install](#install)
+- [Tools](#Tools)
 - [Dev-Env Script](#dev-env-script)
   - [Usage](#usage-for-dev-env-script)
 - [Run Script](#dev-env-script)
@@ -13,6 +14,7 @@ Neovim, Ghostty, Tmux.
   - [Usage](#usage-for-init-script)
 - [Tmux-Sessionizer Script](#tmux-sessionizer)
   - [Usage](#usage-for-tmux-sessionizer)
+- [Essential Development Tools]()
 
 
 ## Install
@@ -31,6 +33,26 @@ curl -fsSL https://raw.githubusercontent.com/thenameiswiiwin/.dotfiles/main/reso
 chmod +x setup
 ./setup
 ```
+
+## Tools
+
+- [**Neovim**](https://neovim.io/) – A highly extensible, fast, and modern text editor that improves upon Vim with Lua-based configurations and built-in LSP support.
+
+- [**Tmux**](https://github.com/tmux/tmux) – A terminal multiplexer that allows managing multiple terminal sessions within a single window, supporting session persistence and efficient workflows.
+
+- [**Ghossty**](https://github.com/your-ghossty-repo) – A lightweight and customizable terminal setup that integrates with tmux, Neovim, and other CLI tools to enhance productivity.
+
+- [**Lazygit**](https://github.com/jesseduffield/lazygit) – A simple and fast terminal UI for Git that provides an intuitive way to manage repositories, commits, and branches.
+
+- macOS
+
+    - [**Rectangle**](https://rectangleapp.com/) – A macOS window management tool that provides easy keyboard shortcuts for resizing and snapping windows for improved productivity.
+
+    - [**Homebrew**](https://brew.sh/) – A package manager for macOS and Linux that simplifies software installation, dependency management, and system updates.
+
+- Linux
+
+    - [**i3 Window Manager**](https://i3wm.org/) – A lightweight tiling window manager for Linux that provides a highly configurable, keyboard-driven approach to workspace organization.
 
 ## dev-env script
 
