@@ -2,13 +2,41 @@
 
 if [[ "$(uname)" == "Darwin" ]]; then
 	brew install neovim
-else
-	git clone git@github.com:neovim/neovim.git ~/personal/neovim
-	cd ~/personal/neovim
-	git fetch
-	git checkout v0.9.2
+elif [[ "$(uname)" == "Linux" ]]; then
+    version="v0.10.2"
+    if [ ! -z $NVIM_VERSION ]; then
+        version="$NVIM_VERSION"
+    fi
 
-	sudo apt install cmake gettext lua5.1 liblua5.1-0-dev
-	make CMAKE_BUILD_TYPE=RelWithDebInfo
-	sudo make install
+    echo "version: \"$version\""
+
+    # neovim btw
+    if [ ! -d $HOME/neovim ]; then
+        git clone https://github.com/neovim/neovim.git $HOME/neovim
+    fi
+
+    sudo apt -y install cmake gettext lua5.1 liblua5.1-0-dev
+
+    git -C ~/neovim fetch --all
+    git -C ~/neovim checkout $version
+
+    make -C ~/neovim clean
+    make -C ~/neovim CMAKE_BUILD_TYPE=RelWithDebInfo
+    sudo make -C ~/neovim install
+
+    git clone https://github.com/ThePrimeagen/harpoon.git $HOME/personal/harpoon
+    cd $HOME/personal/harpoon
+    git fetch
+    git checkout harpoon2
+
+    git clone https://github.com/nvim-lua/plenary.nvim.git $HOME/personal/plenary
+
+    wget https://luarocks.org/releases/luarocks-3.11.1.tar.gz
+    tar zxpf luarocks-3.11.1.tar.gz
+    cd luarocks-3.11.1
+    ./configure && make && sudo make install
+    sudo luarocks install luacheck
+else
+    echo "Unsupported OS"
+    exit 1
 fi

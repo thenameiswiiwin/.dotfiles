@@ -1,7 +1,7 @@
 #!/usr/bin/env bash
 
 if [[ "$(uname)" == "Darwin" ]]; then
-    brew install --cask docker
+    brew install docker --cask
 	brew install docker docker-compose docker-buildx
 else
 	sudo apt-get -y update
