@@ -2,6 +2,19 @@
 
 Neovim, Ghostty, Tmux.
 
+## Table of contents
+
+- [Install](#install)
+- [Dev-Env Script](#dev-env-script)
+  - [Usage](#usage-for-dev-env-script)
+- [Run Script](#dev-env-script)
+  - [Usage](#usage-for-run-script)
+- [Init Script](#dev-env-script)
+  - [Usage](#usage-for-init-script)
+- [Tmux-Sessionizer Script](#tmux-sessionizer)
+  - [Usage](#usage-for-tmux-sessionizer)
+
+
 ## Install
 
 **Note**: This install is if you have a new machine, and need everything setup.
@@ -37,7 +50,7 @@ This script automates the setup of a development environment by copying configur
 - Cleans Up Old Files
   - Removes existing configurations before copying new ones.
 
-#### Usage
+### Usage for dev-env script
 
 Executes the full development setup.
 
@@ -68,7 +81,7 @@ This script automates the execution of setup scripts located in the `runs` direc
 - Dry Run Mode (`--dry`)
   - Allows previewing changes without executing scripts.
 
-#### Usage
+### Usage for run script
 
 Execute all available scripts inside the `runs/` directory.
 
@@ -100,6 +113,12 @@ This script initializes and updates Git submodules, ensuring that dependencies a
    - Ensures `env/.config/nvim` is on the `main` branch.
    - Ensures `tmux-sessionizer` is on the `master` branch.
 
+### Usage for init script
+
+```bash
+./init
+```
+
 ## tmux-sessionizer
 
 This script automates the creation, switching, and hydration of **tmux** sessions based on directories. It allows users to quickly jump between development environments using **fzf** for selection.
@@ -120,7 +139,7 @@ This script automates the creation, switching, and hydration of **tmux** session
 - Hydrates the session
    - Runs `.tmux-sessionizer` (if present) in either the selected directory or `~/.tmux-sessionizer`, allowing project-specific configurations.
 
-#### Usage
+### Usage for tmux-sessionizer
 
 Run the Script Manually
 
