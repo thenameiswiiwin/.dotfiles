@@ -39,7 +39,7 @@ chmod +x setup
 
 - [**Tmux**](https://github.com/tmux/tmux) – A terminal multiplexer that allows managing multiple terminal sessions within a single window, supporting session persistence and efficient workflows.
 
-- [**Ghossty**](https://github.com/your-ghossty-repo) – A lightweight and customizable terminal setup that integrates with tmux, Neovim, and other CLI tools to enhance productivity.
+- [**Ghossty**](https://ghostty.org/) – A lightweight and customizable terminal setup that integrates with tmux, Neovim, and other CLI tools to enhance productivity.
 
 - [**Lazygit**](https://github.com/jesseduffield/lazygit) – A simple and fast terminal UI for Git that provides an intuitive way to manage repositories, commits, and branches.
 
