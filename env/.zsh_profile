@@ -70,4 +70,3 @@ alias bu='brew cleanup && brew update && brew upgrade && brew cleanup && brew do
 alias bo='brew outdated'
 
 source ~/.php_profile
-eval "$(/usr/local/bin/brew shellenv)"
