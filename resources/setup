@@ -12,15 +12,18 @@ if ! command -v git &>/dev/null; then
 fi
 
 # Ensure ~/personal directory exists
-PERSONAL_DIR="$HOME/personal"
-DEV_DIR="$HOME/dev"
+if [ ! -d "$HOME/personal" ]; then
+    mkdir -p "$HOME/personal"
+fi
 
-mkdir -p "$PERSONAL_DIR"
 
 # Clone repo if it doesn't already exist
-if [ ! -d "$DEV_DIR" ] || [ -z "$(ls -A "$DEV_DIR")" ] || [ ! -d "$DEV_DIR/.git" ]; then
+DEV_DIR="$HOME/dev"
+
+if [ ! -d "$DEV_DIR" ]; then
     rm -rf "$DEV_DIR"
-    git clone https://github.com/thenameiswiiwin/.dotfiles "$DEV_DIR"
+    git clone https://github.com/thenameiswiiwin/.dotfiles "$HOME/env"
+    DEV_DIR="$HOME/env"
 else
     echo "Repo already exists at $DEV_DIR. Skipping clone."
 fi
