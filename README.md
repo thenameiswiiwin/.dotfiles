@@ -18,7 +18,7 @@ Terminal-based development, productivity, and workflow efficiency.
 
 ## Install
 
-**Note**: This install is if you have a new machine, and need everything setup.
+**Note**: This install as if you have a new machine, and need everything setup.
 This script automates the setup process for your development environment.
 
 ```bash
