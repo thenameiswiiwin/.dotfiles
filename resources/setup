@@ -14,11 +14,11 @@ fi
 # Ensure ~/personal directory exists
 PERSONAL_DIR="$HOME/personal"
 DEV_DIR="$HOME/dev"
+
 mkdir -p "$PERSONAL_DIR"
-mkdir -p "$DEV_DIR"
 
 # Clone repo if it doesn't already exist
-if [ ! -d "$DEV_DIR" ]; then
+if [ ! -d "$DEV_DIR" ] || [ -z "$(ls -A "$DEV_DIR")" ] || [ ! -d "$DEV_DIR/.git" ]; then
     rm -rf "$DEV_DIR"
     git clone https://github.com/thenameiswiiwin/.dotfiles "$DEV_DIR"
 else
