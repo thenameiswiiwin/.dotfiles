@@ -4,7 +4,7 @@ if [[ "$(uname)" == "Darwin" ]]; then
 	brew install --cask ghostty
 else
 	sudo apt update
-	sudo apt install llvm lld llvm-dev liblld-dev clang libclang-dev libglib2.0-dev libgtk-4-dev libadwaita-1-dev git
+	sudo apt install llvm lld llvm-dev liblld-dev clang libclang-dev libglib2.0-dev libgtk-4-dev libadwaita-1-dev git wget
 
 	wget https://ziglang.org/download/0.13.0/zig-linux-x86_64-0.13.0.tar.xz -O /tmp/zig.tar.xz
 	tar -xvf /tmp/zig.tar.xz -C $HOME/.local
