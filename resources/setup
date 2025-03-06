@@ -1,4 +1,5 @@
 #!/usr/bin/env bash
+: "${DEV_ENV:=$HOME/dev}"
 
 # Install Git if missing
 if ! command -v git &>/dev/null; then
@@ -20,7 +21,7 @@ fi
 if [ ! -d "$HOME/env" ]; then
     git clone https://github.com/thenameiswiiwin/.dotfiles "$HOME/env"
 else
-    echo "Repo already exists at $DEV_DIR. Skipping clone."
+    echo "Repo already exists at $HOME/env. Skipping clone."
 fi
 
 # Run the setup script
