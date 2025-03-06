@@ -1,6 +1,5 @@
 #!/usr/bin/env bash
-: "${DEV_ENV:=$HOME/dev}"
-
+#
 # Install Git if missing
 if ! command -v git &>/dev/null; then
     if [[ "$(uname)" == "Darwin" ]]; then
