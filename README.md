@@ -6,16 +6,15 @@ Terminal-based development, productivity, and workflow efficiency.
 
 - [Install](#install)
 - [Tools](#Tools)
-- [Dev-Env Script](#dev-env-script)
-  - [Usage](#usage-for-dev-env-script)
-- [Run Script](#dev-env-script)
-  - [Usage](#usage-for-run-script)
-- [Init Script](#dev-env-script)
-  - [Usage](#usage-for-init-script)
-- [Tmux-Sessionizer Script](#tmux-sessionizer)
-  - [Usage](#usage-for-tmux-sessionizer)
-- [Essential Development Tools]()
-
+- [Scripts](#scripts)
+    - [Dev-Env Script](#dev-env-script)
+      - [Usage](#usage-for-dev-env-script)
+    - [Run Script](#dev-env-script)
+      - [Usage](#usage-for-run-script)
+    - [Init Script](#dev-env-script)
+      - [Usage](#usage-for-init-script)
+    - [Tmux-Sessionizer Script](#tmux-sessionizer)
+      - [Usage](#usage-for-tmux-sessionizer)
 
 ## Install
 
@@ -54,7 +53,9 @@ chmod +x setup
 
     - [**i3 Window Manager**](https://i3wm.org/) – A lightweight tiling window manager for Linux that provides a highly configurable, keyboard-driven approach to workspace organization.
 
-## dev-env script
+## Scripts
+
+### dev-env script
 
 This script automates the setup of a development environment by copying configuration files and scripts to their appropriate locations.
 
@@ -72,7 +73,7 @@ This script automates the setup of a development environment by copying configur
 - Cleans Up Old Files
   - Removes existing configurations before copying new ones.
 
-### Usage for dev-env script
+#### Usage for dev-env script
 
 Executes the full development setup.
 
@@ -86,7 +87,7 @@ Run in dry-run mode to preview changes:
 ./dev-env --dry
 ```
 
-## run script
+### run script
 
 This script automates the execution of setup scripts located in the `runs` directory, applying optional filtering and a **dry-run mode** for testing changes before applying them.
 
@@ -103,7 +104,7 @@ This script automates the execution of setup scripts located in the `runs` direc
 - Dry Run Mode (`--dry`)
   - Allows previewing changes without executing scripts.
 
-### Usage for run script
+#### Usage for run script
 
 Execute all available scripts inside the `runs/` directory.
 
@@ -123,7 +124,7 @@ Run in dry-run mode to preview changes:
 ./run --dry
 ```
 
-## init script
+### init script
 
 This script initializes and updates Git submodules, ensuring that dependencies are correctly checked out on their respective branches.
 
@@ -135,13 +136,13 @@ This script initializes and updates Git submodules, ensuring that dependencies a
    - Ensures `env/.config/nvim` is on the `main` branch.
    - Ensures `tmux-sessionizer` is on the `master` branch.
 
-### Usage for init script
+#### Usage for init script
 
 ```bash
 ./init
 ```
 
-## tmux-sessionizer
+### tmux-sessionizer
 
 This script automates the creation, switching, and hydration of **tmux** sessions based on directories. It allows users to quickly jump between development environments using **fzf** for selection.
 
@@ -161,7 +162,7 @@ This script automates the creation, switching, and hydration of **tmux** session
 - Hydrates the session
    - Runs `.tmux-sessionizer` (if present) in either the selected directory or `~/.tmux-sessionizer`, allowing project-specific configurations.
 
-### Usage for tmux-sessionizer
+#### Usage for tmux-sessionizer
 
 Run the Script Manually
 
