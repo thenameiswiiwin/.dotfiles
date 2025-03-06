@@ -16,19 +16,14 @@ if [ ! -d "$HOME/personal" ]; then
     mkdir -p "$HOME/personal"
 fi
 
-
 # Clone repo if it doesn't already exist
-DEV_DIR="$HOME/dev"
-
-if [ ! -d "$DEV_DIR" ]; then
-    rm -rf "$DEV_DIR"
+if [ ! -d "$HOME/env" ]; then
     git clone https://github.com/thenameiswiiwin/.dotfiles "$HOME/env"
-    DEV_DIR="$HOME/env"
 else
     echo "Repo already exists at $DEV_DIR. Skipping clone."
 fi
 
 # Run the setup script
-pushd "$DEV_DIR" || exit 1
+pushd "$HOME/env" || exit 1
 ./run
 popd
