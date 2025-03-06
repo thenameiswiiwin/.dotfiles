@@ -17,13 +17,13 @@ if [ ! -d "$HOME/personal" ]; then
 fi
 
 # Clone repo if it doesn't already exist
-if [ ! -d "$HOME/env" ]; then
-    git clone https://github.com/thenameiswiiwin/.dotfiles "$HOME/env"
+if [ ! -d "$DEV_ENV" ]; then
+    git clone https://github.com/thenameiswiiwin/.dotfiles "$DEV_ENV"
 else
     echo "Repo already exists at $HOME/env. Skipping clone."
 fi
 
 # Run the setup script
-pushd "$HOME/env" || exit 1
+pushd "$DEV_ENV" || exit 1
 ./run
 popd
