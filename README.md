@@ -47,7 +47,7 @@ chmod +x setup
 
     - [**Rectangle**](https://rectangleapp.com/) – A macOS window management tool that provides easy keyboard shortcuts for resizing and snapping windows for improved productivity.
 
-    - [**Homebrew**](https://brew.sh/) – A package manager for macOS and Linux that simplifies software installation, dependency management, and system updates.
+    - [**Homebrew**](https://brew.sh/) – A package manager for macOS that simplifies software installation, dependency management, and system updates.
 
 - Linux
 
