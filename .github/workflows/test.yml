@@ -1,0 +1,49 @@
+name: Test Dotfile Deployment
+
+on:
+  push:
+    branches: [ main ]
+  pull_request:
+    branches: [ main ]
+
+jobs:
+  deploy-test:
+    strategy:
+      matrix:
+        os: [ ubuntu-latest, macos-latest, windows-latest ]
+    runs-on: ${{ matrix.os }}
+    steps:
+      - name: Checkout Repository
+        uses: actions/checkout@v3
+
+      - name: Install Dependencies
+        run: |
+          if [[ "$RUNNER_OS" == "Linux" ]]; then
+            sudo apt-get update && sudo apt-get install -y make curl git
+          elif [[ "$RUNNER_OS" == "macOS" ]]; then
+            brew update && brew install make curl git
+          elif [[ "$RUNNER_OS" == "Windows" ]]; then
+            choco install make curl git -y
+          fi
+        shell: bash
+
+      - name: Make Setup Script Executable
+        run: chmod +x setup
+        shell: bash
+
+      - name: Run Setup Script
+        env:
+          DEV_ENV: ${{ github.workspace }}/dev
+        run: bash setup
+        shell: bash
+
+      - name: Verify Deployment
+        run: |
+          if [ -f "$DEV_ENV/run" ]; then
+            echo "Deployment test passed: 'run' file found in $DEV_ENV"
+          else
+            echo "Deployment test failed: 'run' file not found in $DEV_ENV"
+            exit 1
+          fi
+        shell: bash
+
