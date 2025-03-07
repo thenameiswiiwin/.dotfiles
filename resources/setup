@@ -25,5 +25,5 @@ fi
 
 # Run the setup script
 pushd "$DEV_ENV" || exit 1
-./run zsh && ./run
+./run
 popd
