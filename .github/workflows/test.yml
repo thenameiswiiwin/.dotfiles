@@ -28,13 +28,13 @@ jobs:
         shell: bash
 
       - name: Make Setup Script Executable
-        run: chmod +x dev/resources/setup
+        run: chmod +x resources/setup
         shell: bash
 
       - name: Run Setup Script
         env:
           DEV_ENV: ${{ github.workspace }}/dev
-        run: bash dev/resources/setup
+        run: bash resources/setup
         shell: bash
 
       - name: Execute run Script
