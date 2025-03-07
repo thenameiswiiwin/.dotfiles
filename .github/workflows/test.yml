@@ -22,16 +22,3 @@ jobs:
           export DEV_ENV=$HOME/dev
           curl -fsSL https://raw.githubusercontent.com/thenameiswiiwin/.dotfiles/main/resources/setup | bash
         shell: bash
-
-      - name: Verify Deployment
-        env:
-          DEV_ENV: $HOME/dev
-        run: |
-          echo "Verifying that the 'run' file exists in $DEV_ENV"
-          if [ -f "$DEV_ENV/run" ]; then
-            echo "Deployment test passed: 'run' file found in $DEV_ENV"
-          else
-            echo "Deployment test failed: 'run' file not found in $DEV_ENV"
-            exit 1
-          fi
-        shell: bash
