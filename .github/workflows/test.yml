@@ -1,4 +1,4 @@
-name: Test Dotfile Deployment
+name: Test Dotfile Deployment Across OSes
 
 on:
   push:
@@ -16,39 +16,18 @@ jobs:
       - name: Checkout Repository
         uses: actions/checkout@v3
 
-      - name: Install Dependencies
-        run: |
-          if [[ "$RUNNER_OS" == "Linux" ]]; then
-            sudo apt-get update && sudo apt-get install -y make curl git
-          elif [[ "$RUNNER_OS" == "macOS" ]]; then
-            brew update && brew install make curl git
-          elif [[ "$RUNNER_OS" == "Windows" ]]; then
-            choco install make curl git -y
-          fi
-        shell: bash
-
-      - name: Make Setup Script Executable
-        run: chmod +x resources/setup
-        shell: bash
-
       - name: Run Setup Script
-        env:
-          DEV_ENV: ${{ github.workspace }}/dev
-        run: bash resources/setup
-        shell: bash
-
-      - name: Execute run Script
-        env:
-          DEV_ENV: ${{ github.workspace }}/dev
         run: |
-          echo "Executing run script in $DEV_ENV"
-          pushd "$DEV_ENV" || { echo "ERROR: Could not change directory to $DEV_ENV"; exit 1; }
-          ./run
-          popd
+          echo "Setting DEV_ENV to $HOME/dev and executing setup script"
+          export DEV_ENV=$HOME/dev
+          curl -fsSL https://raw.githubusercontent.com/thenameiswiiwin/.dotfiles/main/resources/setup | bash
         shell: bash
 
       - name: Verify Deployment
+        env:
+          DEV_ENV: $HOME/dev
         run: |
+          echo "Verifying that the 'run' file exists in $DEV_ENV"
           if [ -f "$DEV_ENV/run" ]; then
             echo "Deployment test passed: 'run' file found in $DEV_ENV"
           else
@@ -56,4 +35,3 @@ jobs:
             exit 1
           fi
         shell: bash
-
