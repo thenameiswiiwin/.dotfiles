@@ -28,13 +28,23 @@ jobs:
         shell: bash
 
       - name: Make Setup Script Executable
-        run: chmod +x resources/setup
+        run: chmod +x dev/resources/setup
         shell: bash
 
       - name: Run Setup Script
         env:
           DEV_ENV: ${{ github.workspace }}/dev
-        run: bash resources/setup
+        run: bash dev/resources/setup
+        shell: bash
+
+      - name: Execute run Script
+        env:
+          DEV_ENV: ${{ github.workspace }}/dev
+        run: |
+          echo "Executing run script in $DEV_ENV"
+          pushd "$DEV_ENV" || { echo "ERROR: Could not change directory to $DEV_ENV"; exit 1; }
+          ./run
+          popd
         shell: bash
 
       - name: Verify Deployment
