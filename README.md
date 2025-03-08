@@ -29,6 +29,7 @@ curl -fsSL https://raw.githubusercontent.com/thenameiswiiwin/.dotfiles/main/reso
 If you prefer downloading and running it manually:
 
 ```bash
+export DEV_ENV=$HOME/dev
 curl -fsSL https://raw.githubusercontent.com/thenameiswiiwin/.dotfiles/main/resources/setup -o setup
 chmod +x setup
 ./setup
