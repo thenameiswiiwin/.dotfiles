@@ -1,7 +1,14 @@
 #!/usr/bin/env bash
 
 if [[ "$(uname)" == "Darwin" ]]; then
-	brew install neovim
+    brew install --HEAD  neovim
+    brew install wget
+    brew install ripgrep
+    brew install fd
+
+    cd $HOME/dev/lua-5.1.5
+    make macosx
+    sudo make install
 elif [[ "$(uname)" == "Linux" ]]; then
     version="v0.10.2"
     if [ ! -z $NVIM_VERSION ]; then
