@@ -1,8 +1,20 @@
+#!/usr/bin/env bash
+set -euo pipefail
+IFS=$'\n\t'
+
+echo "Initializing Git submodules..."
 git submodule init
 git submodule update
-pushd env/.config/nvim
+
+echo "Checking out 'main' branch in env/.config/nvim..."
+pushd env/.config/nvim >/dev/null || { echo "Failed to change directory to env/.config/nvim" >&2; exit 1; }
 git checkout main
-popd
-cd tmux-sessionizer
+popd >/dev/null
+
+echo "Checking out 'master' branch in tmux-sessionizer..."
+pushd tmux-sessionizer >/dev/null || { echo "Failed to change directory to tmux-sessionizer" >&2; exit 1; }
 git checkout master
-cd ..
+popd >/dev/null
+
+echo "Init script completed."
+

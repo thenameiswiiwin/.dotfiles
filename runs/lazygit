@@ -1,7 +1,10 @@
 #!/usr/bin/env bash
+set -euo pipefail
 
 if [[ "$(uname)" == "Darwin" ]]; then
+    echo "Installing LazyGit via Homebrew..."
     brew install lazygit
 else
+    echo "Installing LazyGit..."
     sudo apt install -y lazygit
 fi

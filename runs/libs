@@ -1,12 +1,20 @@
 #!/usr/bin/env bash
+set -euo pipefail
 
 if [[ "$(uname)" == "Darwin" ]]; then
-	brew install git ripgrep coreaudioctl xclip jq tldr shutter python3
-	brew install fzf && $(brew --prefix)/opt/fzf/install
+    echo "Installing libraries on macOS..."
+    brew install git ripgrep wget fd coreaudioctl xclip jq tldr shutter python3
+    brew install fzf && "$(brew --prefix)/opt/fzf/install"
 else
-	sudo apt -y update
-	sudo apt -y install git ripgrep pavucontrol xclip jq tldr shutter python3-pip
-
-	git clone git@github.com:junegunn/fzf.git "$FZF_DIR"
-	"$FZF_DIR/install" --all
+    echo "Installing libraries on Linux..."
+    sudo apt -y update
+    sudo apt -y install git ripgrep pavucontrol xclip jq tldr shutter python3-pip
+    if [ -z "${FZF_DIR:-}" ]; then
+        export FZF_DIR="$HOME/.fzf"
+    fi
+    if [ ! -d "$FZF_DIR" ]; then
+        git clone https://github.com/junegunn/fzf.git "$FZF_DIR"
+        "$FZF_DIR/install" --all
+    fi
 fi
+

@@ -1,9 +1,16 @@
 #!/usr/bin/env bash
+set -euo pipefail
+IFS=$'\n\t'
 
-if [[ "$i(uname)" == "Darwin" ]]; then
+echo "Installing Rust and Stylua..."
+if [[ "$(uname)" == "Darwin" ]]; then
     brew install rust
 else
     curl --proto '=https' --tlsv1.2 -sSf https://sh.rustup.rs | sh -s -- -y
 fi
 
+# Install stylua with luajit feature
 cargo install stylua --features luajit
+
+echo "Rust and Stylua installation completed."
+

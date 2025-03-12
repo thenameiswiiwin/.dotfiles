@@ -1,49 +1,50 @@
 #!/usr/bin/env bash
+set -euo pipefail
 
 if [[ "$(uname)" == "Darwin" ]]; then
-    brew install --HEAD  neovim
-    brew install wget
-    brew install ripgrep
-    brew install fd
-
-    cd $HOME/dev/lua-5.1.5
+    echo "Installing Neovim via Homebrew..."
+    brew install --HEAD neovim
+    cd "$HOME/dev/lua-5.1.5"
     make macosx
     sudo make install
 elif [[ "$(uname)" == "Linux" ]]; then
+    echo "Installing Neovim..."
     version="v0.10.2"
-    if [ ! -z $NVIM_VERSION ]; then
+    if [ -n "${NVIM_VERSION:-}" ]; then
         version="$NVIM_VERSION"
     fi
 
-    echo "version: \"$version\""
+    echo "Neovim version: $version"
 
-    # neovim btw
-    if [ ! -d $HOME/neovim ]; then
-        git clone https://github.com/neovim/neovim.git $HOME/neovim
+    if [ ! -d "$HOME/neovim" ]; then
+        git clone https://github.com/neovim/neovim.git "$HOME/neovim"
     fi
 
     sudo apt -y install cmake gettext lua5.1 liblua5.1-0-dev
+    git -C "$HOME/neovim" fetch --all
+    git -C "$HOME/neovim" checkout "$version"
 
-    git -C ~/neovim fetch --all
-    git -C ~/neovim checkout $version
+    make -C "$HOME/neovim" clean
+    make -C "$HOME/neovim" CMAKE_BUILD_TYPE=RelWithDebInfo
+    sudo make -C "$HOME/neovim" install
 
-    make -C ~/neovim clean
-    make -C ~/neovim CMAKE_BUILD_TYPE=RelWithDebInfo
-    sudo make -C ~/neovim install
-
-    git clone https://github.com/ThePrimeagen/harpoon.git $HOME/personal/harpoon
-    cd $HOME/personal/harpoon
+    # Install additional Neovim plugins/tools
+    git clone https://github.com/ThePrimeagen/harpoon.git "$HOME/personal/harpoon"
+    pushd "$HOME/personal/harpoon" >/dev/null
     git fetch
     git checkout harpoon2
+    popd >/dev/null
 
-    git clone https://github.com/nvim-lua/plenary.nvim.git $HOME/personal/plenary
+    git clone https://github.com/nvim-lua/plenary.nvim.git "$HOME/personal/plenary"
 
     wget https://luarocks.org/releases/luarocks-3.11.1.tar.gz
     tar zxpf luarocks-3.11.1.tar.gz
-    cd luarocks-3.11.1
+    pushd luarocks-3.11.1 >/dev/null
     ./configure && make && sudo make install
+    popd >/dev/null
     sudo luarocks install luacheck
 else
-    echo "Unsupported OS"
+    echo "Unsupported OS" >&2
     exit 1
 fi
+

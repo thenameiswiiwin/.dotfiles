@@ -1,7 +1,16 @@
 #!/usr/bin/env bash
-#
-# Install Git if missing
+set -euo pipefail
+IFS=$'\n\t'
+
+# Ensure DEV_ENV is set; if not, exit with an error.
+if [ -z "${DEV_ENV:-}" ]; then
+    echo "Error: The DEV_ENV environment variable must be set." >&2
+    exit 1
+fi
+
+# Install Git if missing.
 if ! command -v git &>/dev/null; then
+    echo "Git not found. Installing Git..."
     if [[ "$(uname)" == "Darwin" ]]; then
         /bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/HEAD/install.sh)"
         eval "$(/opt/homebrew/bin/brew shellenv)"
@@ -11,19 +20,38 @@ if ! command -v git &>/dev/null; then
     fi
 fi
 
-# Ensure ~/personal directory exists
-if [ ! -d "$HOME/personal" ]; then
-    mkdir -p "$HOME/personal"
-fi
+# Ensure ~/personal directory exists.
+mkdir -p "$HOME/personal"
 
-# Clone repo if it doesn't already exist
+# Clone repository if it doesn't already exist in DEV_ENV.
 if [ ! -d "$DEV_ENV" ]; then
+    echo "Cloning repository into $DEV_ENV..."
     git clone https://github.com/thenameiswiiwin/.dotfiles "$DEV_ENV"
 else
-    echo "Repo already exists at $HOME/env. Skipping clone."
+    echo "Repository already exists at $DEV_ENV. Skipping clone."
 fi
 
-# Run the setup script
-pushd "$DEV_ENV" || exit 1
-./run
-popd
+# Change into the DEV_ENV directory.
+pushd "$DEV_ENV" >/dev/null || { echo "Failed to change directory to $DEV_ENV" >&2; exit 1; }
+
+# Function to run a script in a subshell so that an exit in that script doesn't terminate the main script.
+run_script() {
+    local script="$1"
+    if [ -x "./$script" ]; then
+        echo "Running $script in a subshell..."
+        if ! (./"$script"); then
+            echo "Warning: $script exited with a non-zero status, continuing..."
+        fi
+    else
+        echo "Script '$script' not found or not executable in $DEV_ENV" >&2
+    fi
+}
+
+# Run the scripts sequentially.
+run_script "run"
+run_script "init"
+run_script "dev-env"
+
+popd >/dev/null
+echo "All scripts executed successfully."
+

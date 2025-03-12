@@ -1,11 +1,32 @@
 #!/usr/bin/env bash
+set -euo pipefail
+IFS=$'\n\t'
 
 if [[ "$(uname)" == "Darwin" ]]; then
-    brew install php
+    echo "Detected macOS."
+    echo "Installing PHP 8.4..."
     /bin/bash -c "$(curl -fsSL https://php.new/install/mac/8.4)"
-else
+elif [[ "$(uname)" == "Linux" ]]; then
+    echo "Detected Linux."
+    echo "Installing PHP 8.4..."
     /bin/bash -c "$(curl -fsSL https://php.new/install/linux/8.4)"
+elif [[ "$(uname)" =~ NT ]]; then
+    echo "Detected Windows."
+    echo "Installing PHP 8.4 via PowerShell..."
+    powershell.exe -Command "Set-ExecutionPolicy Bypass -Scope Process -Force; [System.Net.ServicePointManager]::SecurityProtocol = [System.Net.ServicePointManager]::SecurityProtocol -bor 3072; iex ((New-Object System.Net.WebClient).DownloadString('https://php.new/install/windows/8.4'))"
+else
+    echo "Unsupported OS: $OS" >&2
+    exit 1
 fi
 
-mv ~/.profile ~/.php_profile
+echo "PHP installation completed. Please restart your terminal session for changes to take effect."
+
+# If Composer is installed, install the Laravel installer via Composer.
+if command -v composer >/dev/null 2>&1; then
+    echo "Installing the Laravel installer via Composer..."
+    composer global require laravel/installer
+    echo "Laravel installer installed successfully."
+else
+    echo "Composer is not installed. Please install Composer before installing the Laravel installer." >&2
+fi
 

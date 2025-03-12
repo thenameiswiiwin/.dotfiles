@@ -1,7 +1,10 @@
 #!/usr/bin/env bash
+set -euo pipefail
 
 if [[ "$(uname)" == "Linux" ]]; then
-	sudo apt install i3-wm
-	sudo apt install i3
+    echo "Installing i3 window manager..."
+    sudo apt install -y i3-wm i3
+else
+    echo "i3 is only applicable for Linux."
 fi
 

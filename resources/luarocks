@@ -1,5 +1,49 @@
 #!/usr/bin/env bash
-wget --output-document /tmp/luarocks.tar.gz https://luarocks.org/releases/luarocks-3.11.0.tar.gz
-tar zxpf /tmp/luarocks.tar.gz -C /tmp
-cd /tmp/luarocks-3.11.0
+set -euo pipefail
+IFS=$'\n\t'
+
+# Variables for LuaRocks
+LUAROCKS_VERSION="3.11.0"
+LUAROCKS_TAR="/tmp/luarocks-${LUAROCKS_VERSION}.tar.gz"
+LUAROCKS_URL="https://luarocks.org/releases/luarocks-${LUAROCKS_VERSION}.tar.gz"
+LUAROCKS_DIR="/tmp/luarocks-${LUAROCKS_VERSION}"
+
+echo "Downloading LuaRocks ${LUAROCKS_VERSION}..."
+wget --output-document "$LUAROCKS_TAR" "$LUAROCKS_URL"
+
+echo "Extracting LuaRocks..."
+tar zxpf "$LUAROCKS_TAR" -C /tmp
+
+echo "Building and installing LuaRocks..."
+pushd "$LUAROCKS_DIR" >/dev/null || { echo "Failed to enter $LUAROCKS_DIR"; exit 1; }
 ./configure && make && sudo make install
+popd >/dev/null
+
+echo "Cleaning up LuaRocks tarball..."
+rm -f "$LUAROCKS_TAR"
+
+# Build and install Lua 5.1.5 from source
+LUA_SRC="$HOME/dev/lua-5.1.5"
+
+if [ ! -d "$LUA_SRC" ]; then
+    echo "Error: Lua source directory '$LUA_SRC' does not exist." >&2
+    exit 1
+fi
+
+echo "Building Lua 5.1.5 from source in '$LUA_SRC'..."
+pushd "$LUA_SRC" >/dev/null || { echo "Failed to change directory to $LUA_SRC"; exit 1; }
+
+if [[ "$(uname)" == "Darwin" ]]; then
+    echo "Detected macOS. Running: make macosx"
+    make macosx
+else
+    echo "Detected Linux. Running: make linux"
+    make linux
+fi
+
+echo "Installing Lua 5.1.5..."
+sudo make install
+popd >/dev/null
+
+echo "Installation of LuaRocks and Lua 5.1.5 completed successfully."
+

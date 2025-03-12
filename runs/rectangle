@@ -1,8 +1,12 @@
 #!/usr/bin/env bash
+set -euo pipefail
+IFS=$'\n\t'
 
+echo "Installing Rectangle (macOS only)..."
 if [[ "$(uname)" == "Darwin" ]]; then
-    brew install rectangle --cask
+    brew install --cask rectangle
     open -a "Rectangle"
 else
-    echo "Not macOS. Skipping installation."
+    echo "Not on macOS. Skipping Rectangle installation."
 fi
+

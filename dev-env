@@ -1,71 +1,73 @@
 #!/usr/bin/env bash
-dry_run="0"
+set -euo pipefail
+IFS=$'\n\t'
 
-if [ -z "$XDG_CONFIG_HOME" ]; then
-    echo "no xdg config home"
-    echo "using ~/.config"
-    XDG_CONFIG_HOME=$HOME/.config
+if [ -z "${XDG_CONFIG_HOME:-}" ]; then
+    echo "XDG_CONFIG_HOME not set, using ~/.config."
+    export XDG_CONFIG_HOME="$HOME/.config"
 fi
 
-if [ -z "$DEV_ENV" ]; then
-    echo "env var DEV_ENV needs to be present"
+if [ -z "${DEV_ENV:-}" ]; then
+    echo "Error: The DEV_ENV environment variable must be set." >&2
     exit 1
 fi
 
-if [[ $1 == "--dry" ]]; then
-    dry_run="1"
+dry_run=0
+if [[ "${1:-}" == "--dry" ]]; then
+    dry_run=1
 fi
 
 log() {
-    if [[ $dry_run == "1" ]]; then
+    if [[ $dry_run -eq 1 ]]; then
         echo "[DRY_RUN]: $1"
     else
         echo "$1"
     fi
 }
 
-log "env: $DEV_ENV"
+log "DEV_ENV: $DEV_ENV"
 
 update_files() {
-    log "copying over files from: $1"
-    pushd $1 &>/dev/null
-    (
-        configs=$(find . -mindepth 1 -maxdepth 1 -type d)
-        for c in $configs; do
-            directory=${2%/}/${c#./}
-            log "    removing: rm -rf $directory"
-
-            if [[ $dry_run == "0" ]]; then
-                rm -rf $directory
-            fi
-
-            log "    copying env: cp $c $2"
-            if [[ $dry_run == "0" ]]; then
-                cp -r ./$c $2
-            fi
-        done
-
-    )
-    popd &>/dev/null
+    local src="$1"
+    local dest="$2"
+    log "Copying directories from $src to $dest"
+    pushd "$src" >/dev/null || { echo "Cannot change directory to $src" >&2; return 1; }
+    while IFS= read -r -d '' dir; do
+        local base_dir="${dir#./}"
+        local target="${dest%/}/$base_dir"
+        log "Removing target directory: rm -rf $target"
+        if [[ $dry_run -eq 0 ]]; then
+            rm -rf "$target"
+        fi
+        log "Copying directory: cp -r $dir $dest"
+        if [[ $dry_run -eq 0 ]]; then
+            cp -r "$dir" "$dest"
+        fi
+    done < <(find . -mindepth 1 -maxdepth 1 -type d -print0)
+    popd >/dev/null
 }
 
 copy() {
-    log "removing: $2"
-    if [[ $dry_run == "0" ]]; then
-        rm $2
+    local src="$1"
+    local dest="$2"
+    log "Removing file: rm -f $dest"
+    if [[ $dry_run -eq 0 ]]; then
+        rm -f "$dest"
     fi
-    log "copying: $1 to $2"
-    if [[ $dry_run == "0" ]]; then
-        cp $1 $2
+    log "Copying file: cp $src $dest"
+    if [[ $dry_run -eq 0 ]]; then
+        cp "$src" "$dest"
     fi
 }
 
-update_files $DEV_ENV/env/.config $XDG_CONFIG_HOME
-update_files $DEV_ENV/env/.local $HOME/.local
+update_files "$DEV_ENV/env/.config" "$XDG_CONFIG_HOME"
+update_files "$DEV_ENV/env/.local" "$HOME/.local"
 
-copy $DEV_ENV/tmux-sessionizer/tmux-sessionizer $HOME/.local/scripts/tmux-sessionizer
-copy $DEV_ENV/env/.zsh_profile $HOME/.zsh_profile
-copy $DEV_ENV/env/.zshrc $HOME/.zshrc
-copy $DEV_ENV/env/.xprofile $HOME/.xprofile
-copy $DEV_ENV/env/.tmux-sessionizer $HOME/.tmux-sessionizer
-copy $DEV_ENV/dev-env $HOME/.local/scripts/dev-env
+copy "$DEV_ENV/tmux-sessionizer/tmux-sessionizer" "$HOME/.local/scripts/tmux-sessionizer"
+copy "$DEV_ENV/env/.zsh_profile" "$HOME/.zsh_profile"
+copy "$DEV_ENV/env/.zshrc" "$HOME/.zshrc"
+copy "$DEV_ENV/env/.xprofile" "$HOME/.xprofile"
+copy "$DEV_ENV/env/.tmux-sessionizer" "$HOME/.tmux-sessionizer"
+copy "$DEV_ENV/dev-env" "$HOME/.local/scripts/dev-env"
+
+echo "Dev-env script completed."

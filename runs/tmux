@@ -1,7 +1,14 @@
 #!/usr/bin/env bash
+set -euo pipefail
+IFS=$'\n\t'
 
 if [[ "$(uname)" == "Darwin" ]]; then
-	brew install tmux
+    echo "Installing Tmux via Homebrew..."
+    brew install tmux
 else
-	sudo apt install tmux
+    echo "Installing Tmux..."
+    sudo apt update && sudo apt install -y tmux
 fi
+
+echo "Tmux installation completed."
+
