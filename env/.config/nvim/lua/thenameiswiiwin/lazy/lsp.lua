@@ -1,4 +1,5 @@
 return {
+    {
     "neovim/nvim-lspconfig",
     dependencies = {
         "stevearc/conform.nvim",
@@ -118,4 +119,6 @@ return {
             },
         })
     end
+    },
+    { "roobert/tailwindcss-colorizer-cmp.nvim", opts = {} }
 }
