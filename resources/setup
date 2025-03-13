@@ -78,5 +78,3 @@ run_script() {
 run_script "run"
 # run_script "init"
 # run_script "dev-env"
-
-log "All scripts executed successfully."
