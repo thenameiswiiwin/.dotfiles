@@ -76,7 +76,7 @@ run_script() {
 
 # Run scripts sequentially
 run_script "run"
-run_script "init"
-run_script "dev-env"
+# run_script "init"
+# run_script "dev-env"
 
 log "All scripts executed successfully."
