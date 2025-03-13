@@ -1,6 +1,4 @@
 #!/usr/bin/env bash
-set -euo pipefail
-IFS=$'\n\t'
 
 if [ -z "${XDG_CONFIG_HOME:-}" ]; then
     echo "XDG_CONFIG_HOME not set, using ~/.config."

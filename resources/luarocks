@@ -1,6 +1,4 @@
 #!/usr/bin/env bash
-set -euo pipefail
-IFS=$'\n\t'
 
 # Variables for LuaRocks
 LUAROCKS_VERSION="3.11.0"
