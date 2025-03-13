@@ -16,7 +16,7 @@ fi
 if [[ "$OS" == "Darwin" ]]; then
     echo "Installing Docker via Homebrew..."
     brew install --cask docker
-    brew install docker docker-compose docker-buildx
+    brew install docker-compose docker-buildx
 
 elif [[ "$OS" == "Linux" ]]; then
     echo "Installing Docker on Linux..."
