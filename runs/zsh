@@ -14,6 +14,7 @@ fi
 # Clear any hash cache and switch the default shell
 hash -r
 sudo chsh -s "$(command -v zsh)"
+zsh
 
 # Install Starship prompt
 curl -sS https://starship.rs/install.sh | sh
