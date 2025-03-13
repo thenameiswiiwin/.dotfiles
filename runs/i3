@@ -1,8 +1,0 @@
-#!/usr/bin/env bash
-
-if [[ "$(uname)" == "Linux" ]]; then
-    echo "Installing i3 window manager..."
-    sudo apt install -y i3-wm i3
-else
-    echo "i3 is only applicable for Linux."
-fi

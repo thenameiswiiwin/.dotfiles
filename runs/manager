@@ -1,0 +1,15 @@
+#!/usr/bin/env bash
+
+echo "Installing Rectangle (macOS only)..."
+if [[ "$(uname)" == "Darwin" ]]; then
+    brew install --cask rectangle
+    open -a "Rectangle"
+elif [[ "$(uname)" == "Linux" ]]; then
+    sudo apt update
+    echo "Installing i3 window manager..."
+    sudo apt install -y i3-wm i3
+    echo "Installing Rofi..."
+    sudo apt install -y rofi
+else
+    echo "Not on macOS or Linux. Skipping manager installation."
+fi

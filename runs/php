@@ -17,6 +17,8 @@ else
     exit 1
 fi
 
+mv "$HOME/.profile" "$HOME/.php_profile"
+
 echo "PHP installation completed. Please restart your terminal session for changes to take effect."
 
 # If Composer is installed, install the Laravel installer via Composer.
@@ -27,5 +29,3 @@ if command -v composer >/dev/null 2>&1; then
 else
     echo "Composer is not installed. Please install Composer before installing the Laravel installer." >&2
 fi
-
-mv "$HOME/.profile" "$HOME/.php_profile"

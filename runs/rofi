@@ -1,8 +1,0 @@
-#!/usr/bin/env bash
-
-echo "Installing rofi (Linux only)..."
-if [[ "$(uname)" == "Linux" ]]; then
-    sudo apt update && sudo apt install -y rofi
-else
-    echo "Not on Linux. Skipping rofi installation."
-fi

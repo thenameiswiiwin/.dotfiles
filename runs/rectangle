@@ -1,9 +1,0 @@
-#!/usr/bin/env bash
-
-echo "Installing Rectangle (macOS only)..."
-if [[ "$(uname)" == "Darwin" ]]; then
-    brew install --cask rectangle
-    open -a "Rectangle"
-else
-    echo "Not on macOS. Skipping Rectangle installation."
-fi
