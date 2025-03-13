@@ -1,6 +1,4 @@
 #!/usr/bin/env bash
-set -euo pipefail
-IFS=$'\n\t'
 
 if command -v rustup &>/dev/null; then
     echo "rustup is already installed, skipping rustup installation."

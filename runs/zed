@@ -1,6 +1,4 @@
 #!/usr/bin/env bash
-set -euo pipefail
-IFS=$'\n\t'
 
 echo "Installing Zed..."
 curl -f https://zed.dev/install.sh | sh

@@ -1,5 +1,4 @@
 #!/usr/bin/env bash
-set -euo pipefail
 
 if [[ "$(uname)" == "Linux" ]]; then
     echo "Installing i3 window manager..."

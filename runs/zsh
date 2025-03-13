@@ -1,6 +1,4 @@
 #!/usr/bin/env bash
-set -euo pipefail
-IFS=$'\n\t'
 
 echo "Installing Zsh and configuring Starship and plugins..."
 
