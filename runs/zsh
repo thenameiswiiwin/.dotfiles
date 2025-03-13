@@ -8,13 +8,12 @@ if [[ "$(uname)" == "Darwin" ]]; then
     brew install zsh
 else
     echo "Installing Zsh..."
-    sudo apt update && sudo apt install -y zsh
+    sudo apt update && sudo apt install zsh
 fi
 
 # Clear any hash cache and switch the default shell
 hash -r
-sudo chsh -s "$(command -v zsh)"
-zsh
+sudo chsh -s $(which -v zsh)
 
 # Install Starship prompt
 curl -sS https://starship.rs/install.sh | sh
