@@ -28,6 +28,22 @@ log() {
     fi
 }
 
+# Ensure dependencies (rsync) are installed
+install_dependencies() {
+    if ! command -v rsync &>/dev/null; then
+        log "rsync not found. Installing..."
+        if [[ "$(uname)" == "Darwin" ]]; then
+            brew install rsync
+        elif [[ "$(uname -s)" == "Linux" ]]; then
+            sudo apt update && sudo apt install -y rsync
+        else
+            log "Unsupported OS: $(uname -s). Skipping rsync installation."
+        fi
+    fi
+}
+
+install_dependencies
+
 log "Starting environment setup (DEV_ENV: $DEV_ENV)"
 
 update_files() {
