@@ -13,7 +13,6 @@ install_mac() {
     else
         echo "Rectangle is already installed."
     fi
-    open -a "Rectangle"
 }
 
 install_linux() {
