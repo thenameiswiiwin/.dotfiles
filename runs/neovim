@@ -1,48 +1,92 @@
-#!/usr/bin/env bash
+#!/u✅ sr/bin/env bash
 
-if [[ "$(uname)" == "Darwin" ]]; then
-    echo "Installing Neovim via Homebrew..."
+set -e
+set -o pipefail
+set -u
+
+echo "Installing Neovim..."
+
+OS="$(uname -s)"
+NVIM_REPO="https://github.com/neovim/neovim.git"
+NEOVIM_DIR="$HOME/neovim"
+NVIM_VERSION="${NVIM_VERSION:-HEAD}" # Default to HEAD if not set
+
+install_neovim_mac() {
+    echo "Detected macOS. Installing Neovim via Homebrew..."
     brew install --HEAD neovim
+
+    echo "Installing Lua 5.1 for macOS..."
     cd "$HOME/dev/lua-5.1.5"
     make macosx
     sudo make install
-elif [[ "$(uname)" == "Linux" ]]; then
-    echo "Installing Neovim..."
-    version="v0.10.2"
-    if [ -n "${NVIM_VERSION:-}" ]; then
-        version="$NVIM_VERSION"
+}
+
+install_neovim_linux() {
+    echo "Detected Linux. Installing Neovim from source..."
+
+    # Ensure required dependencies are installed
+    sudo apt update
+    sudo apt install -y cmake gettext lua5.1 liblua5.1-0-dev git unzip curl
+
+    echo "Cloning Neovim repository..."
+    if [ ! -d "$NEOVIM_DIR" ]; then
+        git clone --depth=1 --branch "$NVIM_VERSION" "$NVIM_REPO" "$NEOVIM_DIR"
     fi
 
-    echo "Neovim version: $version"
+    echo "Fetching latest changes..."
+    git -C "$NEOVIM_DIR" fetch --all
+    git -C "$NEOVIM_DIR" checkout "$NVIM_VERSION"
 
-    if [ ! -d "$HOME/neovim" ]; then
-        git clone https://github.com/neovim/neovim.git "$HOME/neovim"
-    fi
+    echo "Building Neovim..."
+    make -C "$NEOVIM_DIR" clean
+    make -C "$NEOVIM_DIR" CMAKE_BUILD_TYPE=RelWithDebInfo
+    sudo make -C "$NEOVIM_DIR" install
+}
 
-    sudo apt -y install cmake gettext lua5.1 liblua5.1-0-dev
-    git -C "$HOME/neovim" fetch --all
-    git -C "$HOME/neovim" checkout "$version"
+install_neovim_wsl() {
+    echo "Detected Windows (WSL). Installing Neovim..."
 
-    make -C "$HOME/neovim" clean
-    make -C "$HOME/neovim" CMAKE_BUILD_TYPE=RelWithDebInfo
-    sudo make -C "$HOME/neovim" install
+    sudo apt update
+    sudo apt install -y neovim
+}
 
-    # Install additional Neovim plugins/tools
+install_plugins() {
+    echo "Installing additional Neovim plugins/tools..."
+
     git clone https://github.com/ThePrimeagen/harpoon.git "$HOME/personal/harpoon"
-    pushd "$HOME/personal/harpoon" >/dev/null
+    cd "$HOME/personal/harpoon"
     git fetch
     git checkout harpoon2
-    popd >/dev/null
 
     git clone https://github.com/nvim-lua/plenary.nvim.git "$HOME/personal/plenary"
 
+    echo "Installing LuaRocks..."
     wget https://luarocks.org/releases/luarocks-3.11.1.tar.gz
     tar zxpf luarocks-3.11.1.tar.gz
-    pushd luarocks-3.11.1 >/dev/null
+    cd luarocks-3.11.1
     ./configure && make && sudo make install
-    popd >/dev/null
     sudo luarocks install luacheck
-else
-    echo "Unsupported OS" >&2
+}
+
+# Detect OS and install accordingly
+case "$OS" in
+Darwin)
+    install_neovim_mac
+    ;;
+Linux)
+    if grep -qi microsoft /proc/version; then
+        install_neovim_wsl
+    else
+        install_neovim_linux
+    fi
+    ;;
+*)
+    echo "Unsupported OS: $OS"
     exit 1
-fi
+    ;;
+esac
+
+# Install Neovim plugins/tools
+install_plugins
+
+echo "Neovim installation completed successfully!"

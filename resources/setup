@@ -2,58 +2,81 @@
 set -euo pipefail
 IFS=$'\n\t'
 
-# Ensure DEV_ENV is set; if not, exit with an error.
-if [ -z "${DEV_ENV:-}" ]; then
-    echo "Error: The DEV_ENV environment variable must be set." >&2
+# Detect OS
+OS="$(uname)"
+IS_WSL=0
+if grep -qEi "(Microsoft|WSL)" /proc/version &>/dev/null; then
+    IS_WSL=1
+fi
+
+log() {
+    echo -e "\033[1;34m[INFO]\033[0m $1"
+}
+
+error() {
+    echo -e "\033[1;31m[ERROR]\033[0m $1" >&2
+}
+
+# Ensure DEV_ENV is set
+if [[ -z "${DEV_ENV:-}" ]]; then
+    error "The DEV_ENV environment variable must be set."
     exit 1
 fi
 
-# Install Git if missing.
+# Install Git if missing
 if ! command -v git &>/dev/null; then
-    echo "Git not found. Installing Git..."
-    if [[ "$(uname)" == "Darwin" ]]; then
-        /bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/HEAD/install.sh)"
-        eval "$(/opt/homebrew/bin/brew shellenv)"
+    log "Git not found. Installing Git..."
+    if [[ "$OS" == "Darwin" ]]; then
+        if ! command -v brew &>/dev/null; then
+            log "Homebrew not found. Installing Homebrew..."
+            /bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/HEAD/install.sh)"
+            eval "$(/opt/homebrew/bin/brew shellenv)"
+        fi
         brew install git
     else
-        sudo apt -y update && sudo apt -y install git
+        sudo apt update -y && sudo apt install -y git
     fi
+else
+    log "Git is already installed."
 fi
 
-# Ensure ~/personal directory exists.
+# Ensure ~/personal directory exists
 mkdir -p "$HOME/personal"
 
-# Clone repository if it doesn't already exist in DEV_ENV.
-if [ ! -d "$DEV_ENV" ]; then
-    echo "Cloning repository into $DEV_ENV..."
+# Clone repository if not already cloned
+if [[ ! -d "$DEV_ENV/.git" ]]; then
+    log "Cloning repository into $DEV_ENV..."
     git clone https://github.com/thenameiswiiwin/.dotfiles "$DEV_ENV"
 else
-    echo "Repository already exists at $DEV_ENV. Skipping clone."
+    log "Repository already exists at $DEV_ENV. Pulling latest changes..."
+    git -C "$DEV_ENV" pull --rebase
 fi
 
-# Change into the DEV_ENV directory.
-pushd "$DEV_ENV" >/dev/null || {
-    echo "Failed to change directory to $DEV_ENV" >&2
+# Change into the DEV_ENV directory
+if ! cd "$DEV_ENV"; then
+    error "Failed to change directory to $DEV_ENV"
     exit 1
-}
+fi
 
-# Function to run a script in a subshell so that an exit in that script doesn't terminate the main script.
+# Ensure all scripts are executable
+chmod +x run init dev-env &>/dev/null || true
+
+# Function to execute a script safely
 run_script() {
     local script="$1"
-    if [ -x "./$script" ]; then
-        echo "Running $script in a subshell..."
-        if ! (./"$script"); then
-            echo "Warning: $script exited with a non-zero status, continuing..."
+    if [[ -x "./$script" ]]; then
+        log "Running $script..."
+        if ! "./$script"; then
+            error "$script exited with a non-zero status, continuing..."
         fi
     else
-        echo "Script '$script' not found or not executable in $DEV_ENV" >&2
+        error "Script '$script' not found or not executable in $DEV_ENV"
     fi
 }
 
-# Run the scripts sequentially.
+# Run scripts sequentially
 run_script "run"
 run_script "init"
 run_script "dev-env"
 
-popd >/dev/null
-echo "All scripts executed successfully."
+log "All scripts executed successfully."

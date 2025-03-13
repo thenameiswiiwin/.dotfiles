@@ -1,11 +1,33 @@
 #!/usr/bin/env bash
+set -e
+set -o pipefail
+set -u
 
-if [[ "$(uname)" == "Darwin" ]]; then
-    echo "Installing Tmux via Homebrew..."
-    brew install tmux
-else
-    echo "Installing Tmux..."
-    sudo apt update && sudo apt install -y tmux
-fi
+echo "Installing Tmux..."
+
+# Detect OS
+OS="$(uname -s)"
+
+install_tmux() {
+    if [[ "$OS" == "Darwin" ]]; then
+        echo "Installing Tmux via Homebrew..."
+        brew install tmux
+    elif [[ "$OS" == "Linux" ]]; then
+        echo "Installing Tmux via APT..."
+        if ! command -v tmux &>/dev/null; then
+            sudo apt update && sudo apt install -y tmux
+        else
+            echo "Tmux is already installed."
+        fi
+    elif [[ "$OS" =~ "MINGW" || "$OS" =~ "CYGWIN" || "$OS" == "Windows_NT" ]]; then
+        echo "Windows detected. Installing Tmux via Chocolatey..."
+        powershell.exe -Command "& {choco install tmux -y}"
+    else
+        echo "Unsupported OS: $OS"
+        exit 1
+    fi
+}
+
+install_tmux
 
 echo "Tmux installation completed."

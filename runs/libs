@@ -1,18 +1,67 @@
 #!/usr/bin/env bash
 
-if [[ "$(uname)" == "Darwin" ]]; then
+set -e
+set -o pipefail
+set -u
+
+OS="$(uname -s)"
+
+install_mac() {
     echo "Installing libraries on macOS..."
-    brew install git ripgrep xclip jq tldr python
-    brew install fzf && "$(brew --prefix)/opt/fzf/install"
-else
+
+    # List of required packages
+    PACKAGES=(git ripgrep xclip jq tldr python fzf)
+
+    for pkg in "${PACKAGES[@]}"; do
+        if ! brew list "$pkg" &>/dev/null; then
+            brew install "$pkg"
+        else
+            echo "$pkg is already installed."
+        fi
+    done
+
+    # Install fzf key bindings and completion
+    "$(brew --prefix)/opt/fzf/install" --all
+}
+
+install_linux() {
     echo "Installing libraries on Linux..."
-    sudo apt -y update
-    sudo apt -y install git ripgrep pavucontrol xclip jq tldr shutter python3-pip
-    if [ -z "${FZF_DIR:-}" ]; then
-        export FZF_DIR="$HOME/.fzf"
-    fi
+
+    sudo apt update -y
+
+    # List of required packages
+    PACKAGES=(git ripgrep pavucontrol xclip jq tldr shutter python3-pip)
+
+    for pkg in "${PACKAGES[@]}"; do
+        if ! dpkg -s "$pkg" &>/dev/null; then
+            sudo apt install -y "$pkg"
+        else
+            echo "$pkg is already installed."
+        fi
+    done
+
+    # Install fzf if not installed
+    FZF_DIR="${FZF_DIR:-$HOME/.fzf}"
     if [ ! -d "$FZF_DIR" ]; then
-        git clone https://github.com/junegunn/fzf.git "$FZF_DIR"
+        git clone --depth 1 https://github.com/junegunn/fzf.git "$FZF_DIR"
         "$FZF_DIR/install" --all
+    else
+        echo "fzf is already installed."
     fi
-fi
+}
+
+# Detect OS and install the necessary packages
+case "$OS" in
+Darwin)
+    install_mac
+    ;;
+Linux)
+    install_linux
+    ;;
+*)
+    echo "Unsupported OS: $OS"
+    exit 1
+    ;;
+esac
+
+echo "Installation process completed!"

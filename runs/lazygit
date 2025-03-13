@@ -1,12 +1,59 @@
 #!/usr/bin/env bash
 
-if [[ "$(uname)" == "Darwin" ]]; then
+set -e
+set -o pipefail
+set -u
+
+OS="$(uname -s)"
+
+install_mac() {
     echo "Installing LazyGit via Homebrew..."
     brew install lazygit
-else
+}
+
+install_linux() {
     echo "Installing LazyGit..."
-    LAZYGIT_VERSION=$(curl -s "https://api.github.com/repos/jesseduffield/lazygit/releases/latest" | \grep -Po '"tag_name": *"v\K[^"]*')
+
+    # Ensure dependencies are installed
+    if ! command -v curl &>/dev/null; then
+        echo "curl is missing. Installing..."
+        sudo apt update && sudo apt install -y curl
+    fi
+    if ! command -v tar &>/dev/null; then
+        echo "tar is missing. Installing..."
+        sudo apt install -y tar
+    fi
+
+    # Fetch the latest version
+    LAZYGIT_VERSION=$(curl -s "https://api.github.com/repos/jesseduffield/lazygit/releases/latest" | grep -Po '"tag_name": *"v\K[^"]*')
+
+    if [[ -z "$LAZYGIT_VERSION" ]]; then
+        echo "Failed to fetch the latest LazyGit version!"
+        exit 1
+    fi
+
+    echo "Downloading LazyGit v${LAZYGIT_VERSION}..."
     curl -Lo lazygit.tar.gz "https://github.com/jesseduffield/lazygit/releases/download/v${LAZYGIT_VERSION}/lazygit_${LAZYGIT_VERSION}_Linux_x86_64.tar.gz"
+
+    # Extract and install
     tar xf lazygit.tar.gz lazygit
     sudo install lazygit -D -t /usr/local/bin/
-fi
+
+    # Cleanup
+    rm -f lazygit.tar.gz lazygit
+    echo "LazyGit installed successfully!"
+}
+
+# Detect OS and run the appropriate installation
+case "$OS" in
+Darwin)
+    install_mac
+    ;;
+Linux)
+    install_linux
+    ;;
+*)
+    echo "Unsupported OS: $OS"
+    exit 1
+    ;;
+esac

@@ -1,52 +1,64 @@
 #!/usr/bin/env bash
+set -euo pipefail
+IFS=$'\n\t'
 
-# Variables for LuaRocks
+# Define LuaRocks version and source path
 LUAROCKS_VERSION="3.11.0"
 LUAROCKS_TAR="/tmp/luarocks-${LUAROCKS_VERSION}.tar.gz"
 LUAROCKS_URL="https://luarocks.org/releases/luarocks-${LUAROCKS_VERSION}.tar.gz"
 LUAROCKS_DIR="/tmp/luarocks-${LUAROCKS_VERSION}"
+LUA_SRC="$HOME/dev/lua-5.1.5"
 
-echo "Downloading LuaRocks ${LUAROCKS_VERSION}..."
-wget --output-document "$LUAROCKS_TAR" "$LUAROCKS_URL"
+# Function to print log messages
+log() {
+    echo -e "\033[1;34m[INFO]\033[0m $1"
+}
 
-echo "Extracting LuaRocks..."
-tar zxpf "$LUAROCKS_TAR" -C /tmp
-
-echo "Building and installing LuaRocks..."
-pushd "$LUAROCKS_DIR" >/dev/null || {
-    echo "Failed to enter $LUAROCKS_DIR"
+# Function to print errors and exit
+error() {
+    echo -e "\033[1;31m[ERROR]\033[0m $1" >&2
     exit 1
 }
+
+# Ensure required tools are available
+for cmd in wget tar make sudo; do
+    if ! command -v "$cmd" &>/dev/null; then
+        error "Required command '$cmd' is missing. Please install it and try again."
+    fi
+done
+
+log "Downloading LuaRocks ${LUAROCKS_VERSION}..."
+wget -O "$LUAROCKS_TAR" "$LUAROCKS_URL"
+
+log "Extracting LuaRocks..."
+tar -zxpf "$LUAROCKS_TAR" -C /tmp
+
+log "Building and installing LuaRocks..."
+pushd "$LUAROCKS_DIR" >/dev/null || error "Failed to enter $LUAROCKS_DIR"
 ./configure && make && sudo make install
 popd >/dev/null
 
-echo "Cleaning up LuaRocks tarball..."
+log "Cleaning up LuaRocks tarball..."
 rm -f "$LUAROCKS_TAR"
 
-# Build and install Lua 5.1.5 from source
-LUA_SRC="$HOME/dev/lua-5.1.5"
-
-if [ ! -d "$LUA_SRC" ]; then
-    echo "Error: Lua source directory '$LUA_SRC' does not exist." >&2
-    exit 1
+# Ensure Lua source directory exists
+if [[ ! -d "$LUA_SRC" ]]; then
+    error "Lua source directory '$LUA_SRC' does not exist. Please download and extract Lua before proceeding."
 fi
 
-echo "Building Lua 5.1.5 from source in '$LUA_SRC'..."
-pushd "$LUA_SRC" >/dev/null || {
-    echo "Failed to change directory to $LUA_SRC"
-    exit 1
-}
+log "Building Lua 5.1.5 from source in '$LUA_SRC'..."
+pushd "$LUA_SRC" >/dev/null || error "Failed to change directory to $LUA_SRC"
 
 if [[ "$(uname)" == "Darwin" ]]; then
-    echo "Detected macOS. Running: make macosx"
+    log "Detected macOS. Running: make macosx"
     make macosx
 else
-    echo "Detected Linux. Running: make linux"
+    log "Detected Linux. Running: make linux"
     make linux
 fi
 
-echo "Installing Lua 5.1.5..."
+log "Installing Lua 5.1.5..."
 sudo make install
 popd >/dev/null
 
-echo "Installation of LuaRocks and Lua 5.1.5 completed successfully."
+log "Installation of LuaRocks and Lua 5.1.5 completed successfully."

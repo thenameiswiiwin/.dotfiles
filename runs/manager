@@ -1,15 +1,58 @@
 #!/usr/bin/env bash
 
-echo "Installing Rectangle (macOS only)..."
-if [[ "$(uname)" == "Darwin" ]]; then
-    brew install --cask rectangle
+set -e
+set -o pipefail
+set -u
+
+OS="$(uname -s)"
+
+install_mac() {
+    echo "Detected macOS. Installing Rectangle..."
+    if ! command -v rectangle &>/dev/null; then
+        brew install --cask rectangle
+    else
+        echo "Rectangle is already installed."
+    fi
     open -a "Rectangle"
-elif [[ "$(uname)" == "Linux" ]]; then
+}
+
+install_linux() {
+    echo "Detected Linux. Installing i3 and Rofi..."
     sudo apt update
-    echo "Installing i3 window manager..."
-    sudo apt install -y i3-wm i3
-    echo "Installing Rofi..."
-    sudo apt install -y rofi
-else
-    echo "Not on macOS or Linux. Skipping manager installation."
-fi
+
+    if ! command -v i3 &>/dev/null; then
+        sudo apt install -y i3-wm i3
+    else
+        echo "i3 is already installed."
+    fi
+
+    if ! command -v rofi &>/dev/null; then
+        sudo apt install -y rofi
+    else
+        echo "Rofi is already installed."
+    fi
+}
+
+install_wsl() {
+    echo "Detected Windows (WSL). Skipping window manager installation."
+}
+
+# Detect OS and run the appropriate function
+case "$OS" in
+Darwin)
+    install_mac
+    ;;
+Linux)
+    if grep -qi microsoft /proc/version; then
+        install_wsl
+    else
+        install_linux
+    fi
+    ;;
+*)
+    echo "Unsupported OS: $OS"
+    exit 1
+    ;;
+esac
+
+echo "Installation process completed!"

@@ -1,31 +1,74 @@
 #!/usr/bin/env bash
+set -e
+set -o pipefail
+set -u
 
-echo "Installing Zsh and configuring Starship and plugins..."
+echo "Installing Zsh and configuring Starship + plugins..."
 
-# Install Zsh
-if [[ "$(uname)" == "Darwin" ]]; then
-    echo "Installing Zsh via Homebrew..."
-    brew install zsh
-else
-    echo "Installing Zsh..."
-    sudo apt update && sudo apt install zsh
-fi
+# Detect OS
+OS="$(uname -s)"
 
-# Clear any hash cache and switch the default shell
-hash -r
-sudo chsh -s $(which -v zsh)
+install_zsh() {
+    if [[ "$OS" == "Darwin" ]]; then
+        echo "Installing Zsh via Homebrew..."
+        brew install zsh
+    elif [[ "$OS" == "Linux" ]]; then
+        echo "Installing Zsh..."
+        sudo apt update -y && sudo apt install -y zsh
+    elif [[ "$OS" =~ "MINGW" || "$OS" =~ "CYGWIN" || "$OS" == "Windows_NT" ]]; then
+        echo "Detected Windows (WSL)... using Scoop to install Zsh"
+        if ! command -v scoop &>/dev/null; then
+            echo "Installing Scoop..."
+            powershell -Command "Set-ExecutionPolicy RemoteSigned -Scope CurrentUser; irm get.scoop.sh | iex"
+        fi
+        scoop install zsh
+    else
+        echo "Unsupported OS: $OS"
+        exit 1
+    fi
+}
 
-# Install Starship prompt
-curl -sS https://starship.rs/install.sh | sh
+set_default_shell() {
+    echo "Setting Zsh as the default shell..."
+    if command -v zsh &>/dev/null; then
+        sudo chsh -s "$(command -v zsh)" "$USER"
+    else
+        echo "Zsh not found, installation may have failed."
+        exit 1
+    fi
+}
 
-# Install Zsh plugins if not already present
-if [ ! -d "$HOME/.zsh/zsh-autosuggestions" ]; then
-    git clone https://github.com/zsh-users/zsh-autosuggestions "$HOME/.zsh/zsh-autosuggestions"
-fi
+install_starship() {
+    echo "Installing Starship prompt..."
+    if ! command -v starship &>/dev/null; then
+        curl -sS https://starship.rs/install.sh | sh -s -- -y
+    fi
+}
 
-if [ ! -d "$HOME/.zsh/zsh-syntax-highlighting" ]; then
-    git clone https://github.com/zsh-users/zsh-syntax-highlighting.git "$HOME/.zsh/zsh-syntax-highlighting"
-fi
+install_zsh_plugins() {
+    echo "Installing Zsh plugins..."
+    mkdir -p "$HOME/.zsh"
 
-echo "Zsh installation and configuration completed."
+    if [[ ! -d "$HOME/.zsh/zsh-autosuggestions" ]]; then
+        git clone https://github.com/zsh-users/zsh-autosuggestions "$HOME/.zsh/zsh-autosuggestions"
+    fi
+
+    if [[ ! -d "$HOME/.zsh/zsh-syntax-highlighting" ]]; then
+        git clone https://github.com/zsh-users/zsh-syntax-highlighting.git "$HOME/.zsh/zsh-syntax-highlighting"
+    fi
+}
+
+switch_to_zsh() {
+    echo "Switching to Zsh (restart terminal if needed)..."
+    exec zsh -l
+}
+
+# Run installation steps
+install_zsh
+set_default_shell
+install_starship
+install_zsh_plugins
+switch_to_zsh
+
+echo "Zsh installation complete!"
 

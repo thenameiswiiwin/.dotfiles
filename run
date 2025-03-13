@@ -2,15 +2,18 @@
 set -euo pipefail
 IFS=$'\n\t'
 
+# Get script directory
 script_dir="$(cd "$(dirname "${BASH_SOURCE[0]}")" &>/dev/null && pwd)"
 
-if [ -z "${DEV_ENV:-}" ]; then
+# Ensure DEV_ENV is set
+if [[ -z "${DEV_ENV:-}" ]]; then
     echo "Error: DEV_ENV environment variable must be set." >&2
     exit 1
 fi
 
 export DEV_ENV="$DEV_ENV"
 
+# Parse arguments
 dry_run=0
 grep_filter=""
 
@@ -23,9 +26,10 @@ while [[ $# -gt 0 ]]; do
     shift
 done
 
+# Logging function
 log() {
     if [[ $dry_run -eq 1 ]]; then
-        echo "[DRY_RUN]: $1"
+        echo "[DRY_RUN] $1"
     else
         echo "$1"
     fi
@@ -33,15 +37,30 @@ log() {
 
 log "RUN: DEV_ENV: $DEV_ENV -- grep_filter: '$grep_filter'"
 
-if [[ "$(uname)" == "Darwin" ]]; then
-    runs_dir=$(find "$script_dir/runs" -mindepth 1 -maxdepth 1 -type f -perm +111)
-else
-    runs_dir=$(find "$script_dir/runs" -mindepth 1 -maxdepth 1 -type f -executable)
+# Ensure the "runs" directory exists
+runs_path="$script_dir/runs"
+if [[ ! -d "$runs_path" ]]; then
+    echo "Error: '$runs_path' directory not found!" >&2
+    exit 1
 fi
 
+# Find executable scripts in "runs" directory
+if [[ "$(uname)" == "Darwin" ]]; then
+    runs_dir=$(find "$runs_path" -mindepth 1 -maxdepth 1 -type f -perm -111 2>/dev/null)
+else
+    runs_dir=$(find "$runs_path" -mindepth 1 -maxdepth 1 -type f -executable 2>/dev/null)
+fi
+
+# Check if there are any scripts
+if [[ -z "$runs_dir" ]]; then
+    echo "Warning: No executable scripts found in '$runs_path'."
+    exit 0
+fi
+
+# Loop through found scripts
 for s in $runs_dir; do
     if [[ -n "$grep_filter" ]] && ! echo "$s" | grep -q "$grep_filter"; then
-        log "grep filter '$grep_filter' filtered out $s"
+        log "Grep filter '$grep_filter' filtered out: $s"
         continue
     fi
 
@@ -51,4 +70,4 @@ for s in $runs_dir; do
     fi
 done
 
-echo "Run script completed."
+echo "Run script completed successfully."
