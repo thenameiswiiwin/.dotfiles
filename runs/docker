@@ -51,5 +51,3 @@ fi
 
 # **Verify installation**
 echo "Verifying Docker installation..."
-docker --version && echo "Docker installation successful!"
-
