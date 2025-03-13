@@ -2,23 +2,71 @@ name: Test Dotfile Deployment Across OSes
 
 on:
   push:
-    branches: [ main ]
+    branches: [main]
   pull_request:
-    branches: [ main ]
+    branches: [main]
 
 jobs:
   deploy-test:
     strategy:
       matrix:
-        os: [ ubuntu-latest, macos-latest, windows-latest ]
+        os: [ubuntu-latest, macos-latest, windows-latest]
     runs-on: ${{ matrix.os }}
+
     steps:
       - name: Checkout Repository
         uses: actions/checkout@v3
 
+      - name: Set up Linux Package Managers
+        if: runner.os == 'Linux'
+        run: |
+          echo "Updating package list..."
+          sudo apt update
+          sudo apt install -y git curl wget
+
+          if [[ -f "/etc/arch-release" ]]; then
+            echo "Installing Yay on Arch Linux..."
+            sudo pacman -Syu --noconfirm base-devel git
+            git clone https://aur.archlinux.org/yay-bin.git /tmp/yay-bin
+            pushd /tmp/yay-bin >/dev/null || exit 1
+            makepkg -si --noconfirm
+            popd >/dev/null
+            rm -rf /tmp/yay-bin
+          fi
+        shell: bash
+
+      - name: Set up macOS Package Manager
+        if: runner.os == 'macOS'
+        run: |
+          echo "Checking for Homebrew..."
+          if ! command -v brew &>/dev/null; then
+            echo "Installing Homebrew..."
+            /bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/HEAD/install.sh)"
+            eval "$(/opt/homebrew/bin/brew shellenv)"
+          else
+            echo "Homebrew already installed."
+          fi
+          brew install git curl wget
+        shell: bash
+
+      - name: Set up Windows Package Manager
+        if: runner.os == 'Windows'
+        run: |
+          echo "Checking for Chocolatey..."
+          if (-Not (Get-Command choco -ErrorAction SilentlyContinue)) {
+            Write-Output "Installing Chocolatey..."
+            Set-ExecutionPolicy Bypass -Scope Process -Force
+            [System.Net.ServicePointManager]::SecurityProtocol = [System.Net.ServicePointManager]::SecurityProtocol -bor 3072
+            iex ((New-Object System.Net.WebClient).DownloadString('https://community.chocolatey.org/install.ps1'))
+          } else {
+            Write-Output "Chocolatey already installed."
+          }
+          choco install git curl wget -y
+        shell: powershell
+
       - name: Run Setup Script
         run: |
-          echo "Setting DEV_ENV to $HOME/dev and executing setup script"
+          echo "Setting DEV_ENV to $HOME/dev and executing setup script..."
           export DEV_ENV=$HOME/dev
           curl -fsSL https://raw.githubusercontent.com/thenameiswiiwin/.dotfiles/main/resources/setup | bash
         shell: bash
