@@ -51,7 +51,6 @@ run_script() {
 }
 
 # Run the scripts sequentially.
-run_script "run zsh"
 run_script "run"
 run_script "init"
 run_script "dev-env"
