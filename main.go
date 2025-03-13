@@ -20,7 +20,6 @@ func main() {
 		_, _ = w.Write(data)
 	})
 
-
 	log.Println("listening on", port)
 	log.Fatal(http.ListenAndServe(":"+port, nil))
 }

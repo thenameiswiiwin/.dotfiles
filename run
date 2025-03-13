@@ -16,8 +16,8 @@ grep_filter=""
 
 while [[ $# -gt 0 ]]; do
     case "$1" in
-        --dry) dry_run=1 ;;
-        *) grep_filter="$1" ;;
+    --dry) dry_run=1 ;;
+    *) grep_filter="$1" ;;
     esac
     echo "ARG: \"$1\""
     shift

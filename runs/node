@@ -2,10 +2,11 @@
 set -euo pipefail
 IFS=$'\n\t'
 
-echo "Installing Node, npm, Deno, and Bun..."
+echo "Installing Node, npm, pnpm, Deno, and Bun..."
 
 if [[ "$(uname)" == "Darwin" ]]; then
     brew install node
+    brew install pnpm
 else
     sudo apt update && sudo apt install -y nodejs npm unzip
 fi
@@ -14,11 +15,9 @@ fi
 npm config set prefix "$HOME/.local/npm"
 
 # Install and use the 'n' tool to switch to LTS version
+npm install -g neovim
 npm install -g n
 n lts
-
-# Install the neovim npm package globally
-npm install -g neovim
 
 # Install Deno
 curl -fsSL https://deno.land/install.sh | sh
@@ -27,4 +26,3 @@ curl -fsSL https://deno.land/install.sh | sh
 curl -fsSL https://bun.sh/install | bash
 
 echo "Node, Deno, and Bun installation completed."
-

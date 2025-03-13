@@ -1,38 +1,33 @@
+#!/usr/bin/env zsh
+
 eval "$(starship init zsh)"
 
 autoload -Uz compinit
 zstyle ':completion:*' menu select
-if [[ -f ~/.zcompdump ]]; then
-    compinit -d ~/.zcompdump
+if [[ -f "$HOME/.zcompdump" ]]; then
+    compinit -d "$HOME/.zcompdump"
 else
     compinit
 fi
 
-source ~/.zsh/zsh-autosuggestions/zsh-autosuggestions.zsh
-source ~/.zsh/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh
+source "$HOME/.zsh/zsh-autosuggestions/zsh-autosuggestions.zsh"
+source "$HOME/.zsh/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh"
 
 ZSH_AUTOSUGGEST_HIGHLIGHT_STYLE="fg=#7C6F64"
 
-# bun completions
-if [[ -s "$HOME/.bun/_bun" ]]; then
-    source "$HOME/.bun/_bun"
-fi
+[[ -s "$HOME/.bun/_bun" ]] && source "$HOME/.bun/_bun"
 
-# Bun
 export BUN_INSTALL="$HOME/.bun"
 export PATH="$BUN_INSTALL/bin:$PATH"
 
-# pnpm
 export PNPM_HOME="$HOME/.local/share/pnpm"
 export PATH="$PNPM_HOME:$PATH"
-
-# Turso
 export PATH="$HOME/.turso:$PATH"
 
-unsetopt beep
-unsetopt correct
-setopt hist_ignore_all_dups
-setopt share_history
-setopt no_flow_control
+unsetopt beep                # Disable beeping sound.
+unsetopt correct             # Disable autocorrection.
+setopt hist_ignore_all_dups  # Ignore duplicate history entries.
+setopt share_history         # Share history across sessions.
+setopt no_flow_control       # Disable flow control for performance.
 
-[[ -f ~/.zsh_profile ]] && source ~/.zsh_profile
+[[ -f "$HOME/.zsh_profile" ]] && source "$HOME/.zsh_profile"

@@ -1,15 +1,15 @@
 #!/usr/bin/env bash
 
 [ "$1" ] || {
-   echo "usage.....: $0 <version>"
-   echo "example...: $0 3.1.1"
-   echo
-   echo "Before running this, make sure the packages were built:"
-   echo "   makedist 3.1.1 /opt/lua54/ binary sign"
-   echo "And the tag was merged:"
-   echo "   mergerelease 3.1.1"
-   echo
-   exit 1
+    echo "usage.....: $0 <version>"
+    echo "example...: $0 3.1.1"
+    echo
+    echo "Before running this, make sure the packages were built:"
+    echo "   makedist 3.1.1 /opt/lua54/ binary sign"
+    echo "And the tag was merged:"
+    echo "   mergerelease 3.1.1"
+    echo
+    exit 1
 }
 
 #######################################
@@ -19,28 +19,27 @@
 v="$1"
 
 git checkout v$v || {
-   echo "Could not checkout release tag."
+    echo "Could not checkout release tag."
 }
 
 packages=(
-   luarocks-$v-windows-32.zip
-   luarocks-$v-windows-32.zip.asc
-   luarocks-$v-windows-64.zip
-   luarocks-$v-windows-64.zip.asc
-   luarocks-$v-linux-x86_64.zip
-   luarocks-$v-linux-x86_64.zip.asc
-   luarocks-$v-win32.zip
-   luarocks-$v-win32.zip.asc
-   luarocks-$v.tar.gz
-   luarocks-$v.tar.gz.asc
+    luarocks-$v-windows-32.zip
+    luarocks-$v-windows-32.zip.asc
+    luarocks-$v-windows-64.zip
+    luarocks-$v-windows-64.zip.asc
+    luarocks-$v-linux-x86_64.zip
+    luarocks-$v-linux-x86_64.zip.asc
+    luarocks-$v-win32.zip
+    luarocks-$v-win32.zip.asc
+    luarocks-$v.tar.gz
+    luarocks-$v.tar.gz.asc
 )
 
-for f in "${packages[@]}" luarocks-$v-1.rockspec
-do
-   [ -e "$f" ] || {
-      echo "Missing file $f"
-      exit 1
-   }
+for f in "${packages[@]}" luarocks-$v-1.rockspec; do
+    [ -e "$f" ] || {
+        echo "Missing file $f"
+        exit 1
+    }
 done
 
 #######################################
@@ -48,24 +47,23 @@ done
 #######################################
 
 function confirm() {
-   branch="$1"
+    branch="$1"
 
-   echo "****************************************"
-   git diff $branch
-   echo "****************************************"
-   git status
-   echo "****************************************"
+    echo "****************************************"
+    git diff $branch
+    echo "****************************************"
+    git status
+    echo "****************************************"
 
-   echo "Everything looks all right? (y/n)"
-   echo "(Answering y will commit and push)"
-   read
-   if ! [ "$REPLY" == "y" ]
-   then
-      git reset
-      git checkout .
-      git checkout master
-      exit 1
-   fi
+    echo "Everything looks all right? (y/n)"
+    echo "(Answering y will commit and push)"
+    read
+    if ! [ "$REPLY" == "y" ]; then
+        git reset
+        git checkout .
+        git checkout master
+        exit 1
+    fi
 }
 
 #######################################
@@ -103,7 +101,7 @@ gawk '
       print
    }
 }
-' index.html > index.html.1
+' index.html >index.html.1
 mv index.html.1 index.html
 git add index.html
 
@@ -124,7 +122,7 @@ gawk '
       print "}},"
    }
 }
-' releases.json > releases.json.1
+' releases.json >releases.json.1
 mv releases.json.1 releases.json
 git add releases.json
 
@@ -147,14 +145,13 @@ git checkout master
 # luarocks-site
 #######################################
 
-if [ -e ../luarocks-site ]
-then
-   cd ../luarocks-site
-   git pull
+if [ -e ../luarocks-site ]; then
+    cd ../luarocks-site
+    git pull
 else
-   cd ..
-   git clone ssh://git@github.com/luarocks/luarocks-site
-   cd luarocks-site
+    cd ..
+    git clone ssh://git@github.com/luarocks/luarocks-site
+    cd luarocks-site
 fi
 
 sed -i 's,luarocks-[0-9]*\.[0-9]*\.[0-9]*,luarocks-'$v',' static/md/home.md
@@ -170,18 +167,17 @@ git push
 #######################################
 
 [ -e ../luarocks.wiki ] || {
-   cd ..
-   git clone ssh://git@github.com/luarocks/luarocks.wiki.git
+    cd ..
+    git clone ssh://git@github.com/luarocks/luarocks.wiki.git
 }
 
-if [ -e ../luarocks.wiki ]
-then
-   cd ../luarocks.wiki
-   git pull
+if [ -e ../luarocks.wiki ]; then
+    cd ../luarocks.wiki
+    git pull
 else
-   cd ..
-   git clone ssh://git@github.com/luarocks/luarocks.wiki.git
-   cd luarocks.wiki
+    cd ..
+    git clone ssh://git@github.com/luarocks/luarocks.wiki.git
+    cd luarocks.wiki
 fi
 
 sed -i "s,Latest release: .*,Latest release: '''LuaRocks $v''' - '$(date +'%d/%b/%Y')'," Download.mediawiki
@@ -200,7 +196,7 @@ BEGIN {
 // {
    print
 }
-' "Release-history.mediawiki" > "Release-history.mediawiki.1"
+' "Release-history.mediawiki" >"Release-history.mediawiki.1"
 mv "Release-history.mediawiki.1" "Release-history.mediawiki"
 
 git add "Download.mediawiki"

@@ -47,4 +47,3 @@ else
     echo "Unsupported OS" >&2
     exit 1
 fi
-

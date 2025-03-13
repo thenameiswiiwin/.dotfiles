@@ -8,4 +8,3 @@ if [[ "$(uname)" == "Linux" ]]; then
 else
     echo "Not on Linux. Skipping rofi installation."
 fi
-

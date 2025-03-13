@@ -9,4 +9,3 @@ if [[ "$(uname)" == "Darwin" ]]; then
 else
     echo "Not on macOS. Skipping Rectangle installation."
 fi
-

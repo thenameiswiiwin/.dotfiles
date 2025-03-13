@@ -3,7 +3,7 @@ set -euo pipefail
 
 if [[ "$(uname)" == "Darwin" ]]; then
     echo "Installing libraries on macOS..."
-    brew install git ripgrep wget fd coreaudioctl xclip jq tldr shutter python3
+    brew install git ripgrep xclip jq tldr python
     brew install fzf && "$(brew --prefix)/opt/fzf/install"
 else
     echo "Installing libraries on Linux..."
@@ -17,4 +17,3 @@ else
         "$FZF_DIR/install" --all
     fi
 fi
-

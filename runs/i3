@@ -7,4 +7,3 @@ if [[ "$(uname)" == "Linux" ]]; then
 else
     echo "i3 is only applicable for Linux."
 fi
-

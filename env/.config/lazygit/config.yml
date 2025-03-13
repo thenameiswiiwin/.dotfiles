@@ -3,24 +3,25 @@ gui:
   border: rounded
   theme:
     activeBorderColor:
-      - '#f5e0dc'
+      - "#fab387" # Peach (Catppuccin Mocha)
       - bold
     inactiveBorderColor:
-      - '#a6adc8'
+      - "#6c7086" # Overlay0
     optionsTextColor:
-      - '#89b4fa'
+      - "#89b4fa" # Blue
     selectedLineBgColor:
-      - '#313244'
+      - "#313244" # Surface0
     cherryPickedCommitBgColor:
-      - '#45475a'
+      - "#45475a" # Surface1
     cherryPickedCommitFgColor:
-      - '#f5e0dc'
+      - "#f5e0dc" # Rosewater
     unstagedChangesColor:
-      - '#f38ba8'
+      - "#f38ba8" # Red
     defaultFgColor:
-      - '#cdd6f4'
+      - "#cdd6f4" # Text
     searchingActiveBorderColor:
-      - '#f9e2af'
+      - "#f9e2af" # Yellow
 
   authorColors:
-    '*': '#b4befe'
+    "*": "#b4befe" # Lavender
+

@@ -29,4 +29,3 @@ if command -v composer >/dev/null 2>&1; then
 else
     echo "Composer is not installed. Please install Composer before installing the Laravel installer." >&2
 fi
-

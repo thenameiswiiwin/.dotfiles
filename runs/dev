@@ -31,7 +31,10 @@ echo "Extracting LuaRocks..."
 tar zxpf "$LUAROCKS_TAR" -C /tmp
 
 echo "Building and installing LuaRocks..."
-pushd "$LUAROCKS_DIR" >/dev/null || { echo "Failed to enter $LUAROCKS_DIR"; exit 1; }
+pushd "$LUAROCKS_DIR" >/dev/null || {
+    echo "Failed to enter $LUAROCKS_DIR"
+    exit 1
+}
 ./configure && make && sudo make install
 popd >/dev/null
 
@@ -42,4 +45,3 @@ echo "Installing luacheck via LuaRocks..."
 luarocks install luacheck
 
 echo "Installation completed successfully."
-

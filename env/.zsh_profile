@@ -51,6 +51,7 @@ addToPathFront $HOME/.local/n/bin/
 addToPathFront $HOME/.local/apps/
 addToPathFront $HOME/.local/zig-linux-x86_64-0.13.0
 
+addToPathFront /usr/local/sbin
 addToPathFront $HOME/.local/go/bin
 addToPathFront /usr/local/go/bin
 addToPathFront $HOME/personal/sumneko/bin
@@ -64,6 +65,7 @@ export PATH="$HOME/.config/herd-lite/bin:$PATH"
 export PHP_INI_SCAN_DIR="$HOME/.config/herd-lite/bin:$PHP_INI_SCAN_DIR"
 
 alias v='nvim'
+alias t='tmux'
 alias gt='NODE_OPTIONS="--no-deprecation" gt'
 alias dsclean='sudo find / -name ".DS_Store" -exec rm -v {} \;'
 alias flush='sudo dscacheutil -flushcache && sudo killall -HUP mDNSResponder && echo "DNS cache flushed"'

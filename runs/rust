@@ -13,4 +13,3 @@ fi
 cargo install stylua --features luajit
 
 echo "Rust and Stylua installation completed."
-

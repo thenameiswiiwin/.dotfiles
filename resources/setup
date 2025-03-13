@@ -32,7 +32,10 @@ else
 fi
 
 # Change into the DEV_ENV directory.
-pushd "$DEV_ENV" >/dev/null || { echo "Failed to change directory to $DEV_ENV" >&2; exit 1; }
+pushd "$DEV_ENV" >/dev/null || {
+    echo "Failed to change directory to $DEV_ENV" >&2
+    exit 1
+}
 
 # Function to run a script in a subshell so that an exit in that script doesn't terminate the main script.
 run_script() {
@@ -54,4 +57,3 @@ run_script "dev-env"
 
 popd >/dev/null
 echo "All scripts executed successfully."
-

@@ -15,7 +15,10 @@ echo "Extracting LuaRocks..."
 tar zxpf "$LUAROCKS_TAR" -C /tmp
 
 echo "Building and installing LuaRocks..."
-pushd "$LUAROCKS_DIR" >/dev/null || { echo "Failed to enter $LUAROCKS_DIR"; exit 1; }
+pushd "$LUAROCKS_DIR" >/dev/null || {
+    echo "Failed to enter $LUAROCKS_DIR"
+    exit 1
+}
 ./configure && make && sudo make install
 popd >/dev/null
 
@@ -31,7 +34,10 @@ if [ ! -d "$LUA_SRC" ]; then
 fi
 
 echo "Building Lua 5.1.5 from source in '$LUA_SRC'..."
-pushd "$LUA_SRC" >/dev/null || { echo "Failed to change directory to $LUA_SRC"; exit 1; }
+pushd "$LUA_SRC" >/dev/null || {
+    echo "Failed to change directory to $LUA_SRC"
+    exit 1
+}
 
 if [[ "$(uname)" == "Darwin" ]]; then
     echo "Detected macOS. Running: make macosx"
@@ -46,4 +52,3 @@ sudo make install
 popd >/dev/null
 
 echo "Installation of LuaRocks and Lua 5.1.5 completed successfully."
-

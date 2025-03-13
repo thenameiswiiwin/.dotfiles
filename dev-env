@@ -31,7 +31,10 @@ update_files() {
     local src="$1"
     local dest="$2"
     log "Copying directories from $src to $dest"
-    pushd "$src" >/dev/null || { echo "Cannot change directory to $src" >&2; return 1; }
+    pushd "$src" >/dev/null || {
+        echo "Cannot change directory to $src" >&2
+        return 1
+    }
     while IFS= read -r -d '' dir; do
         local base_dir="${dir#./}"
         local target="${dest%/}/$base_dir"

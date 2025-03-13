@@ -6,4 +6,3 @@ echo "Installing Zed..."
 curl -f https://zed.dev/install.sh | sh
 
 echo "Zed installation completed."
-

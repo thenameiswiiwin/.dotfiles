@@ -19,4 +19,3 @@ else
     zig build -p "$HOME/.local" -Doptimize=ReleaseFast
     popd >/dev/null
 fi
-
