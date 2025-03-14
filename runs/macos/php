@@ -1,0 +1,11 @@
+#!/usr/bin/env bash
+
+brew install php
+brew install composer
+composer global require laravel/installer
+
+if [[ -f "$HOME/.profile" ]]; then
+    mv ~/.profile ~/.php_profile
+fi
+
+echo "[INFO] PHP script completed."

@@ -1,0 +1,5 @@
+#!/usr/bin/env bash
+
+brew install tmux
+
+echo "[INFO] TMUX script completed."

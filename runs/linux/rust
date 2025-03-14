@@ -1,0 +1,5 @@
+#!/usr/bin/env bash
+
+yay -S --noconfirm rustup
+rustup default stable
+cargo install stylua --features luajit

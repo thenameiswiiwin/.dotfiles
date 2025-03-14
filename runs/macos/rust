@@ -1,0 +1,10 @@
+#!/usr/bin/env bash
+set +e
+
+brew install rustup || true
+rustup default stable || true
+
+export PATH="$HOME/.cargo/bin:$PATH"
+cargo install stylua --features luajit || true
+
+echo "[INFO] Rust script completed."

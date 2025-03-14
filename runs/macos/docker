@@ -1,0 +1,5 @@
+#!/usr/bin/env bash
+
+brew install --cask docker
+
+echo "[INFO] Docker script completed."

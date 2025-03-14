@@ -1,49 +1,28 @@
 #!/usr/bin/env bash
-set -euo pipefail
-IFS=$'\n\t'
+set -eo pipefail
 
-# Function to print log messages
-log() {
-    echo -e "\033[1;34m[INFO]\033[0m $1"
-}
+# Initialize and update submodules
+echo "Initializing git submodules..."
+git submodule sync --quiet
+git submodule init --quiet
+git submodule update --quiet --recursive
 
-# Function to print errors and exit
-error() {
-    echo -e "\033[1;31m[ERROR]\033[0m $1" >&2
-    exit 1
-}
+# Checkout specific branches in submodules
+echo "Configuring submodule branches..."
+(
+    cd env/.config/nvim
+    git checkout main --quiet || {
+        echo "Error checking out main branch in nvim config"
+        exit 1
+    }
+)
 
-# Ensure Git is installed
-if ! command -v git &>/dev/null; then
-    error "Git is not installed. Please install Git and try again."
-fi
+(
+    cd tmux-sessionizer
+    git checkout master --quiet || {
+        echo "Error checking out master branch in tmux-sessionizer"
+        exit 1
+    }
+)
 
-log "Initializing and updating Git submodules..."
-git submodule update --init --recursive
-
-# Function to check out a branch if it exists
-checkout_branch() {
-    local dir="$1"
-    local branch="$2"
-
-    if [[ ! -d "$dir" ]]; then
-        error "Directory '$dir' does not exist."
-    fi
-
-    pushd "$dir" >/dev/null || error "Failed to change directory to $dir"
-
-    if git rev-parse --verify "$branch" &>/dev/null; then
-        log "Checking out '$branch' branch in $dir..."
-        git checkout "$branch" || error "Failed to checkout $branch in $dir"
-    else
-        log "Branch '$branch' not found in $dir. Skipping."
-    fi
-
-    popd >/dev/null
-}
-
-# Checkout branches
-checkout_branch "env/.config/nvim" "main"
-checkout_branch "tmux-sessionizer" "master"
-
-log "Init script completed successfully."
+echo "Repository initialization completed successfully"

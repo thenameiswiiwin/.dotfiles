@@ -1,0 +1,41 @@
+#!/usr/bin/env bash
+
+git config --global user.email "huyn.nguyen95@gmail.com"
+git config --global user.name "thenameiswiiwin"
+
+brew install luarocks
+brew install luacheck
+brew install wget
+
+# Install Lua 5.1 manually
+LUA_VERSION="5.1.5"
+LUA_SRC="https://www.lua.org/ftp/lua-${LUA_VERSION}.tar.gz"
+LUA_DIR="$HOME/opt/lua@5.1"
+
+if ! command -v lua5.1 &>/dev/null; then
+    echo "[INFO] Downloading Lua ${LUA_VERSION}..."
+    wget -q "$LUA_SRC" -O "/tmp/lua-${LUA_VERSION}.tar.gz"
+
+    echo "[INFO] Extracting Lua..."
+    tar -xzf "/tmp/lua-${LUA_VERSION}.tar.gz" -C /tmp
+
+    echo "[INFO] Building Lua ${LUA_VERSION}..."
+    pushd "/tmp/lua-${LUA_VERSION}" >/dev/null || exit
+    make macosx
+
+    echo "[INFO] Installing Lua ${LUA_VERSION} to ${LUA_DIR}..."
+    mkdir -p "$LUA_DIR"
+    make INSTALL_TOP="$LUA_DIR" install
+    popd >/dev/null || exit
+
+    echo "[INFO] Creating symlink for lua5.1..."
+    mkdir -p "$HOME/.local/bin"
+    ln -sf "$LUA_DIR/bin/lua" "$HOME/.local/bin/lua5.1"
+
+    echo "[INFO] Cleaning up..."
+    rm -rf "/tmp/lua-${LUA_VERSION}" "/tmp/lua-${LUA_VERSION}.tar.gz"
+else
+    echo "[INFO] Lua 5.1 is already installed. Skipping..."
+fi
+
+echo "[INFO] Dev script completed."

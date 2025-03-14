@@ -1,0 +1,6 @@
+
+#!/usr/bin/env bash
+
+brew install python
+
+echo "[INFO] Python script completed."

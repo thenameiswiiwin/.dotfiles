@@ -1,80 +1,39 @@
-#!/usr/bin/env bash
-set -euo pipefail
-IFS=$'\n\t'
+#/usr/bin/env bash
+sudo apt -y update
 
-# Detect OS
-OS="$(uname)"
-IS_WSL=0
-if grep -qEi "(Microsoft|WSL)" /proc/version &>/dev/null; then
-    IS_WSL=1
+export DEV_ENV=$HOME/dev
+
+if ! command -v git &> /dev/null; then
+    sudo apt -y install git
 fi
 
-log() {
-    echo -e "\033[1;34m[INFO]\033[0m $1"
-}
-
-error() {
-    echo -e "\033[1;31m[ERROR]\033[0m $1" >&2
-}
-
-# Ensure DEV_ENV is set
-if [[ -z "${DEV_ENV:-}" ]]; then
-    error "The DEV_ENV environment variable must be set."
-    exit 1
+if [ ! -d $HOME/personal ]; then
+    mkdir $HOME/personal
 fi
 
-# Install Git if missing
-if ! command -v git &>/dev/null; then
-    log "Git not found. Installing Git..."
-    if [[ "$OS" == "Darwin" ]]; then
-        if ! command -v brew &>/dev/null; then
-            log "Homebrew not found. Installing Homebrew..."
-            /bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/HEAD/install.sh)"
-            eval "$(/opt/homebrew/bin/brew shellenv)"
-        fi
-        brew install git
-    else
-        sudo apt update -y && sudo apt install -y git
-    fi
-else
-    log "Git is already installed."
+if [ ! -d $HOME/dev ]; then
+    echo "Cloning dev repository..."
+    git clone https://github.com/thenameiswiiwin/.dotfiles.git $HOME/personal/dev
 fi
 
-# Ensure ~/personal directory exists
-mkdir -p "$HOME/personal"
+echo "[INFO] Starting environment setup..."
 
-# Clone repository if not already cloned
-if [[ ! -d "$DEV_ENV/.git" ]]; then
-    log "Cloning repository into $DEV_ENV..."
-    git clone https://github.com/thenameiswiiwin/.dotfiles "$DEV_ENV"
-else
-    log "Repository already exists at $DEV_ENV. Pulling latest changes..."
-    git -C "$DEV_ENV" pull --rebase
-fi
+echo "[INFO] Running run script..."
+pushd $HOME/dev
+./run
+popd
 
-# Change into the DEV_ENV directory
-if ! cd "$DEV_ENV"; then
-    error "Failed to change directory to $DEV_ENV"
-    exit 1
-fi
+echo "[INFO] Running init script..."
+pushd $HOME/dev
+./init
+popd
 
-# Ensure all scripts are executable
-chmod +x run init dev-env &>/dev/null || true
+echo "[INFO] Running dev-env script..."
+pushd $HOME/dev
+./dev-env
+popd
 
-# Function to execute a script safely
-run_script() {
-    local script="$1"
-    if [[ -x "./$script" ]]; then
-        log "Running $script..."
-        if ! "./$script"; then
-            error "$script exited with a non-zero status, continuing..."
-        fi
-    else
-        error "Script '$script' not found or not executable in $DEV_ENV"
-    fi
-}
+echo "[INFO] Changing shell to zsh..."
+exec zsh
 
-# Run scripts sequentially
-run_script "run"
-# run_script "init"
-# run_script "dev-env"
+echo "[INFO] Setup script completed."

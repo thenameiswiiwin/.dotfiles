@@ -1,0 +1,8 @@
+#!/usr/bin/env bash
+
+yay -S --noconfirm nodejs npm deno bun-bin
+
+npm config set prefix ~/.local/npm
+npm i -g n
+npm i -g neovim
+n lts

@@ -1,0 +1,6 @@
+#!/usr/bin/env bash
+
+# brew install --HEAD neovim
+brew install neovim
+
+echo "[INFO] Neovim script completed."
