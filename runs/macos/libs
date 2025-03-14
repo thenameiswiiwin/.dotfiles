@@ -1,0 +1,13 @@
+#!/usr/bin/env bash
+
+brew install git
+brew install ripgrep
+brew install wget
+brew install xclip
+brew install jq
+brew install tldr
+brew install fd
+brew install fzf
+brew install tree
+
+echo "[INFO] Libs script completed."

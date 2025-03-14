@@ -1,33 +1,57 @@
-#!/usr/bin/env zsh
-
 eval "$(starship init zsh)"
 
-autoload -Uz compinit
+autoload -Uz compinit && compinit -C
 zstyle ':completion:*' menu select
+
 if [[ -f "$HOME/.zcompdump" ]]; then
     compinit -d "$HOME/.zcompdump"
 else
     compinit
 fi
 
-source "$HOME/.zsh/zsh-autosuggestions/zsh-autosuggestions.zsh"
-source "$HOME/.zsh/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh"
+source ~/.zprofile
+
+if [[ -f /usr/local/share/zsh-autosuggestions/zsh-autosuggestions.zsh ]]; then
+    source /usr/local/share/zsh-autosuggestions/zsh-autosuggestions.zsh
+fi
+if [[ -f /usr/local/share/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh ]]; then
+    source /usr/local/share/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh
+fi
 
 ZSH_AUTOSUGGEST_HIGHLIGHT_STYLE="fg=#7C6F64"
 
-[[ -s "$HOME/.bun/_bun" ]] && source "$HOME/.bun/_bun"
+if [[ -s "$HOME/.bun/_bun" ]]; then
+    source "$HOME/.bun/_bun"
+fi
 
-export BUN_INSTALL="$HOME/.bun"
-export PATH="$BUN_INSTALL/bin:$PATH"
+if [[ -s "$HOME/.fzf.zsh" ]]; then
+[ -f $HOME/.fzf.zsh ] && source $HOME/.fzf.zsh
+fi
 
-export PNPM_HOME="$HOME/.local/share/pnpm"
-export PATH="$PNPM_HOME:$PATH"
-export PATH="$HOME/.turso:$PATH"
+# History settings
+HISTSIZE=50000
+SAVEHIST=10000
+HISTFILE="$HOME/.zsh_history"
+setopt hist_ignore_all_dups
+setopt share_history
+setopt appendhistory
+setopt extended_history
 
-unsetopt beep                # Disable beeping sound.
-unsetopt correct             # Disable autocorrection.
-setopt hist_ignore_all_dups  # Ignore duplicate history entries.
-setopt share_history         # Share history across sessions.
-setopt no_flow_control       # Disable flow control for performance.
+# Optimize shell behavior
+unsetopt beep
+unsetopt correct
+setopt no_flow_control
 
-[[ -f "$HOME/.zsh_profile" ]] && source "$HOME/.zsh_profile"
+# Aliases
+alias v='nvim'
+alias t='tmux'
+alias gt='NODE_OPTIONS="--no-deprecation" gt'
+alias dsclean='sudo find / -name ".DS_Store" -exec rm -v {} \;'
+alias flush='sudo dscacheutil -flushcache && sudo killall -HUP mDNSResponder && echo "DNS cache flushed"'
+alias port='sudo lsof -i'
+alias ps='ps aux | grep'
+alias kill_port=findandkill
+alias bu='brew cleanup && brew update && brew upgrade && brew cleanup && brew doctor'
+alias bo='brew outdated'
+
+[ -f "$HOME/.php_profile" ] && source "$HOME/.php_profile"

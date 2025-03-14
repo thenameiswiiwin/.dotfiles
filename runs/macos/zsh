@@ -1,0 +1,8 @@
+#!/usr/bin/env bash
+
+brew install zsh
+brew install starship
+brew install zsh-autosuggestions
+brew install zsh-syntax-highlighting
+
+echo "[INFO] Zsh script completed."

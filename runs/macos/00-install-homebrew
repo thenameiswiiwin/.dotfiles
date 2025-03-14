@@ -1,0 +1,8 @@
+#!/usr/bin/env bash
+
+/bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/HEAD/install.sh)"
+echo >>$HOME/.zprofile
+echo 'eval "$(/usr/local/bin/brew shellenv)"' >>$HOME/.zprofile
+eval "$(/usr/local/bin/brew shellenv)"
+
+echo "[INFO] 00-Install-Homebrew script completed."

@@ -1,73 +1,56 @@
 #!/usr/bin/env bash
-set -euo pipefail
-IFS=$'\n\t'
+set +e # Disable immediate exit on error
 
-# Get script directory
 script_dir="$(cd "$(dirname "${BASH_SOURCE[0]}")" &>/dev/null && pwd)"
+platform="$(uname -s | tr '[:upper:]' '[:lower:]')"
+filter="${1:-}"
 
-# Ensure DEV_ENV is set
-if [[ -z "${DEV_ENV:-}" ]]; then
-    echo "Error: DEV_ENV environment variable must be set." >&2
-    exit 1
-fi
-
-export DEV_ENV="$DEV_ENV"
-
-# Parse arguments
-dry_run=0
-grep_filter=""
-
-while [[ $# -gt 0 ]]; do
-    case "$1" in
-    --dry) dry_run=1 ;;
-    *) grep_filter="$1" ;;
-    esac
-    echo "ARG: \"$1\""
-    shift
-done
-
-# Logging function
-log() {
-    if [[ $dry_run -eq 1 ]]; then
-        echo "[DRY_RUN] $1"
-    else
-        echo "$1"
-    fi
+# Logging functions
+log_info() {
+    echo -e "\033[1;34m[INFO]\033[0m $1"
+}
+log_warn() {
+    echo -e "\033[1;33m[WARN]\033[0m $1"
 }
 
-log "RUN: DEV_ENV: $DEV_ENV -- grep_filter: '$grep_filter'"
+run_platform_scripts() {
+    local os_dir="$script_dir/runs/$1"
+    local scripts=()
 
-# Ensure the "runs" directory exists
-runs_path="$script_dir/runs"
-if [[ ! -d "$runs_path" ]]; then
-    echo "Error: '$runs_path' directory not found!" >&2
+    # If no filter is provided, add all 00-* scripts first
+    if [ -z "$filter" ]; then
+        while IFS= read -r script; do
+            scripts+=("$script")
+        done < <(find "$os_dir" -name "00-*" -type f | sort)
+    fi
+
+    # Then add the other scripts
+    while IFS= read -r script; do
+        scripts+=("$script")
+    done < <(find "$os_dir" -mindepth 1 -maxdepth 1 -type f ! -name "00-*" | sort)
+
+    # Iterate over the collected scripts
+    for script in "${scripts[@]}"; do
+        script_name=$(basename "$script")
+        if [ -x "$script" ]; then
+            if [[ -n "$filter" && ! "$script_name" =~ $filter ]]; then
+                log_warn "Skipping script '$script_name' (does not match filter '$filter')"
+                continue
+            fi
+            log_info "Executing script: $script_name"
+            # Execute using bash so any exit in the child won't affect this loop
+            bash "$script" || log_warn "Script $script_name exited with nonzero status"
+        fi
+    done
+
+    log_info "All scripts in $os_dir have been executed."
+}
+
+case "$platform" in
+linux*) run_platform_scripts "linux" ;;
+darwin*) run_platform_scripts "macos" ;;
+*)
+    echo "Unsupported OS"
     exit 1
-fi
-
-# Find executable scripts in "runs" directory
-if [[ "$(uname)" == "Darwin" ]]; then
-    runs_dir=$(find "$runs_path" -mindepth 1 -maxdepth 1 -type f -perm -111 2>/dev/null)
-else
-    runs_dir=$(find "$runs_path" -mindepth 1 -maxdepth 1 -type f -executable 2>/dev/null)
-fi
-
-# Check if there are any scripts
-if [[ -z "$runs_dir" ]]; then
-    echo "Warning: No executable scripts found in '$runs_path'."
-    exit 0
-fi
-
-# Loop through found scripts
-for s in $runs_dir; do
-    if [[ -n "$grep_filter" ]] && ! echo "$s" | grep -q "$grep_filter"; then
-        log "Grep filter '$grep_filter' filtered out: $s"
-        continue
-    fi
-
-    log "Running script: $s"
-    if [[ $dry_run -eq 0 ]]; then
-        "$s"
-    fi
-done
-
-echo "Run script completed successfully."
+    ;;
+esac

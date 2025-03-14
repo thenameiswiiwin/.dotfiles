@@ -1,0 +1,6 @@
+
+#!/usr/bin/env bash
+
+brew install go
+
+echo "[INFO] Go script completed."

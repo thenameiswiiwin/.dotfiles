@@ -1,0 +1,6 @@
+#!/usr/bin/env bash
+
+yay -S zsh
+yay -S starship-git
+yay -S zsh-autosuggestions-git
+yay -S zsh-syntax-highlighting-git

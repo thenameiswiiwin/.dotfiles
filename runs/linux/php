@@ -1,0 +1,6 @@
+#!/usr/bin/env bash
+
+/bin/bash -c "$(curl -fsSL https://php.new/install/linux/8.4)"
+composer global require laravel/installer
+
+mv $HOME/.profile $HOME/.php_profile
