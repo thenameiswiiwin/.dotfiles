@@ -13,7 +13,7 @@ fi
 
 if [ ! -d $HOME/dev ]; then
     echo "Cloning dev repository..."
-    git clone https://github.com/thenameiswiiwin/.dotfiles.git $HOME/personal/dev
+    git clone https://github.com/thenameiswiiwin/.dotfiles.git $HOME/dev
 fi
 
 echo "[INFO] Starting environment setup..."
