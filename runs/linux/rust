@@ -1,5 +1,7 @@
 #!/usr/bin/env bash
 
-yay -S --noconfirm rustup
-rustup default stable
+curl --proto '=https' --tlsv1.2 -sSf https://sh.rustup.rs | sh -s -- -y
+source $HOME/.cargo/env
 cargo install stylua --features luajit
+
+echo -e "\e[1;34m[INFO]\e[0m Rust script completed."

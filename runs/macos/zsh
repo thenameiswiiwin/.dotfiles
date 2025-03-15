@@ -5,4 +5,4 @@ brew install starship
 brew install zsh-autosuggestions
 brew install zsh-syntax-highlighting
 
-echo "[INFO] Zsh script completed."
+echo -e "\e[38;2;254;128;25m[INFO]\e[0m Zsh script completed."

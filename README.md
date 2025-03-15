@@ -22,14 +22,12 @@ Terminal-based development, productivity, and workflow efficiency.
 This script automates the setup process for your development environment.
 
 ```bash
-export DEV_ENV=$HOME/dev
 curl -fsSL https://raw.githubusercontent.com/thenameiswiiwin/.dotfiles/main/resources/setup | bash
 ```
 
 If you prefer downloading and running it manually:
 
 ```bash
-export DEV_ENV=$HOME/dev
 curl -fsSL https://raw.githubusercontent.com/thenameiswiiwin/.dotfiles/main/resources/setup -o setup
 ./setup
 ```

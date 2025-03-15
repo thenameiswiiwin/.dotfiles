@@ -12,11 +12,11 @@ detect_os
 
 case $OS in
 arch)
-    sudo pacman -S --noconfirm i3-wm i3status dmenu
+    yay -S --noconfirm go
     ;;
 ubuntu | debian)
-    sudo apt install -y i3 i3status dmenu
+    sudo apt install -y golang
     ;;
 esac
 
-echo -e "\e[38;2;254;128;25m[INFO]\e[0m I3 script completed."
+echo -e "\e[1;34m[INFO]\e[0m Go script completed."

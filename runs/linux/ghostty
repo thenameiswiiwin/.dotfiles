@@ -1,3 +1,24 @@
 #!/usr/bin/env bash
 
-yay -S --noconfirm ghostty-git zig
+detect_os() {
+    if [ -f /etc/os-release ]; then
+        . /etc/os-release
+        OS=$ID
+    else
+        OS=$(uname -s | tr '[:upper:]' '[:lower:]')
+    fi
+}
+detect_os
+
+case $OS in
+arch)
+    yay -S --noconfirm ghostty-bin
+    ;;
+ubuntu | debian)
+    wget https://github.com/misterdanb/ghostty/releases/latest/download/ghostty.deb -O /tmp/ghostty.deb
+    sudo dpkg -i /tmp/ghostty.deb
+    sudo apt install -f -y
+    ;;
+esac
+
+echo -e "\e[1;34m[INFO]\e[0m Ghostty script completed."

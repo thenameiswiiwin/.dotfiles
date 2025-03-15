@@ -1,3 +1,22 @@
 #!/usr/bin/env bash
 
-yay -S --noconfirm git ripgrep pavucontrol xclip jq tldr python-pip fzf
+detect_os() {
+    if [ -f /etc/os-release ]; then
+        . /etc/os-release
+        OS=$ID
+    else
+        OS=$(uname -s | tr '[:upper:]' '[:lower:]')
+    fi
+}
+detect_os
+
+case $OS in
+arch)
+    yay -S --noconfirm git ripgrep xclip jq tldr fzf tree fd
+    ;;
+ubuntu | debian)
+    sudo apt install -y git ripgrep xclip jq tldr fzf tree fd-find
+    ;;
+esac
+
+echo -e "\e[1;34m[INFO]\e[0m Libs script completed."

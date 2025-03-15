@@ -10,4 +10,4 @@ brew install fd
 brew install fzf
 brew install tree
 
-echo "[INFO] Libs script completed."
+echo -e "\e[1;34m[INFO]\e[0m Libs script completed."

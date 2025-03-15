@@ -8,4 +8,4 @@ if [[ -f "$HOME/.profile" ]]; then
     mv ~/.profile ~/.php_profile
 fi
 
-echo "[INFO] PHP script completed."
+echo -e "\e[1;34m[INFO]\e[0m PHP script completed."

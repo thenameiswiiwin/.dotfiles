@@ -1,4 +1,24 @@
 #!/usr/bin/env bash
 
-# yay -S neovim-nightly-bin
-yay -S neovim-nightly-bin
+detect_os() {
+    if [ -f /etc/os-release ]; then
+        . /etc/os-release
+        OS=$ID
+    else
+        OS=$(uname -s | tr '[:upper:]' '[:lower:]')
+    fi
+}
+detect_os
+
+case $OS in
+arch)
+    yay -S --noconfirm neovim-nightly-bin
+    ;;
+ubuntu | debian)
+    sudo add-apt-repository ppa:neovim-ppa/unstable -y
+    sudo apt update
+    sudo apt install -y neovim
+    ;;
+esac
+
+echo -e "\e[1;34m[INFO]\e[0m Neovim script completed."

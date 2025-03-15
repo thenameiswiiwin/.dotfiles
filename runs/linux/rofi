@@ -1,3 +1,22 @@
 #!/usr/bin/env bash
 
-yay -S rofi
+detect_os() {
+    if [ -f /etc/os-release ]; then
+        . /etc/os-release
+        OS=$ID
+    else
+        OS=$(uname -s | tr '[:upper:]' '[:lower:]')
+    fi
+}
+detect_os
+
+case $OS in
+arch)
+    sudo pacman -S --noconfirm rofi
+    ;;
+ubuntu | debian)
+    sudo apt install -y rofi
+    ;;
+esac
+
+echo -e "\e[1;34m[INFO]\e[0m Rofi script completed."

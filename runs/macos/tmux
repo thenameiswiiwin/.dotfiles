@@ -2,4 +2,4 @@
 
 brew install tmux
 
-echo "[INFO] TMUX script completed."
+echo -e "\e[1;34m[INFO]\e[0m TMUX script completed."

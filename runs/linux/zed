@@ -1,3 +1,26 @@
 #!/usr/bin/env bash
 
-yay -S zed
+detect_os() {
+    if [ -f /etc/os-release ]; then
+        . /etc/os-release
+        OS=$ID
+    else
+        OS=$(uname -s | tr '[:upper:]' '[:lower:]')
+    fi
+}
+detect_os
+
+case $OS in
+arch)
+    yay -S --noconfirm zed-editor-bin
+    ;;
+ubuntu | debian)
+    # Get latest .deb release from GitHub
+    ZED_DEB=$(curl -s https://api.github.com/repos/zed-industries/zed/releases/latest | grep -oP 'browser_download_url.*Ubuntu.*amd64\.deb' | cut -d'"' -f4)
+    wget $ZED_DEB -O /tmp/zed.deb
+    sudo dpkg -i /tmp/zed.deb || sudo apt install -f -y
+    rm /tmp/zed.deb
+    ;;
+esac
+
+echo -e "\e[38;2;254;128;25m[INFO]\e[0m Zed script completed."

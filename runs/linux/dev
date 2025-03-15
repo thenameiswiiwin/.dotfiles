@@ -3,6 +3,30 @@
 git config --global user.email "huyn.nguyen95@gmail.com"
 git config --global user.name "thenameiswiiwin"
 
-# Lua tools
-yay -S --noconfirm luarocks luajit
-sudo luarocks install luacheck
+detect_os() {
+    if [ -f /etc/os-release ]; then
+        . /etc/os-release
+        OS=$ID
+    else
+        OS=$(uname -s | tr '[:upper:]' '[:lower:]')
+    fi
+}
+detect_os
+
+case $OS in
+arch)
+    yay -S --noconfirm luarocks lua51 wget
+    sudo luarocks install luacheck
+    sudo ln -sf /usr/bin/lua5.1 /usr/local/bin/lua5.1
+    ;;
+ubuntu | debian)
+    sudo apt install -y luarocks wget lua5.1
+    sudo luarocks install luacheck
+    ;;
+*)
+    echo -e "\e[1;31m[ERROR]\e[0m Unsupported OS"
+    exit 1
+    ;;
+esac
+
+echo -e "\e[1;34m[INFO]\e[0m Dev script completed."

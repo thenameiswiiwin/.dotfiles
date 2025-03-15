@@ -1,5 +1,22 @@
 #!/usr/bin/env bash
 
-# via the install script
-## using curl
-bash -c "$(curl -fsSL https://gef.blah.cat/sh)"
+detect_os() {
+    if [ -f /etc/os-release ]; then
+        . /etc/os-release
+        OS=$ID
+    else
+        OS=$(uname -s | tr '[:upper:]' '[:lower:]')
+    fi
+}
+detect_os
+
+case $OS in
+arch)
+    sudo pacman -S --noconfirm gdb
+    ;;
+ubuntu | debian)
+    sudo apt install -y gdb
+    ;;
+esac
+
+echo -e "\e[38;2;254;128;25m[INFO]\e[0m GDB script completed."

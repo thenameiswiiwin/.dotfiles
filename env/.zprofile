@@ -41,6 +41,7 @@ addToPathFront "$HOME/.local/bin"
 addToPathFront "$HOME/opt/lua@5.1/bin"
 addToPathFront "/usr/local/lib/node_modules"
 addToPathFront "$HOME/.npm-global/bin"
+addToPathFront $HOME/.local/scripts
 
 bindkey -s ^f "tmux-sessionizer\n"
 

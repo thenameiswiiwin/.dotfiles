@@ -2,4 +2,4 @@
 
 brew install --cask zed
 
-echo "[INFO] Zed script completed."
+echo -e "\e[38;2;254;128;25m[INFO]\e[0m Zed script completed."

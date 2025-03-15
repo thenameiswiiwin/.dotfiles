@@ -1,6 +1,25 @@
 #!/usr/bin/env bash
 
-yay -S zsh
-yay -S starship-git
-yay -S zsh-autosuggestions-git
-yay -S zsh-syntax-highlighting-git
+detect_os() {
+    if [ -f /etc/os-release ]; then
+        . /etc/os-release
+        OS=$ID
+    else
+        OS=$(uname -s | tr '[:upper:]' '[:lower:]')
+    fi
+}
+detect_os
+
+case $OS in
+arch)
+    yay -S --noconfirm zsh starship zsh-syntax-highlighting zsh-autosuggestions
+    ;;
+ubuntu|debian)
+    sudo apt install -y zsh zsh-syntax-highlighting
+    sh -c "$(curl -fsSL https://starship.rs/install.sh)" -- -y
+    git clone https://github.com/zsh-users/zsh-autosuggestions \
+        ~/.zsh/zsh-autosuggestions
+    ;;
+esac
+
+echo -e "\e[1;34m[INFO]\e[0m Zsh script completed."

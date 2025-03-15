@@ -1,7 +1,43 @@
 #!/usr/bin/env bash
 
-sudo pacman -Syu --needed base-devel git
-if ! command -v yay &> /dev/null; then
-    git clone https://aur.archlinux.org/yay-bin.git /tmp/yay
-    (cd /tmp/yay && makepkg -si --noconfirm)
-fi
+detect_os() {
+    if [ -f /etc/os-release ]; then
+        . /etc/os-release
+        OS=$ID
+    else
+        OS=$(uname -s | tr '[:upper:]' '[:lower:]')
+    fi
+}
+detect_os
+
+install_arch_packages() {
+    if ! command -v yay &>/dev/null; then
+        sudo pacman -S --needed --noconfirm git base-devel
+        git clone https://aur.archlinux.org/yay-bin.git /tmp/yay-bin
+        (cd /tmp/yay-bin && makepkg -si --noconfirm)
+        rm -rf /tmp/yay-bin
+    fi
+}
+
+install_debian_packages() {
+    sudo apt update && sudo apt install -y \
+        build-essential \
+        curl \
+        git \
+        software-properties-common
+}
+
+case $OS in
+arch)
+    install_arch_packages
+    ;;
+ubuntu | debian)
+    install_debian_packages
+    ;;
+*)
+    echo -e "\e[1;31m[ERROR]\e[0m Unsupported OS"
+    exit 1
+    ;;
+esac
+
+echo -e "\e[1;34m[INFO]\e[0m 00-package-manager script completed."

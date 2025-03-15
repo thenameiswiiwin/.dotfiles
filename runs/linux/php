@@ -1,6 +1,24 @@
 #!/usr/bin/env bash
 
-/bin/bash -c "$(curl -fsSL https://php.new/install/linux/8.4)"
-composer global require laravel/installer
+detect_os() {
+    if [ -f /etc/os-release ]; then
+        . /etc/os-release
+        OS=$ID
+    else
+        OS=$(uname -s | tr '[:upper:]' '[:lower:]')
+    fi
+}
+detect_os
 
-mv $HOME/.profile $HOME/.php_profile
+case $OS in
+arch)
+    yay -S --noconfirm php composer
+    composer global require laravel/installer
+    ;;
+ubuntu | debian)
+    sudo apt install -y php php-cli composer
+    composer global require laravel/installer
+    ;;
+esac
+
+echo -e "\e[1;34m[INFO]\e[0m PHP script completed."

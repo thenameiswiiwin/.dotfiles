@@ -38,4 +38,4 @@ else
     echo "[INFO] Lua 5.1 is already installed. Skipping..."
 fi
 
-echo "[INFO] Dev script completed."
+echo -e "\e[1;34m[INFO]\e[0m Dev script completed."

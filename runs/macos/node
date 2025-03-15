@@ -7,4 +7,4 @@ brew install oven-sh/bun/bun
 brew install n
 n lts
 
-echo "[INFO] Node script completed."
+echo -e "\e[1;34m[INFO]\e[0m Node script completed."
