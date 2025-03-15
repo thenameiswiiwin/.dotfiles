@@ -1,4 +1,5 @@
 #!/usr/bin/env bash
+set -euo pipefail
 
 detect_os() {
     if [ -f /etc/os-release ]; then
@@ -12,12 +13,27 @@ detect_os
 
 case $OS in
 arch)
-    yay -S --noconfirm ghostty-bin
+    yay -S --noconfirm ghostty-git
     ;;
-ubuntu | debian)
-    wget https://github.com/misterdanb/ghostty/releases/latest/download/ghostty.deb -O /tmp/ghostty.deb
-    sudo dpkg -i /tmp/ghostty.deb
-    sudo apt install -f -y
+ubuntu)
+    GHOSTTY_URL="https://github.com/misterdanb/ghostty/releases/latest/download/ghostty.deb"
+    wget "$GHOSTTY_URL" -O /tmp/ghostty.deb
+    if [ ! -s /tmp/ghostty.deb ]; then
+        echo "[ERROR] Failed to download ghostty.deb from $GHOSTTY_URL"
+        exit 1
+    fi
+    sudo apt install -y /tmp/ghostty.deb
+    rm /tmp/ghostty.deb
+    ;;
+debian)
+    echo 'deb http://download.opensuse.org/repositories/home:/clayrisser:/bookworm/Debian_12/ /' | sudo tee /etc/apt/sources.list.d/home:clayrisser:bookworm.list
+    curl -fsSL https://download.opensuse.org/repositories/home:clayrisser:bookworm/Debian_12/Release.key | gpg --dearmor | sudo tee /etc/apt/trusted.gpg.d/home_clayrisser_bookworm.gpg >/dev/null
+    sudo apt update
+    sudo apt install -y ghostty
+    ;;
+*)
+    echo "[ERROR] Unsupported OS: $OS"
+    exit 1
     ;;
 esac
 

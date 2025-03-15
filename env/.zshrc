@@ -42,8 +42,13 @@ unsetopt beep
 unsetopt correct
 setopt no_flow_control
 
+if [[ -z "$TMUX" ]]; then
+    alias tmux='command /usr/local/bin/tmux -2 -2'
+fi
+
 # Aliases
 alias v='nvim'
+alias vim='nvim'
 alias t='tmux'
 alias gt='NODE_OPTIONS="--no-deprecation" gt'
 alias dsclean='sudo find / -name ".DS_Store" -exec rm -v {} \;'

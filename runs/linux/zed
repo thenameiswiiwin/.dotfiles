@@ -1,4 +1,5 @@
 #!/usr/bin/env bash
+set -euo pipefail
 
 detect_os() {
     if [ -f /etc/os-release ]; then
@@ -12,12 +13,17 @@ detect_os
 
 case $OS in
 arch)
-    yay -S --noconfirm zed-editor-bin
+    yay -S zed
     ;;
 ubuntu | debian)
-    # Get latest .deb release from GitHub
-    ZED_DEB=$(curl -s https://api.github.com/repos/zed-industries/zed/releases/latest | grep -oP 'browser_download_url.*Ubuntu.*amd64\.deb' | cut -d'"' -f4)
-    wget $ZED_DEB -O /tmp/zed.deb
+    # Get latest .deb release URL from GitHub using the API
+    ZED_DEB=$(curl -s https://api.github.com/repos/zed-industries/zed/releases/latest |
+        grep -oP 'browser_download_url.*Ubuntu.*amd64\.deb' | cut -d'"' -f4)
+    if [ -z "$ZED_DEB" ]; then
+        echo "[ERROR] Could not retrieve Zed download URL."
+        exit 1
+    fi
+    wget "$ZED_DEB" -O /tmp/zed.deb
     sudo dpkg -i /tmp/zed.deb || sudo apt install -f -y
     rm /tmp/zed.deb
     ;;

@@ -1,4 +1,5 @@
 #!/usr/bin/env bash
+set -euo pipefail
 
 detect_os() {
     if [ -f /etc/os-release ]; then
@@ -11,9 +12,27 @@ detect_os() {
 detect_os
 
 install_node() {
+    # Install fnm via the official installer
     curl -fsSL https://fnm.vercel.app/install | bash
-    source ~/.bashrc
+
+    # Instead of sourcing ~/.bashrc (which might not update in a non-interactive shell),
+    # explicitly source the fnm initialization script.
+    if [ -s "$HOME/.fnm/fnm.sh" ]; then
+        . "$HOME/.fnm/fnm.sh"
+    else
+        echo "[ERROR] fnm installation did not create $HOME/.fnm/fnm.sh"
+        exit 1
+    fi
+
+    # Install the latest Node.js using fnm
     fnm install --latest
+
+    # Check that npm is available
+    if ! command -v npm &>/dev/null; then
+        echo "[ERROR] npm not found after installing Node.js via fnm."
+        exit 1
+    fi
+
     npm install -g pnpm bun
 }
 
