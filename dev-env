@@ -11,7 +11,7 @@ if [ -z "$DEV_ENV" ]; then
     exit 1
 fi
 
-if [[ $1 == "--dry" ]]; then
+if [[ $1 == "--dry-run" ]]; then
     dry_run="1"
 fi
 

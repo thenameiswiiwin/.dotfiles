@@ -1,9 +1,32 @@
 #!/usr/bin/env bash
-set +e # Disable immediate exit on error
+# Disable immediate exit on error
+# set +e
 
 script_dir="$(cd "$(dirname "${BASH_SOURCE[0]}")" &>/dev/null && pwd)"
 platform="$(uname -s | tr '[:upper:]' '[:lower:]')"
-filter="${1:-}"
+
+# Initialize variables
+dry_run=0
+filter=""
+
+# Parse command-line arguments.
+# This supports both: ./run {prefix} --dry-run and ./run --dry-run
+while [[ "$#" -gt 0 ]]; do
+    case "$1" in
+    --dry-run)
+        dry_run=1
+        ;;
+    *)
+        if [ -z "$filter" ]; then
+            filter="$1"
+        else
+            echo "Unknown argument: $1"
+            exit 1
+        fi
+        ;;
+    esac
+    shift
+done
 
 # Logging functions
 log_info() {
@@ -37,13 +60,16 @@ run_platform_scripts() {
                 log_warn "Skipping script '$script_name' (does not match filter '$filter')"
                 continue
             fi
-            log_info "Executing script: $script_name"
-            # Execute using bash so any exit in the child won't affect this loop
-            bash "$script" || log_warn "Script $script_name exited with nonzero status"
+            if [ "$dry_run" -eq 1 ]; then
+                log_info "Dry-run: Would execute script: $script_name"
+            else
+                log_info "Executing script: $script_name"
+                bash "$script" || log_warn "Script $script_name exited with nonzero status"
+            fi
         fi
     done
 
-    log_info "All scripts in $os_dir have been executed."
+    log_info "All scripts in $os_dir have been processed."
 }
 
 case "$platform" in

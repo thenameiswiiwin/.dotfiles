@@ -22,7 +22,7 @@ Terminal-based development, productivity, and workflow efficiency.
 This script automates the setup process for your development environment.
 
 ```bash
-curl -fsSL https://raw.githubusercontent.com/thenameiswiiwin/.dotfiles/main/resources/setup | bash
+curl -fsSL https://raw.githubusercontent.com/thenameiswiiwin/.dotfiles/test/resources/setup | bash
 ```
 
 If you prefer downloading and running it manually:
